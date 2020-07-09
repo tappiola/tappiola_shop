@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import './styles.css';
-import BannerOption from "./banner-option";
+import './Banner.css';
+import BannerOption from "./BannerOption/BannerOption";
 
 class Banner extends Component {
     state = {
