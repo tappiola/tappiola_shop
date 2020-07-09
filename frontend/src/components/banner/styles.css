@@ -1,0 +1,14 @@
+.banner {
+    background-color: #dddddd;
+    padding: 12px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.separate::after {
+    content: "\00a0\00a0\00a0\00a0\00a0\00a0|\00a0\00a0\00a0\00a0\00a0\00a0";
+}
+
+.underline {
+    text-decoration: underline;
+}
