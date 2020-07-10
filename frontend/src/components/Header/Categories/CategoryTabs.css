@@ -1,0 +1,10 @@
+.categories {
+    display: flex;
+    align-items: center;
+
+}
+
+.categories div {
+    margin: 20px;
+}
+

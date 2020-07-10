@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name='CategoryTabs',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=50)),
@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                                             to='shop_app.Brand')),
                 ('category',
                  models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='product_category',
-                                   to='shop_app.Category')),
+                                   to='shop_app.CategoryTabs')),
             ],
         ),
     ]

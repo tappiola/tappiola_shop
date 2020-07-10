@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('image_link', models.URLField()),
                 ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='product_image',
-                                              to='shop_app.Category')),
+                                              to='shop_app.CategoryTabs')),
             ],
         ),
     ]

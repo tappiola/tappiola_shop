@@ -2,6 +2,8 @@ import React from "react";
 import MainLogo from "./MainLogo/MainLogo";
 import './Header.css';
 import Banner from "./Banner/Banner";
+import CategoryTabs from "./Categories/CategoryTabs";
+import {withRouter} from "react-router-dom";
 
 const Header = props => {
     return (
@@ -21,9 +23,8 @@ const Header = props => {
             </div>
 
         </div>
-        <Banner/>
         </div>
     );
 }
 
-export default Header;
+export default withRouter(Header);
