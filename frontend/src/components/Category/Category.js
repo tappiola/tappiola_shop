@@ -3,7 +3,7 @@ import {getCategoryProducts} from '../../lib/service';
 import ProductCard from "../ProductCard/ProductCard";
 import './Category.css';
 
-class Category extends Component{
+class Category extends Component {
     state = {
         categoryId: this.props.match.params.id,
         products: []
@@ -22,11 +22,11 @@ class Category extends Component{
     }
 
     componentWillReceiveProps(nextProps, nextValue) {
-    if (nextProps.match.params.id !== this.props.match.params.id) {
-      const id = nextProps.match.params.id;
-      this.getProducts( id );
+        if (nextProps.match.params.id !== this.props.match.params.id) {
+            const id = nextProps.match.params.id;
+            this.getProducts(id);
+        }
     }
-  }
 
     render() {
         return (<div className="category">

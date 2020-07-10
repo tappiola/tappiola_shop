@@ -6,10 +6,10 @@ class ProductCard extends Component {
         src: this.getSrc(0)
     }
 
-    getSrc(position){
+    getSrc(position) {
         return this.props.productData.product_images[0]
-        ? this.props.productData.product_images.sort((x, y) => x.position - y.position)[position].image_link
-        : 'https://tuktuk4children.org/wp-content/uploads/2017/09/shop-placeholder-600x600.png'
+            ? this.props.productData.product_images.sort((x, y) => x.position - y.position)[position].image_link
+            : 'https://tuktuk4children.org/wp-content/uploads/2017/09/shop-placeholder-600x600.png'
     }
 
 

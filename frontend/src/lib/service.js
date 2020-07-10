@@ -10,3 +10,8 @@ export const getCategories = () => {
 export const getCategoryProducts = (categoryId) => {
     return axios.get(API_HOST + '/category_products/' + categoryId);
 }
+
+export const getBrands = () => {
+
+    return axios.get(API_HOST + '/brands');
+};

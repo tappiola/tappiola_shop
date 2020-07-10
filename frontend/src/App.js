@@ -7,14 +7,16 @@ import Home from "./components/Home/Home";
 import Category from "./components/Category/Category";
 import CategoryTabs from "./components/Header/Categories/CategoryTabs";
 import Banner from "./components/Header/Banner/Banner";
+import DesignersList from "./components/DesignersList/DesignersList";
 
 function App() {
     return (
         <div>
             <Header/>
-            <Route path={['/category/:id','/']} component={CategoryTabs}/>
+            <Route path={['/category/:id', '/']} component={CategoryTabs}/>
             <Banner/>
             <Switch>
+                <Route path='/designers' component={DesignersList}/>
                 <Route path='/category/:id' component={Category}/>
                 <Route path='/' component={Home}/>
             </Switch>
