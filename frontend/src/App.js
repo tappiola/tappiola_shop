@@ -12,7 +12,7 @@ function App() {
     return (
         <div>
             <Header/>
-            <Route path='/category/:id' component={CategoryTabs}/>
+            <Route path={['/category/:id','/']} component={CategoryTabs}/>
             <Banner/>
             <Switch>
                 <Route path='/category/:id' component={Category}/>

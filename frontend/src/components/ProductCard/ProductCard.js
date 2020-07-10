@@ -3,7 +3,7 @@ import './ProductCard.css';
 
 class ProductCard extends Component {
     state = {
-        src: null
+        src: this.getSrc(0)
     }
 
     getSrc(position){
@@ -25,10 +25,10 @@ class ProductCard extends Component {
         return (
             <div className="product-card">
                 <img
-                    src={this.src}
+                    src={this.state.src}
                     alt="product-card"
-                    onMouseOver={this.hover}
-                    onMouseOut={this.unhover}
+                    onMouseOver={this.hover.bind(this)}
+                    onMouseOut={this.unhover.bind(this)}
                 />
                 <div>{this.props.productData.brand.name}</div>
                 <div>{this.props.productData.name}</div>

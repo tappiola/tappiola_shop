@@ -7,6 +7,7 @@ import {withRouter} from "react-router-dom";
 
 class CategoryTabs extends Component {
 
+    categoriesPanel = React.createRef()
     state = {
         categories: [],
         activeCategory: null
@@ -16,6 +17,9 @@ class CategoryTabs extends Component {
         const id = event.target.id
     this.setState({ activeCategory: event.target.id});
     this.props.history.push(`/category/${id}`);
+    if (this.categoriesPanel.current.getBoundingClientRect().top === 0){
+        this.categoriesPanel.current.scrollIntoView()
+    }
   }
 
 
@@ -30,7 +34,7 @@ class CategoryTabs extends Component {
 
     render() {
         return (
-            <div className="categories">
+            <div className="categories" ref={this.categoriesPanel}>
                 {this.state.categories.map(c => <CategoryTab
                     key={c.id}
                     id={c.id}
