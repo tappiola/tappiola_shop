@@ -4,7 +4,7 @@ from rest_framework import permissions
 
 from .models import Brand, Category, Product, Image, StockLevel
 from .serilalizers import (
-    BrandSerializer, CategorySerializer, ProductSerializer, ImageSerializer, StockLevelSerializer
+    BrandSerializer, CategorySerializer, ProductSerializer, ImageSerializer, StockLevelSerializer, ProductCreateSerializer
 )
 
 
@@ -63,7 +63,13 @@ class BrandProductsList(generics.ListAPIView):
 
 class ProductsList(generics.ListCreateAPIView):
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return ProductSerializer
+        else:
+            return ProductCreateSerializer
+
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_queryset(self):

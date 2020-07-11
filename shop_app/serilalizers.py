@@ -47,7 +47,16 @@ class StockLevelLimitedSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     product_images = ImageLimitedSerializer(many=True, read_only=True)
-    brand = BrandLimitedSerializer(read_only=True)
+    brand = BrandLimitedSerializer(read_only=False)
+    stock_level = StockLevelLimitedSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Product
+        exclude = ()
+
+
+class ProductCreateSerializer(serializers.ModelSerializer):
+    product_images = ImageLimitedSerializer(many=True, read_only=True)
     stock_level = StockLevelLimitedSerializer(many=True, read_only=True)
 
     class Meta:

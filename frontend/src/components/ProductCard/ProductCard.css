@@ -1,9 +1,28 @@
 .product-card {
-    width: 33.3%;
-    height: auto;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 12px;
+        width: 100%;
+        height: auto;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 12px;
+        padding: 20px;
+        flex-wrap: wrap;
+    }
+
+
+@media (min-width: 600px) {
+    .product-card {
+        width: 50%;
+    }
+}
+
+@media (min-width: 1000px) {
+    .product-card {
+        width: 33.3%;
+    }
+}
+
+.discount {
+    text-decoration: line-through;
 }
 
 .product-card img {

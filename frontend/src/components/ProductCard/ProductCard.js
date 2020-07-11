@@ -22,6 +22,8 @@ class ProductCard extends Component {
     }
 
     render() {
+        const discountedPrice = this.props.productData.discounted_price;
+
         return (
             <div className="product-card">
                 <img
@@ -32,7 +34,11 @@ class ProductCard extends Component {
                 />
                 <div>{this.props.productData.brand.name}</div>
                 <div>{this.props.productData.name}</div>
-                <div>{this.props.productData.price} €</div>
+                <div>
+                    <span>{discountedPrice ? discountedPrice + ' ': ''}</span>
+                    <span className={discountedPrice ? 'discount' : undefined}>{this.props.productData.price}</span>
+                    &nbsp;€
+                </div>
             </div>)
     }
 

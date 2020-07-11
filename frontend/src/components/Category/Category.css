@@ -1,3 +1,5 @@
 .category {
     padding: 30px 100px;
+  display: flex;
+  flex-flow: row wrap;
 }
