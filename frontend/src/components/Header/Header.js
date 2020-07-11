@@ -20,6 +20,14 @@ class Header extends Component {
         this.setState({searchTerm: queryString.parse(this.props.location.search).search})
     }
 
+    componentWillReceiveProps(nextProps, nextValue) {
+        if (!nextProps.history.location.search) {
+            this.setState({searchTerm: ''});
+            this.textInput.value = '';
+
+        }
+    }
+
     render() {
         return (
             <div>
