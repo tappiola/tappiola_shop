@@ -15,3 +15,13 @@ export const getBrands = () => {
 
     return axios.get(API_HOST + '/brands');
 };
+
+export const getSaleItems = () => {
+
+    return axios.get(API_HOST + '/sale');
+};
+
+export const getProducts = (param) => {
+    const params = {search: param};
+    return axios.get(API_HOST + '/products', {params});
+};

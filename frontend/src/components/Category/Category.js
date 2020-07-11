@@ -1,30 +1,50 @@
 import React, {Component} from "react";
-import {getCategoryProducts} from '../../lib/service';
+import {getCategoryProducts, getProducts, getSaleItems} from '../../lib/service';
 import ProductCard from "../ProductCard/ProductCard";
 import './Category.css';
+import queryString from 'query-string';
 
 class Category extends Component {
     state = {
         categoryId: this.props.match.params.id,
-        products: []
+        products: [],
+        searchTerm: ''
     }
 
-    getProducts(id) {
-        getCategoryProducts(parseInt(id))
-            .then(({data}) => {
+    getProducts(id, searchParam = null) {
+        if (id === 'search_results') {
+            getProducts(searchParam).then(({data}) => {
+                this.setState({
+                    categoryId: id,
+                    products: data
+                })
+            });
+        } else if (id === 'sale') {
+            getSaleItems().then(({data}) => {
                 this.setState({categoryId: id, products: data})
             })
+        } else {
+            getCategoryProducts(id).then(({data}) => {
+                this.setState({categoryId: id, products: data})
+            })
+        }
     }
 
     componentDidMount() {
-        this.getProducts(this.props.match.params.id);
-        console.log(this.props.match.params.id);
+        const searchParam = this.props.location.search;
+        const param = queryString.parse(searchParam).search;
+        this.setState({searchTerm: param});
+        console.log('search mount ' + param);
+        this.getProducts(this.props.match.params.id, param);
     }
 
     componentWillReceiveProps(nextProps, nextValue) {
-        if (nextProps.match.params.id !== this.props.match.params.id) {
+        if (nextProps.match.params.id !== this.props.match.params.id
+            || nextProps.history.location.search !== this.props.location.search) {
             const id = nextProps.match.params.id;
-            this.getProducts(id);
+            const searchParam = queryString.parse(nextProps.history.location.search).search;
+            this.setState({searchTerm: searchParam});
+            this.getProducts(id, searchParam);
         }
     }
 

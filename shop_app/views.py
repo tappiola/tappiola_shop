@@ -1,11 +1,16 @@
+from django.db.models import Q, Sum
 from rest_framework import generics
 from rest_framework import permissions
-from django.db.models import Q
 
 from .models import Brand, Category, Product, Image, StockLevel
 from .serilalizers import (
     BrandSerializer, CategorySerializer, ProductSerializer, ImageSerializer, StockLevelSerializer
 )
+
+
+def get_products_in_stock():
+    return Product.objects.annotate(
+        total_stock=Sum('stock_level__stock_level')).filter(total_stock__gt=0)
 
 
 class BrandsList(generics.ListCreateAPIView):
@@ -34,7 +39,15 @@ class CategoryDetails(generics.RetrieveUpdateDestroyAPIView):
 
 class CategoryProductsList(generics.ListAPIView):
     def get_queryset(self):
-        return Product.objects.filter(category=self.kwargs.get("category_id"))
+        return get_products_in_stock().filter(category=self.kwargs.get("category_id"))
+
+    serializer_class = ProductSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class SaleProductsList(generics.ListAPIView):
+    def get_queryset(self):
+        return get_products_in_stock().filter(discounted_price__isnull=False)
 
     serializer_class = ProductSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -42,7 +55,7 @@ class CategoryProductsList(generics.ListAPIView):
 
 class BrandProductsList(generics.ListAPIView):
     def get_queryset(self):
-        return Product.objects.filter(brand=self.kwargs.get("brand_id"))
+        return get_products_in_stock().filter(brand=self.kwargs.get("brand_id"))
 
     serializer_class = ProductSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -57,17 +70,19 @@ class ProductsList(generics.ListCreateAPIView):
 
         search_param = self.request.query_params.get('search', None)
         if not search_param:
-            return Product.objects.all()
+            return get_products_in_stock()
         else:
-            return Product.objects.filter(
-                Q(name__icontains=search_param) |
-                Q(brand__name__istartswith=search_param) |
-                Q(color__iexact=search_param) |
-                Q(keywords__icontains=search_param)
-            )
+            q_term = Q()
+            for param in search_param.split(' '):
+                q = (
+                        Q(name__icontains=param) |
+                        Q(brand__name__istartswith=param) |
+                        Q(color__iexact=param) |
+                        Q(keywords__icontains=param)
+                )
+                q_term &= q
 
-
-
+        return get_products_in_stock().filter(q_term)
 
 
 class ProductDetails(generics.RetrieveUpdateDestroyAPIView):

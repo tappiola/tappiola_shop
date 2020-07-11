@@ -28,7 +28,7 @@ class CategoryTabs extends Component {
 
     saleClickHandler() {
         this.setState({activeCategory: 'sale'});
-        this.props.history.push(`/sale`);
+        this.props.history.push(`/category/sale`);
         this.scrollToCategories()
     }
 
@@ -43,7 +43,6 @@ class CategoryTabs extends Component {
         getCategories().then(
             ({data}) => this.setState({categories: data})
         )
-        console.log('panda' + this.props.match.params.id)
     }
 
 
@@ -68,7 +67,7 @@ class CategoryTabs extends Component {
                     key="sale"
                     id="sale"
                     name="Sale"
-                    active={this.state.activeCategory === 'sale' || this.props.location.pathname === '/sale'}
+                    active={this.state.activeCategory === 'sale' || this.props.location.pathname === '/category/sale'}
                     clicked={this.saleClickHandler.bind(this)}
                 />
             </div>
