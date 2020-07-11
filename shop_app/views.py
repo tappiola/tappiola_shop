@@ -1,5 +1,6 @@
 from rest_framework import generics
 from rest_framework import permissions
+from django.db.models import Q
 
 from .models import Brand, Category, Product, Image, StockLevel
 from .serilalizers import (
@@ -51,6 +52,22 @@ class ProductsList(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+
+        search_param = self.request.query_params.get('search', None)
+        if not search_param:
+            return Product.objects.all()
+        else:
+            return Product.objects.filter(
+                Q(name__icontains=search_param) |
+                Q(brand__name__istartswith=search_param) |
+                Q(color__iexact=search_param) |
+                Q(keywords__icontains=search_param)
+            )
+
+
+
 
 
 class ProductDetails(generics.RetrieveUpdateDestroyAPIView):
