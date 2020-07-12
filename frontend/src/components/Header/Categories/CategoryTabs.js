@@ -1,5 +1,5 @@
 import {getCategories} from '../../../lib/service';
-import React, {Component} from "react";
+import React, {Component, Fragment} from "react";
 import './CategoryTabs.css';
 import CategoryTab from "./CategoryTabs/CategoryTab";
 import {withRouter} from "react-router-dom";
@@ -55,6 +55,14 @@ class CategoryTabs extends Component {
                     name="Designers"
                     active={this.props.location.pathname === '/designers'}
                     clicked={this.designersClickHandler.bind(this)}
+                    popup={
+                        <Fragment>
+                            <ul>
+                                <li><a href='#'>Remain Birger Christensen</a></li>
+                                <li><a href='#'>Rotate Birger Christensen</a></li>
+                            </ul>
+                        </Fragment>
+                    }
                 />
                 {this.state.categories.map(c => <CategoryTab
                     key={c.id}

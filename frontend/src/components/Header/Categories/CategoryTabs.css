@@ -4,11 +4,17 @@
     position: sticky;
     top: 0;
     background-color: white;
-
 }
 
-.categories div {
+.categories div.category-name {
     margin: 20px;
 }
 
+.categories:hover {
+    color: gray;
+}
+
+.categories div:hover {
+    color: black;
+}
 
