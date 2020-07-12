@@ -8,6 +8,7 @@ import Category from "./components/Category/Category";
 import CategoryTabs from "./components/Header/Categories/CategoryTabs";
 import Banner from "./components/Header/Banner/Banner";
 import DesignersList from "./components/DesignersList/DesignersList";
+import DesignerCategory from "./components/DesignerCategory/DesignerCategory";
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
             <Route path={['/category/:id', '/']} component={CategoryTabs}/>
             <Banner/>
             <Switch>
+                <Route path='/designers/:id' component={DesignerCategory}/>
                 <Route path='/designers' component={DesignersList}/>
                 <Route path='/category/:id' component={Category}/>
                 <Route path='/' component={Home}/>

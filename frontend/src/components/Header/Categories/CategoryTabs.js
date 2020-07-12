@@ -1,8 +1,9 @@
-import {getCategories} from '../../../lib/service';
+import {getBrands, getCategories} from '../../../lib/service';
 import React, {Component, Fragment} from "react";
 import './CategoryTabs.css';
 import CategoryTab from "./CategoryTabs/CategoryTab";
 import {withRouter} from "react-router-dom";
+import DesignersPopup from "./DesignersPopup/DesignersPopup";
 
 
 class CategoryTabs extends Component {
@@ -10,6 +11,7 @@ class CategoryTabs extends Component {
     categoriesPanel = React.createRef()
     state = {
         categories: [],
+        designersData: [],
         activeCategory: null
     }
 
@@ -43,6 +45,11 @@ class CategoryTabs extends Component {
         getCategories().then(
             ({data}) => this.setState({categories: data})
         )
+
+        getBrands()
+            .then(({data}) => {
+                this.setState({designersData: data})
+            })
     }
 
 
@@ -53,16 +60,10 @@ class CategoryTabs extends Component {
                     key="designers"
                     id="designers"
                     name="Designers"
-                    active={this.props.location.pathname === '/designers'}
+                    active={this.props.location.pathname.startsWith('/designers')}
                     clicked={this.designersClickHandler.bind(this)}
-                    popup={
-                        <Fragment>
-                            <ul>
-                                <li><a href='#'>Remain Birger Christensen</a></li>
-                                <li><a href='#'>Rotate Birger Christensen</a></li>
-                            </ul>
-                        </Fragment>
-                    }
+                    popup={<DesignersPopup data={this.state.designersData}/>}
+                    popupData={this.state.designersData}
                 />
                 {this.state.categories.map(c => <CategoryTab
                     key={c.id}

@@ -11,9 +11,18 @@ export const getCategoryProducts = (categoryId) => {
     return axios.get(API_HOST + '/category_products/' + categoryId);
 }
 
+export const getBrandProducts = (designerId) => {
+    return axios.get(API_HOST + '/brand_products/' + designerId);
+}
+
 export const getBrands = () => {
 
     return axios.get(API_HOST + '/brands');
+};
+
+export const getBrand = (id) => {
+
+    return axios.get(API_HOST + '/brands/' + id);
 };
 
 export const getSaleItems = () => {

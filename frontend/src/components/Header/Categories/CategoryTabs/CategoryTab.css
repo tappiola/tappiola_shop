@@ -2,30 +2,3 @@
     font-weight: bold;
 }
 
-.category-popup {
-    position: absolute;
-    z-index: 10;
-    transition: .3s, width 2s;
-    background-color: white;
-    box-shadow: 0 3px 10px rgba(0,0,0,.2);
-    padding: 10px;
-}
-
-.category-popup ul {
-    padding: 5px 20px;
-}
-
-.category-popup li {
-    list-style: none;
-    height: 25px;
-}
-
-.category-popup li a {
-    color: #222222;
-    text-decoration: none;
-}
-
-.category-popup li a:hover {
-    opacity: 0.5;
-    text-decoration: underline;
-}
