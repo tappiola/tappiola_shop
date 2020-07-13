@@ -1,12 +1,11 @@
 .designer-card {
-    /*width: 33.3%;*/
     border: 2px solid gray;
     height: 200px;
     display: flex;
     flex-direction: column;
-    /*justify-content: space-around;*/
+    justify-content: space-between;
     align-items: center;
-    padding: 30px;
+    padding: 30px 50px;
     border-collapse: collapse;
     text-transform: uppercase;
 
@@ -21,20 +20,14 @@
     box-shadow: 10px 15px 7px #C7C7C7;
 }
 
-.designer-card img {
-    max-width: 100%;
-    max-height: 100%;
-    padding-bottom: 20px;
-    vertical-align: center;
-}
-
 .designer-card .image {
-    height: 130px;
-    width: 300px;
-    /*background-color: cadetblue;*/
-    /*border: 2px solid rebeccapurple;*/
+    height: 60%;
+    width: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .designer-card .title {
-    height: 70px;
+    height: 20%;
 }

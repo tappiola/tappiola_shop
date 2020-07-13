@@ -14,13 +14,11 @@ class ProductCard extends Component {
                  onClick={this.designerClickHandler.bind(this, this.props.designerData.id)}
                  id={this.props.designerData.id}
             >
-                <div className='image'>
-                    <img
-                        src={this.props.designerData.image_link}
-                        alt="designer-card"
-                    />
+                <div className='image' style={{backgroundImage: `url(${this.props.designerData.image_link})`}}/>
+
+                <div className='title'>
+                    {this.props.designerData.name}
                 </div>
-                <div className='title'>{this.props.designerData.name}</div>
             </div>)
     }
 

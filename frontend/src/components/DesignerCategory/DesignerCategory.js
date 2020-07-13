@@ -49,15 +49,15 @@ class DesignerCategory extends Component {
         return (
             <div>
                 <div className='designer-info'>
-                <div className='designer-logo'>
-                <img
-                    src={this.state.designerData.image_link}
-                    alt="designer-card"
-                /><h1>{this.state.designerData.name}</h1>
+                    <div className='designer-header'>
+                        <div className='designer-logo'
+                             style={{backgroundImage: `url(${this.state.designerData.image_link})`}}/>
+                        <h2>{this.state.designerData.name}</h2>
+                    </div>
+
+                    <div className="designer-desc">{this.state.designerData.description}</div>
                 </div>
 
-                <div className="designer-desc">{this.state.designerData.description}</div>
-                    </div>
                 <div className="category">
                     {this.state.products.map(p => <ProductCard key={p.id} productData={p}/>)}
                 </div>

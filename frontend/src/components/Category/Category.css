@@ -1,5 +1,5 @@
 .category {
-    padding: 30px 100px;
+    padding: 30px 10%;
   display: flex;
   flex-flow: row wrap;
 }
