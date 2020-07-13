@@ -3,12 +3,12 @@ import './ProductCard.css';
 
 class ProductCard extends Component {
     state = {
-        src: this.getSrc(0)
+        imagesSorted: this.props.productData.product_images.sort((x, y) => x.position - y.position)
     }
 
     getSrc(position) {
-        return this.props.productData.product_images[0]
-            ? this.props.productData.product_images.sort((x, y) => x.position - y.position)[position].image_link
+        return this.state.imagesSorted[0]
+            ? this.state.imagesSorted[position].image_link
             : 'https://tuktuk4children.org/wp-content/uploads/2017/09/shop-placeholder-600x600.png'
     }
 
@@ -19,6 +19,10 @@ class ProductCard extends Component {
 
     unhover() {
         this.setState({src: this.getSrc(1)});
+    }
+
+    componentDidMount() {
+        this.setState({src: this.getSrc(0)});
     }
 
     render() {

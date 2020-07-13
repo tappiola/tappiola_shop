@@ -31,7 +31,6 @@ class DesignerCategory extends Component {
 
     getAllData(id) {
         this.setState({loading: true});
-        console.log(this.state);
 
         Promise.all([
             this.getProducts(id),
@@ -48,15 +47,12 @@ class DesignerCategory extends Component {
         const searchParam = this.props.location.search;
         const param = queryString.parse(searchParam).search;
         this.setState({searchTerm: param});
-        // this.getProducts(this.state.designerId);
     }
 
     componentWillReceiveProps(nextProps, nextValue) {
         if (nextProps.match.params.id !== this.props.match.params.id) {
             const id = nextProps.match.params.id;
             this.getAllData(id);
-            // this.getProducts(id);
-            // this.getBrandInfo(id);
         }
     }
 
@@ -66,7 +62,6 @@ class DesignerCategory extends Component {
                 <div className='designer-header'>
                     <div className='designer-logo'
                          style={{backgroundImage: `url(${this.state.designerData.image_link})`}}/>
-                    <h2>{this.state.designerData.name}</h2>
                 </div>
 
                 <div className="designer-desc">{this.state.designerData.description}</div>
