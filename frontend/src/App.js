@@ -1,8 +1,8 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {Route, Switch} from 'react-router-dom';
 import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
 import Home from "./components/Home/Home";
 import Category from "./components/Category/Category";
 import CategoryTabs from "./components/Header/Categories/CategoryTabs";
@@ -22,7 +22,7 @@ function App() {
                 <Route path='/category/:id' component={Category}/>
                 <Route path='/' component={Home}/>
             </Switch>
-            <Footer/>
+            {/*<Footer/>*/}
         </div>
     );
 }

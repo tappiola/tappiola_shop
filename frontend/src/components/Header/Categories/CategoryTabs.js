@@ -1,5 +1,5 @@
 import {getBrands, getCategories} from '../../../lib/service';
-import React, {Component, Fragment} from "react";
+import React, {Component} from "react";
 import './CategoryTabs.css';
 import CategoryTab from "./CategoryTabs/CategoryTab";
 import {withRouter} from "react-router-dom";

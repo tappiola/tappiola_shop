@@ -1,5 +1,7 @@
 .category {
     padding: 30px 10%;
-  display: flex;
-  flex-flow: row wrap;
+    display: grid;
+    border-collapse: collapse;
+    grid-template-columns: 100%;
+    grid-gap: 20px;
 }

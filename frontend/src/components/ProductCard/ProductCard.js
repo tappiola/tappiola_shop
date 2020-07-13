@@ -26,16 +26,16 @@ class ProductCard extends Component {
 
         return (
             <div className="product-card">
-                <img
-                    src={this.state.src}
-                    alt="product-card"
-                    onMouseOver={this.hover.bind(this)}
-                    onMouseOut={this.unhover.bind(this)}
-                />
+                <div className="product-image"
+                     style={{backgroundImage: `url(${this.state.src})`}}
+                     onMouseOver={this.hover.bind(this)}
+                     onMouseOut={this.unhover.bind(this)}>
+                </div>
+                <br/>
                 <div>{this.props.productData.brand.name}</div>
                 <div>{this.props.productData.name}</div>
                 <div>
-                    <span>{discountedPrice ? discountedPrice + ' ': ''}</span>
+                    <span>{discountedPrice ? discountedPrice + ' ' : ''}</span>
                     <span className={discountedPrice ? 'discount' : undefined}>{this.props.productData.price}</span>
                     &nbsp;€
                 </div>

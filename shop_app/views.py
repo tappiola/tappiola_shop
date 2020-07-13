@@ -93,7 +93,13 @@ class ProductsList(generics.ListCreateAPIView):
 
 class ProductDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return ProductSerializer
+        else:
+            return ProductCreateSerializer
+
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 

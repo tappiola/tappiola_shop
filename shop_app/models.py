@@ -57,7 +57,8 @@ class StockLevel(models.Model):
         ('36', '36'),
         ('38', '38'),
         ('40', '40'),
-        ('42', '42')
+        ('42', '42'),
+        ('one_size', 'One size')
     )
 
     product = models.ForeignKey(Product, related_name='stock_level', on_delete=models.CASCADE)

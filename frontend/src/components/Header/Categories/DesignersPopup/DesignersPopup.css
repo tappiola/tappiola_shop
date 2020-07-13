@@ -4,7 +4,7 @@
     z-index: 10;
     transition: .3s, width 2s;
     background-color: white;
-    box-shadow: 0 3px 10px rgba(0,0,0,.2);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .2);
     padding: 10px;
 }
 

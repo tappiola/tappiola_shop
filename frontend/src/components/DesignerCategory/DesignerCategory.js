@@ -3,6 +3,7 @@ import {getBrand, getBrandProducts} from '../../lib/service';
 import ProductCard from "../ProductCard/ProductCard";
 import './DesignerCategory.css';
 import queryString from 'query-string';
+import Spinner from "react-bootstrap/Spinner";
 
 class DesignerCategory extends Component {
     state = {
@@ -13,7 +14,8 @@ class DesignerCategory extends Component {
     }
 
     getProducts(id) {
-        getBrandProducts(id).then(({data}) => {
+
+        return getBrandProducts(id).then(({data}) => {
             this.setState({
                 designerId: id,
                 products: data
@@ -21,47 +23,65 @@ class DesignerCategory extends Component {
         })
     }
 
-    getBrandInfo(id){
-        getBrand(id).then(({data}) => {
+    getBrandInfo(id) {
+        return getBrand(id).then(({data}) => {
             this.setState({designerData: data})
         });
     }
 
+    getAllData(id) {
+        this.setState({loading: true});
+        console.log(this.state);
+
+        Promise.all([
+            this.getProducts(id),
+            this.getBrandInfo(id)
+        ]).then(
+            () => this.setState({loading: false})
+        )
+
+    }
 
     componentDidMount() {
 
-        this.getBrandInfo(this.state.designerId);
+        this.getAllData(this.state.designerId);
         const searchParam = this.props.location.search;
         const param = queryString.parse(searchParam).search;
         this.setState({searchTerm: param});
-        this.getProducts(this.state.designerId);
+        // this.getProducts(this.state.designerId);
     }
 
     componentWillReceiveProps(nextProps, nextValue) {
         if (nextProps.match.params.id !== this.props.match.params.id) {
             const id = nextProps.match.params.id;
-            this.getProducts(id);
-            this.getBrandInfo(id);
+            this.getAllData(id);
+            // this.getProducts(id);
+            // this.getBrandInfo(id);
         }
     }
 
     render() {
-        return (
-            <div>
-                <div className='designer-info'>
-                    <div className='designer-header'>
-                        <div className='designer-logo'
-                             style={{backgroundImage: `url(${this.state.designerData.image_link})`}}/>
-                        <h2>{this.state.designerData.name}</h2>
-                    </div>
-
-                    <div className="designer-desc">{this.state.designerData.description}</div>
+        let data = <div>
+            <div className='designer-info'>
+                <div className='designer-header'>
+                    <div className='designer-logo'
+                         style={{backgroundImage: `url(${this.state.designerData.image_link})`}}/>
+                    <h2>{this.state.designerData.name}</h2>
                 </div>
 
-                <div className="category">
-                    {this.state.products.map(p => <ProductCard key={p.id} productData={p}/>)}
-                </div>
-            </div>)
+                <div className="designer-desc">{this.state.designerData.description}</div>
+            </div>
+
+            <div className="category">
+                {this.state.products.map(p => <ProductCard key={p.id} productData={p}/>)}
+            </div>
+        </div>
+
+        if (this.state.loading) {
+            data = <Spinner className="spinner" animation="border" variant="secondary"/>
+        }
+
+        return (data)
     }
 
 }

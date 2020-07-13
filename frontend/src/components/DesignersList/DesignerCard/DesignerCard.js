@@ -15,7 +15,6 @@ class ProductCard extends Component {
                  id={this.props.designerData.id}
             >
                 <div className='image' style={{backgroundImage: `url(${this.props.designerData.image_link})`}}/>
-
                 <div className='title'>
                     {this.props.designerData.name}
                 </div>

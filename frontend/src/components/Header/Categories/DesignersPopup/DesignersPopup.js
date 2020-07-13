@@ -2,26 +2,26 @@ import React, {Component} from "react";
 import './DesignersPopup.css';
 import {withRouter} from "react-router-dom";
 
-class DesignersPopup extends Component{
+class DesignersPopup extends Component {
 
-    designerLinkClickHandler(id){
+    designerLinkClickHandler(id) {
         this.props.history.push(`/designers/${id}`);
     }
 
     render() {
-        return(
+        return (
             <div className='category-popup'>
-            <ul>
-                {this.props.data
-                    .sort((a,b) => a.name.localeCompare(b.name))
-                    .map(d =>
-                        <li
-                            onClick={this.designerLinkClickHandler.bind(this, d.id)}
-                            key={d.id} id={d.id}>
-                    {d.name}
-                </li>)}
-            </ul>
-                </div>)
+                <ul>
+                    {this.props.data
+                        .sort((a, b) => a.name.localeCompare(b.name))
+                        .map(d =>
+                            <li
+                                onClick={this.designerLinkClickHandler.bind(this, d.id)}
+                                key={d.id} id={d.id}>
+                                {d.name}
+                            </li>)}
+                </ul>
+            </div>)
     }
 }
 
