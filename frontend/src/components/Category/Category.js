@@ -46,11 +46,11 @@ class Category extends Component {
         const searchParam = this.props.location.search;
         const param = queryString.parse(searchParam).search;
         this.setState({searchTerm: param});
-        console.log('search mount ' + param);
         this.getProducts(this.props.match.params.id, param);
     }
 
     componentWillReceiveProps(nextProps, nextValue) {
+        console.log('PROPS');
         if (nextProps.match.params.id !== this.props.match.params.id
             || nextProps.history.location.search !== this.props.location.search) {
             const id = nextProps.match.params.id;

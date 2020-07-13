@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import './ProductCard.css';
+import {withRouter} from 'react-router-dom';
 
 class ProductCard extends Component {
     state = {
@@ -13,12 +14,16 @@ class ProductCard extends Component {
     }
 
 
-    hover() {
+    hover= () => {
         this.setState({src: this.getSrc(1)});
     }
 
-    unhover() {
+    unhover = () => {
         this.setState({src: this.getSrc(0)});
+    }
+
+    clickHandler = (id) => {
+        this.props.history.push(`/product/${id}`)
     }
 
     componentDidMount() {
@@ -33,7 +38,8 @@ class ProductCard extends Component {
                 <div className="product-image"
                      style={{backgroundImage: `url(${this.state.src})`}}
                      onMouseOver={this.hover.bind(this)}
-                     onMouseOut={this.unhover.bind(this)}>
+                     onMouseOut={this.unhover.bind(this)}
+                    onClick={this.clickHandler.bind(this, this.props.productData.id)}>
                 </div>
                 <br/>
                 <div>{this.props.productData.brand.name}</div>
@@ -48,4 +54,4 @@ class ProductCard extends Component {
 
 }
 
-export default ProductCard;
+export default withRouter(ProductCard);

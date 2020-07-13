@@ -34,3 +34,7 @@ export const getProducts = (param) => {
     const params = {search: param};
     return axios.get(API_HOST + '/products', {params});
 };
+
+export const getProduct = (id) => {
+    return axios.get(API_HOST + '/products/' + id);
+};

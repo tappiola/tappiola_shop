@@ -9,6 +9,7 @@ import CategoryTabs from "./components/Header/Categories/CategoryTabs";
 import Banner from "./components/Header/Banner/Banner";
 import DesignersList from "./components/DesignersList/DesignersList";
 import DesignerCategory from "./components/DesignerCategory/DesignerCategory";
+import ProductPage from "./components/ProductPage/ProductPage";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path='/designers/:id' component={DesignerCategory}/>
                 <Route path='/designers' component={DesignersList}/>
                 <Route path='/category/:id' component={Category}/>
+                <Route path='/product/:id' component={ProductPage}/>
                 <Route path='/' component={Home}/>
             </Switch>
             {/*<Footer/>*/}
