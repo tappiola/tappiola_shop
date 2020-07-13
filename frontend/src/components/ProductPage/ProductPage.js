@@ -21,7 +21,7 @@ class ProductPage extends Component{
         });
     }
     componentDidMount() {
-        this.getProductInfo(this.props.match.params.id);
+        this.getProductInfo(this.props.match.params.productId);
     }
 
     render() {

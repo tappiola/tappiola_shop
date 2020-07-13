@@ -20,8 +20,8 @@ function App() {
             <Switch>
                 <Route path='/designers/:id' component={DesignerCategory}/>
                 <Route path='/designers' component={DesignersList}/>
+                <Route path='/category/:id/product/:productId' component={ProductPage}/>
                 <Route path='/category/:id' component={Category}/>
-                <Route path='/product/:id' component={ProductPage}/>
                 <Route path='/' component={Home}/>
             </Switch>
             {/*<Footer/>*/}
