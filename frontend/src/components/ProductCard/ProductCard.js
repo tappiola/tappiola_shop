@@ -14,11 +14,11 @@ class ProductCard extends Component {
 
 
     hover() {
-        this.setState({src: this.getSrc(0)});
+        this.setState({src: this.getSrc(1)});
     }
 
     unhover() {
-        this.setState({src: this.getSrc(1)});
+        this.setState({src: this.getSrc(0)});
     }
 
     componentDidMount() {

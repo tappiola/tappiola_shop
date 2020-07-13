@@ -69,14 +69,14 @@ class CategoryTabs extends Component {
                     key={c.id}
                     id={c.id}
                     name={c.name}
-                    active={c.id === +this.state.activeCategory || c.id === +this.props.match.params.id}
+                    active={c.id === +this.props.match.params.id && this.props.location.pathname.startsWith('/category')}
                     clicked={this.categoryClickHandler.bind(this)}
                 />)}
                 <CategoryTab
                     key="sale"
                     id="sale"
                     name="Sale"
-                    active={this.state.activeCategory === 'sale' || this.props.location.pathname === '/category/sale'}
+                    active={this.props.location.pathname === '/category/sale'}
                     clicked={this.saleClickHandler.bind(this)}
                 />
             </div>
