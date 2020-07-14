@@ -1,15 +1,20 @@
 import React, {Component} from "react";
 import {withRouter} from 'react-router-dom';
 import {getProduct} from "../../lib/service";
+import Carousel from "react-bootstrap/Carousel";
+import './ProductPage.css';
 
-class ProductPage extends Component{
+class ProductPage extends Component {
     state = {
         productData: {},
         productImages: [],
         stockLevel: []
     }
 
-    goBackButton = <button onClick={() => this.props.history.goBack()}>Back</button>;
+    goBackButton = <div className="goBackButton" onClick={() => this.props.history.goBack()}>
+        <i className="fa fa-arrow-left" aria-hidden="true"/>
+        &nbsp;Back
+    </div>;
 
     getProductInfo(id) {
         return getProduct(id).then(({data}) => {
@@ -20,6 +25,7 @@ class ProductPage extends Component{
             })
         });
     }
+
     componentDidMount() {
         this.getProductInfo(this.props.match.params.productId);
     }
@@ -28,24 +34,35 @@ class ProductPage extends Component{
         console.log(this.state.productImages)
         const discountedPrice = this.state.productData.discounted_price;
 
-        const getProductImage = (image) => <div className="product-image"
-                                              id={image.position}
-                     style={{backgroundImage: `url(${image.image_link})`}}>
-                </div>
+        const getProductImage = (image) => <Carousel.Item>
+            <img
+                className="d-block w-100"
+                src={image.image_link}
+                alt="Product image"
+            />
+        </Carousel.Item>
 
-        return(<div>
-            {this.props.history.length > 2 && this.goBackButton}
-
-            <h1>{this.state.productData.name}</h1>
-            <div>{this.state.productData.description}</div>
-            <div>{this.state.productData.color}</div>
-                <div>{this.state.productData.name}</div>
-                <div>
-                    <span>{discountedPrice ? discountedPrice + ' ' : ''}</span>
-                    <span className={discountedPrice ? 'discount' : undefined}>{this.state.productData.price}</span>
-                    &nbsp;€
+        return (
+            <div className="product-area">
+                {this.props.history.length > 2 && this.goBackButton}
+                <div className="product-block">
+                    <div className="carousel-block">
+                        <Carousel>
+                            {this.state.productImages.map(s => getProductImage(s))}
+                        </Carousel>
+                    </div>
+                    <div className="product-data">
+                        <h1>{this.state.productData.name}</h1>
+                        <div className="product-description">{this.state.productData.description}</div>
+                        <div>Color: {this.state.productData.color}</div>
+                        <div>
+                            <span>{discountedPrice ? discountedPrice + ' ' : ''}</span>
+                            <span
+                                className={discountedPrice ? 'discount' : undefined}>{this.state.productData.price}</span>
+                            &nbsp;€
+                        </div>
+                    </div>
                 </div>
-            <div>{this.state.productImages.map(s => getProductImage(s))}</div>
             </div>)
     }
 }

@@ -1,3 +1,7 @@
 .main-logo {
     width: 12rem;
 }
+
+.main-logo img{
+    width: 100%
+}

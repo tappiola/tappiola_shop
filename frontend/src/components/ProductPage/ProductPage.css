@@ -1,0 +1,39 @@
+.product-area {
+    margin: 15px 5%;
+}
+
+.product-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-description {
+ text-align: justify;
+}
+
+.goBackButton {
+    margin: 10px;
+}
+
+.product-data {
+    padding-top: 30px;
+}
+
+.product-data div{
+    padding-bottom: 10px;
+}
+
+@media(min-width: 650px){
+    .product-block {
+    flex-direction: row;
+}
+    .carousel-block {
+    width: 45%;
+
+}
+.product-data {
+    width: 55%;
+    padding-left: 30px;
+    padding-top: 0;
+}
+}
