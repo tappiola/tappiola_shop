@@ -62,9 +62,11 @@ class ProductPage extends Component {
                                 className={discountedPrice ? 'discount' : undefined}>{this.state.productData.price}</span>
                             &nbsp;€
                         </div>
+                        <div className="sizes">
                         {this.state.stockLevel
                             .filter(x => x.size !== 'one_size')
                             .map((x, index) => <Size data={x} key={index}/> )}
+                            </div>
                     </div>
                 </div>
             </div>)

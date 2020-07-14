@@ -37,3 +37,7 @@
     padding-top: 0;
 }
 }
+
+.sizes {
+    display: flex;
+}
