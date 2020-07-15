@@ -4,6 +4,7 @@ import {getProduct} from "../../lib/service";
 import Carousel from "react-bootstrap/Carousel";
 import './ProductPage.css';
 import Size from './Size/Size';
+import Spinner from "react-bootstrap/Spinner";
 
 class ProductPage extends Component {
     state = {
@@ -19,14 +20,23 @@ class ProductPage extends Component {
     </div>;
 
     getProductInfo(id) {
-        return getProduct(id).then(({data}) => {
+        this.setState({loading: true});
+
+        return getProduct(id)
+            .then(null, error => error.response.status === 404 && this.setState({notFound: true}))
+            .then(({data}) => {
             this.setState({
                 productData: data,
                 productImages: data.product_images,
                 stockLevel: data.stock_level
             })
-        });
+        }).catch(err => console.log(err)).finally(() => this.setState({loading: false}));
     }
+
+    getTotalStock = () => {
+        return this.state.stockLevel.reduce((prev, curr) => prev + curr.stock_level, 0);
+}
+
 
     sizeClickHandler = (newSize) => {
         this.setState({selectedSize: this.state.selectedSize !== newSize ? newSize: null});
@@ -57,9 +67,10 @@ class ProductPage extends Component {
                                 clicked={this.sizeClickHandler.bind(this, x.size)}
                                 selectedSize={this.state.selectedSize}
                             />)
+        const buttonClasses = this.getTotalStock() === 0 ? 'total-sold-out'
+            : this.state.selectedSize ? 'add-to-cart size-selected' : 'add-to-cart'
 
-        return (
-            <div className="product-area">
+        let productData = <div className="product-area">
                 {this.props.history.length > 2 && this.goBackButton}
                 <div className="product-block">
                     <div className="carousel-block">
@@ -78,12 +89,22 @@ class ProductPage extends Component {
                             &nbsp;€
                         </div>
                         <div className="sizes">{sizesData}</div>
-                        <button className={`add-to-cart ${this.state.selectedSize? 'size-selected': ''}`}>
+                        <button className={buttonClasses}>
                             <span>Add to cart</span>
                         </button>
                     </div>
                 </div>
-            </div>)
+            </div>
+
+        if (this.state.loading) {
+            productData = <Spinner className="spinner" animation="border" variant="secondary"/>
+        }
+
+        if (this.state.notFound){
+            productData = <h4>This product doesn't exist</h4>
+        }
+
+        return (productData)
     }
 }
 

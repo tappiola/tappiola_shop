@@ -55,3 +55,6 @@
 
 .add-to-cart:not(.size-selected):hover span {display:none}
 .add-to-cart:not(.size-selected):hover:before {content:"Please select size"}
+
+.total-sold-out:hover span {display:none}
+.total-sold-out:not(.size-selected):hover:before {content:"Sold out"}
