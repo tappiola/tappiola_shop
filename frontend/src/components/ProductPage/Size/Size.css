@@ -1,13 +1,24 @@
-.sold-out {
-    color: gray;
-    border: 1px solid gray;
+.size {
+    color: black;
+    border: 1px solid black;
     width: 50px;
     height: 50px;
     display: flex;
-    margin: 10px;
+    margin-right: 20px;
     align-items: center;
     justify-content: center;
     padding-bottom: 0!important;
+}
+
+.sold-out {
+    color: gray;
+    border: 1px solid gray;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M0 99 L99 0 L100 1 L1 100' fill='black' /></svg>") no-repeat center center;
+    background-size: 100% 100%, auto;
+}
+
+.size-selected {
+    border-width: 2px;
 }
 
 

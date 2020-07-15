@@ -9,7 +9,8 @@ class ProductPage extends Component {
     state = {
         productData: {},
         productImages: [],
-        stockLevel: []
+        stockLevel: [],
+        selectedSize: null
     }
 
     goBackButton = <div className="goBackButton" onClick={() => this.props.history.goBack()}>
@@ -27,12 +28,17 @@ class ProductPage extends Component {
         });
     }
 
+    sizeClickHandler = (newSize) => {
+        this.setState({selectedSize: this.state.selectedSize !== newSize ? newSize: null});
+    }
+
     componentDidMount() {
         this.getProductInfo(this.props.match.params.productId);
+        this.state.stockLevel.filter(x => x.size === 'one_size')
+        && this.setState({selectedSize: 'one_size'});
     }
 
     render() {
-        console.log(this.state.productImages)
         const discountedPrice = this.state.productData.discounted_price;
 
         const getProductImage = (image, index) => <Carousel.Item key={index}>
@@ -42,6 +48,15 @@ class ProductPage extends Component {
                 alt="Product image"
             />
         </Carousel.Item>
+
+        const sizesData = this.state.stockLevel
+                            .filter(x => x.size !== 'one_size')
+                            .map((x, index) => <Size
+                                data={x}
+                                key={index}
+                                clicked={this.sizeClickHandler.bind(this, x.size)}
+                                selectedSize={this.state.selectedSize}
+                            />)
 
         return (
             <div className="product-area">
@@ -62,11 +77,10 @@ class ProductPage extends Component {
                                 className={discountedPrice ? 'discount' : undefined}>{this.state.productData.price}</span>
                             &nbsp;€
                         </div>
-                        <div className="sizes">
-                        {this.state.stockLevel
-                            .filter(x => x.size !== 'one_size')
-                            .map((x, index) => <Size data={x} key={index}/> )}
-                            </div>
+                        <div className="sizes">{sizesData}</div>
+                        <button className={`add-to-cart ${this.state.selectedSize? 'size-selected': ''}`}>
+                            <span>Add to cart</span>
+                        </button>
                     </div>
                 </div>
             </div>)
