@@ -52,34 +52,37 @@ class CategoryTabs extends Component {
             })
     }
 
-
     render() {
-        return (
-            <div className="categories" ref={this.categoriesPanel}>
-                <CategoryTab
-                    key="designers"
-                    id="designers"
-                    name="Designers"
-                    active={this.props.location.pathname.startsWith('/designers')}
-                    clicked={this.designersClickHandler.bind(this)}
-                    popup={<DesignersPopup data={this.state.designersData}/>}
-                    popupData={this.state.designersData}
-                />
-                {this.state.categories.map(c => <CategoryTab
-                    key={c.id}
-                    id={c.id}
-                    name={c.name}
-                    active={c.id === +this.props.match.params.id && this.props.location.pathname.startsWith('/category')}
-                    clicked={this.categoryClickHandler.bind(this)}
-                />)}
-                <CategoryTab
-                    key="sale"
-                    id="sale"
-                    name="Sale"
-                    active={this.props.location.pathname === '/category/sale'}
-                    clicked={this.saleClickHandler.bind(this)}
-                />
-            </div>
+        const categoriesData = <React.Fragment>
+            <CategoryTab
+                key="designers"
+                id="designers"
+                name="Designers"
+                active={this.props.location.pathname.startsWith('/designers')}
+                clicked={this.designersClickHandler.bind(this)}
+                popup={<DesignersPopup data={this.state.designersData}/>}
+                popupData={this.state.designersData}
+            />
+            {this.state.categories.map(c => <CategoryTab
+                key={c.id}
+                id={c.id}
+                name={c.name}
+                active={c.id === +this.props.match.params.id && this.props.location.pathname.startsWith('/category')}
+                clicked={this.categoryClickHandler.bind(this)}
+            />)}
+            <CategoryTab
+                key="sale"
+                id="sale"
+                name="Sale"
+                active={this.props.location.pathname === '/category/sale'}
+                clicked={this.saleClickHandler.bind(this)}
+            />
+        </React.Fragment>
+
+        return (<React.Fragment>
+            <div className="categories" ref={this.categoriesPanel}>{categoriesData}</div>
+            {/*<div className="categories-mobile" ref={this.categoriesPanel}>{categoriesData}</div>*/}
+</React.Fragment>
         )
     }
 

@@ -1,11 +1,31 @@
-.categories {
-    display: flex;
-    align-items: center;
-    position: sticky;
-    top: 0;
+/*.categories {*/
+/*    display: none;*/
+/*}*/
+
+.categories-mobile {
+    position: fixed;
     background-color: white;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    padding: 20px;
     z-index: 10;
 }
+
+/*@media (min-width: 800px) {*/
+    .categories {
+        display: flex;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        background-color: white;
+        z-index: 10;
+    }
+
+    .categories-mobile{
+        display: none;
+    }
+/*}*/
 
 .categories div.category-name {
     margin: 20px;
