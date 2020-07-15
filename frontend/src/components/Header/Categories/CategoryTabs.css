@@ -13,18 +13,19 @@
 }
 
 /*@media (min-width: 800px) {*/
-    .categories {
-        display: flex;
-        align-items: center;
-        position: sticky;
-        top: 0;
-        background-color: white;
-        z-index: 10;
-    }
+.categories {
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 10;
+}
 
-    .categories-mobile{
-        display: none;
-    }
+.categories-mobile {
+    display: none;
+}
+
 /*}*/
 
 .categories div.category-name {

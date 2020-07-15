@@ -14,7 +14,7 @@ class Size extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps, nextValue){
+    componentWillReceiveProps(nextProps, nextValue) {
         if (this.stockLevel > 0
             && nextProps.selectedSize === this.props.data.size
             && !this.state.classes.includes('size-selected')
