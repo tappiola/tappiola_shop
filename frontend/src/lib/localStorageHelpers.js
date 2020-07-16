@@ -26,7 +26,7 @@ export const updateCart = (newItemData, maxQuantity) =>{
                     : item
             );
             setCartItems(cartItems);
-            return 'Not enough items in stock';
+            return 'All items in stock are already in your cart';
         } else {
             cartItems = cartItems.map(
                 item => item.id === newItemId && item.size === newItemData.size

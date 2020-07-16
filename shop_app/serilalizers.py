@@ -12,7 +12,7 @@ class BrandSerializer(serializers.ModelSerializer):
 class BrandLimitedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
-        fields = ['name']
+        fields = ['name', 'image_link']
 
 
 class CategorySerializer(serializers.ModelSerializer):

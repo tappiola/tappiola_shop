@@ -58,3 +58,13 @@
 
 .total-sold-out:hover span {display:none}
 .total-sold-out:not(.size-selected):hover:before {content:"Sold out"}
+
+.purchase-status {
+    font-style: italic;
+    height: 14px;
+    color: darkred;
+}
+
+.product-title {
+    text-transform: uppercase;
+}

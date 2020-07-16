@@ -12,7 +12,8 @@ class ProductPage extends Component {
         productData: {},
         productImages: [],
         stockLevel: [],
-        selectedSize: null
+        selectedSize: null,
+        purchaseStatus: null
     }
 
     goBackButton = <div className="goBackButton" onClick={() => this.props.history.goBack()}>
@@ -29,7 +30,8 @@ class ProductPage extends Component {
                 this.setState({
                     productData: data,
                     productImages: data.product_images,
-                    stockLevel: data.stock_level
+                    stockLevel: data.stock_level,
+                    brand: data.brand.name
                 });
                 console.log(data.stock_level.filter(x => x.size === 'one_size').length);
                 data.stock_level.filter(x => x.size === 'one_size').length !== 0
@@ -43,7 +45,10 @@ class ProductPage extends Component {
 
 
     sizeClickHandler = (newSize) => {
-        this.setState({selectedSize: this.state.selectedSize !== newSize ? newSize : null});
+        this.setState({
+            selectedSize: this.state.selectedSize !== newSize ? newSize : null,
+            purchaseStatus: null
+        });
     }
 
     buttonClickHandler = () => {
@@ -55,6 +60,7 @@ class ProductPage extends Component {
             }
             const maxQuantity = this.state.stockLevel.filter(x => x.size === this.state.selectedSize)[0].stock_level;
             const status = updateCart(newItemValue, maxQuantity);
+            this.setState({purchaseStatus: status})
         }
     }
 
@@ -93,7 +99,8 @@ class ProductPage extends Component {
                     </Carousel>
                 </div>
                 <div className="product-data">
-                    <h1>{this.state.productData.name}</h1>
+                    <h4 class="product-title">{this.state.brand}</h4>
+                    <h5>{this.state.productData.name}</h5>
                     <div className="product-description">{this.state.productData.description}</div>
                     <div>Color: {this.state.productData.color}</div>
                     <div>
@@ -103,6 +110,7 @@ class ProductPage extends Component {
                         &nbsp;€
                     </div>
                     <div className="sizes">{sizesData}</div>
+                    <div className="purchase-status">{this.state.purchaseStatus}</div>
                     <button
                         className={buttonClasses}
                         onClick={this.buttonClickHandler}
