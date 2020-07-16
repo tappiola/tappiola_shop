@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {getCartItems} from '../../lib/localStorageHelpers';
+import {getCartItems, setCartItems} from '../../lib/localStorageHelpers';
 import {getProducts} from "../../lib/service";
 import CartItem from "./CartItem/CartItem";
 import Spinner from "react-bootstrap/Spinner";
@@ -17,6 +17,7 @@ class Cart extends Component {
         getProducts({ids: cartIds.join(',')}).then(({data}) => {
                 const idsInStock = data.map(x => x.id);
                 const updatedCartItems = cartDataLocal.filter(x => idsInStock.includes(+x.id));
+                setCartItems(updatedCartItems);
 
                 const cartItems = updatedCartItems.map(item => {
                     const itemSameId = data.filter(x => +x.id === +item.id)[0];
