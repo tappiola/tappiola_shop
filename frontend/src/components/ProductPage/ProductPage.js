@@ -35,7 +35,7 @@ class ProductPage extends Component {
                 });
                 console.log(data.stock_level.filter(x => x.size === 'one_size').length);
                 data.stock_level.filter(x => x.size === 'one_size').length !== 0
-                     && this.setState({selectedSize: 'one_size'});
+                && this.setState({selectedSize: 'one_size'});
             }).catch(err => console.log(err)).finally(() => this.setState({loading: false}));
     }
 
@@ -53,7 +53,7 @@ class ProductPage extends Component {
 
     buttonClickHandler = () => {
         if (this.state.selectedSize) {
-            const newItemValue =  {
+            const newItemValue = {
                 id: this.props.match.params.productId,
                 size: this.state.selectedSize,
                 quantity: 1

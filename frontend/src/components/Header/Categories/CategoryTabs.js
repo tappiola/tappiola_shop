@@ -80,9 +80,9 @@ class CategoryTabs extends Component {
         </React.Fragment>
 
         return (<React.Fragment>
-            <div className="categories" ref={this.categoriesPanel}>{categoriesData}</div>
-            {/*<div className="categories-mobile" ref={this.categoriesPanel}>{categoriesData}</div>*/}
-</React.Fragment>
+                <div className="categories" ref={this.categoriesPanel}>{categoriesData}</div>
+                {/*<div className="categories-mobile" ref={this.categoriesPanel}>{categoriesData}</div>*/}
+            </React.Fragment>
         )
     }
 

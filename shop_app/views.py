@@ -4,7 +4,8 @@ from rest_framework import permissions
 
 from .models import Brand, Category, Product, Image, StockLevel
 from .serilalizers import (
-    BrandSerializer, CategorySerializer, ProductSerializer, ImageSerializer, StockLevelSerializer, ProductCreateSerializer
+    BrandSerializer, CategorySerializer, ProductSerializer, ImageSerializer, StockLevelSerializer,
+    ProductCreateSerializer
 )
 
 

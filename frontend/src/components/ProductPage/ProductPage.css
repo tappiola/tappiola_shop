@@ -8,7 +8,7 @@
 }
 
 .product-description {
- text-align: justify;
+    text-align: justify;
 }
 
 .goBackButton {
@@ -19,24 +19,26 @@
     padding-top: 30px;
 }
 
-.product-data div{
+.product-data div {
     padding-bottom: 10px;
     font-size: 14px;
 }
 
-@media(min-width: 650px){
+@media (min-width: 650px) {
     .product-block {
-    flex-direction: row;
-}
-    .carousel-block {
-    width: 45%;
+        flex-direction: row;
+    }
 
-}
-.product-data {
-    width: 55%;
-    padding-left: 30px;
-    padding-top: 0;
-}
+    .carousel-block {
+        width: 45%;
+
+    }
+
+    .product-data {
+        width: 55%;
+        padding-left: 30px;
+        padding-top: 0;
+    }
 }
 
 .sizes {
@@ -53,11 +55,21 @@
 
 }
 
-.add-to-cart:not(.size-selected):hover span {display:none}
-.add-to-cart:not(.size-selected):hover:before {content:"Please select size"}
+.add-to-cart:not(.size-selected):hover span {
+    display: none
+}
 
-.total-sold-out:hover span {display:none}
-.total-sold-out:not(.size-selected):hover:before {content:"Sold out"}
+.add-to-cart:not(.size-selected):hover:before {
+    content: "Please select size"
+}
+
+.total-sold-out:hover span {
+    display: none
+}
+
+.total-sold-out:not(.size-selected):hover:before {
+    content: "Sold out"
+}
 
 .purchase-status {
     font-style: italic;

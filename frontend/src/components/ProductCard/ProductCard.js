@@ -14,7 +14,7 @@ class ProductCard extends Component {
     }
 
 
-    hover= () => {
+    hover = () => {
         this.setState({src: this.getSrc(1)});
     }
 
@@ -39,7 +39,7 @@ class ProductCard extends Component {
                      style={{backgroundImage: `url(${this.state.src})`}}
                      onMouseOver={this.hover.bind(this)}
                      onMouseOut={this.unhover.bind(this)}
-                    onClick={this.clickHandler.bind(this, this.props.productData.category, this.props.productData.id)}>
+                     onClick={this.clickHandler.bind(this, this.props.productData.category, this.props.productData.id)}>
                 </div>
                 <br/>
                 <div>{this.props.productData.brand.name}</div>
