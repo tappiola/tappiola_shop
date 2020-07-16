@@ -3,6 +3,7 @@ import {getCartItems, setCartItems} from '../../lib/localStorageHelpers';
 import {getProducts} from "../../lib/service";
 import CartItem from "./CartItem/CartItem";
 import Spinner from "react-bootstrap/Spinner";
+import './Cart.css';
 
 class Cart extends Component {
     state = {
@@ -29,8 +30,8 @@ class Cart extends Component {
     }
 
     render() {
-        let data = <div>
-            {JSON.stringify(this.state.cartItems)}
+        let data = <div className="cart-items">
+            <h4 className="cart-header">Your cart items:</h4>
             {this.state.cartItems.map(itemData => <CartItem data={itemData}/>)}
         </div>
 
@@ -38,7 +39,9 @@ class Cart extends Component {
             data = <Spinner className="spinner" animation="border" variant="secondary"/>
         }
 
-        return (data);
+        return (<div>
+
+            {data}</div>);
     }
 }
 
