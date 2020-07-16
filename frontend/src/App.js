@@ -10,6 +10,7 @@ import Banner from "./components/Header/Banner/Banner";
 import DesignersList from "./components/DesignersList/DesignersList";
 import DesignerCategory from "./components/DesignerCategory/DesignerCategory";
 import ProductPage from "./components/ProductPage/ProductPage";
+import Cart from "./components/Cart/Cart";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                 <Route path='/designers' component={DesignersList}/>
                 <Route path='/category/:id/product/:productId' component={ProductPage}/>
                 <Route path='/category/:id' component={Category}/>
+                <Route path='/cart' component={Cart}/>
                 <Route path='/' component={Home}/>
             </Switch>
             {/*<Footer/>*/}

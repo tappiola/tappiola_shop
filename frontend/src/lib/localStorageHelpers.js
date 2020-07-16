@@ -1,12 +1,12 @@
 const CART_ITEM_KEY = 'tappiola_cart'
-const getCartItems = () => {
+export const getCartItems = () => {
     if (localStorage.getItem(CART_ITEM_KEY)) {
         return JSON.parse(localStorage[CART_ITEM_KEY]);
     } else {
         return [];
     }
 }
-const setCartItems = (newValues) => {
+export const setCartItems = (newValues) => {
     console.log('CART: ' + JSON.stringify(newValues));
     localStorage[CART_ITEM_KEY] = JSON.stringify(newValues);
 }

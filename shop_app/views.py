@@ -76,9 +76,9 @@ class ProductsList(generics.ListCreateAPIView):
     def get_queryset(self):
 
         search_param = self.request.query_params.get('search', None)
-        if not search_param:
-            return get_products_in_stock()
-        else:
+        ids_param = self.request.query_params.get('ids', None)
+
+        if search_param:
             q_term = Q()
             for param in search_param.split(' '):
                 q = (
@@ -89,7 +89,11 @@ class ProductsList(generics.ListCreateAPIView):
                 )
                 q_term &= q
 
-        return get_products_in_stock().filter(q_term)
+            return get_products_in_stock().filter(q_term)
+        elif ids_param:
+            return get_products_in_stock().filter(id__in=ids_param.split(','))
+        else:
+            return get_products_in_stock()
 
 
 class ProductDetails(generics.RetrieveUpdateDestroyAPIView):

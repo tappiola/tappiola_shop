@@ -30,8 +30,8 @@ export const getSaleItems = () => {
     return axios.get(API_HOST + '/sale');
 };
 
-export const getProducts = (param) => {
-    const params = {search: param};
+export const getProducts = (paramsDict) => {
+    const params = paramsDict;
     return axios.get(API_HOST + '/products', {params});
 };
 

@@ -16,7 +16,7 @@ class Category extends Component {
         this.setState({loading: true});
 
         if (id === 'search_results') {
-            getProducts(searchParam).then(({data}) => {
+            getProducts({search: searchParam}).then(({data}) => {
                 this.setState({
                     categoryId: id,
                     products: data,
