@@ -1,7 +1,7 @@
 import {getBrands, getCategories} from '../../../lib/service';
 import React, {Component} from "react";
 import './CategoryTabs.css';
-import CategoryTab from "./CategoryTabs/CategoryTab";
+import CategoryTab from "./CategoryTab/CategoryTab";
 import {withRouter} from "react-router-dom";
 import DesignersPopup from "./DesignersPopup/DesignersPopup";
 

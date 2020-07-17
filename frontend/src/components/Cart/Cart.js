@@ -1,15 +1,14 @@
 import React, {Component} from "react";
-import {getCartItems, setCartItems} from '../../lib/localStorageHelpers';
 import {getProducts} from "../../lib/service";
 import CartItem from "./CartItem/CartItem";
 import Spinner from "react-bootstrap/Spinner";
 import './Cart.css';
 import {withRouter} from 'react-router-dom';
+import {connect} from "react-redux";
 
 class Cart extends Component {
     state = {
-        cartItems: [],
-        cartDataLocal: []
+        cartItems: []
     }
 
     getStockLevelForCartItem = (cartItem, data) => {
@@ -20,9 +19,9 @@ class Cart extends Component {
 
     deleteItemHandler = (id, size) => {
         const updatedCartItems = this.state.cartItems.filter(x => !(x.id === id && x.size === size));
-        const cartDataLocal = this.state.cartDataLocal.filter(x => x.id !== id && x.size !== size);
-        this.setState({cartItems: updatedCartItems, cartDataLocal});
-        setCartItems(cartDataLocal);
+        const cartDataLocal = this.props.cartDataLocal.filter(x => !(+x.id === +id && x.size === size));
+        this.setState({cartItems: updatedCartItems});
+        this.props.onButtonClick(cartDataLocal);
     }
 
     quantityChangedHandler = (id, size, newQuantity) => {
@@ -31,27 +30,26 @@ class Cart extends Component {
                 ? {...item, quantity: newQuantity}
                 : item
         );
-        const cartDataLocal = this.state.cartItems.map(
-            item => item.id === id && item.size === size
+        const cartDataLocal = this.props.cartDataLocal.map(
+            item => +item.id === +id && item.size === size
                 ? {...item, quantity: newQuantity}
                 : item
         );
-        this.setState({cartItems, cartDataLocal});
-        setCartItems(cartDataLocal);
+        this.setState({cartItems});
+        this.props.onButtonClick(cartDataLocal);
     }
 
     componentDidMount() {
         this.setState({loading: true});
 
-        const cartDataLocal = getCartItems();
-        this.setState({cartDataLocal});
+        const cartDataLocal = this.props.cartDataLocal;
         const cartIds = Array.from(new Set(cartDataLocal.map(i => i.id)));
         getProducts({ids: cartIds.join(',')}).then(({data}) => {
                 const idsInStock = data.map(x => x.id);
                 const updatedCartItems = cartDataLocal
                     .filter(x => idsInStock.includes(+x.id))
                     .filter(x => this.getStockLevelForCartItem(x, data) > 0);
-                setCartItems(updatedCartItems);
+                this.props.onButtonClick(updatedCartItems);
 
                 const cartItems = updatedCartItems.map(item => {
                     const itemSameId = data.filter(x => +x.id === +item.id)[0];
@@ -94,4 +92,19 @@ class Cart extends Component {
     }
 }
 
-export default withRouter(Cart);
+const mapStateToProps = state => {
+    return {
+        cartDataLocal: state.cartDataLocal
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onButtonClick: (cartDataLocal) => dispatch({
+            type: 'UPDATE_CART',
+            cartDataLocal: cartDataLocal
+        })
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Cart));

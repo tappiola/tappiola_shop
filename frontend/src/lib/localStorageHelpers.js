@@ -10,9 +10,8 @@ export const setCartItems = (newValues) => {
     localStorage[CART_ITEM_KEY] = JSON.stringify(newValues);
 }
 
-export const updateCart = (newItemData, maxQuantity) => {
+export const getUpdatedCartItems = (cartItems, newItemData, maxQuantity) => {
 
-    let cartItems = getCartItems();
     const newItemId = newItemData.id;
     const sameItemsInCart = cartItems.filter(item => item.id === newItemId && item.size === newItemData.size);
     if (sameItemsInCart.length > 0) {
@@ -23,21 +22,17 @@ export const updateCart = (newItemData, maxQuantity) => {
                     ? {...item, quantity: maxQuantity}
                     : item
             );
-            setCartItems(cartItems);
-            return 'All items in stock are already in your cart';
+            return [cartItems, 'All items in stock are already in your cart'];
         } else {
             cartItems = cartItems.map(
                 item => item.id === newItemId && item.size === newItemData.size
                     ? {...item, quantity: sameItemInCart.quantity + 1}
                     : item
             );
-            setCartItems(cartItems);
-            return 'Product added to cart';
+            return [cartItems, 'Product added to cart'];
         }
     } else {
         cartItems.push(newItemData);
-        setCartItems(cartItems);
-        return 'Product added to cart';
+        return [cartItems, 'Product added to cart'];
     }
-
 }

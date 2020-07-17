@@ -5,7 +5,8 @@ import Carousel from "react-bootstrap/Carousel";
 import './ProductPage.css';
 import Size from './Size/Size';
 import Spinner from "react-bootstrap/Spinner";
-import {updateCart} from '../../lib/localStorageHelpers';
+import {connect} from "react-redux";
+import {getUpdatedCartItems} from "../../lib/localStorageHelpers";
 
 class ProductPage extends Component {
     state = {
@@ -58,8 +59,10 @@ class ProductPage extends Component {
                 quantity: 1
             }
             const maxQuantity = this.state.stockLevel.filter(x => x.size === this.state.selectedSize)[0].stock_level;
-            const status = updateCart(newItemValue, maxQuantity);
-            this.setState({purchaseStatus: status})
+
+            const [updatedData, purchaseStatus] = getUpdatedCartItems(this.props.cartDataLocal, newItemValue, maxQuantity);
+            this.props.onButtonClick(updatedData);
+            this.setState({purchaseStatus: purchaseStatus});
         }
     }
 
@@ -132,4 +135,19 @@ class ProductPage extends Component {
     }
 }
 
-export default withRouter(ProductPage);
+const mapStateToProps = state => {
+    return {
+        cartDataLocal: state.cartDataLocal
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onButtonClick: (cartDataLocal) => dispatch({
+            type: 'UPDATE_CART',
+            cartDataLocal: cartDataLocal
+        })
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProductPage));

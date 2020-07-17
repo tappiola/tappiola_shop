@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import queryString from 'query-string';
 import {withRouter} from "react-router-dom";
+import './Search.css';
+import SearchIcon from "../../Icons/SearchIcon";
 
 class Search extends Component {
     state = {
@@ -27,12 +29,20 @@ class Search extends Component {
     }
 
     render() {
-        return (<form onSubmit={this.handleSearchTermSubmit}>
-            <input className='search' defaultValue={this.state.searchTerm}
-                   ref={input => this.textInput = input}>
-            </input>
-
-        </form>)
+        return (
+            <div className='header__search'>
+                <form name='header-search' onSubmit={this.handleSearchTermSubmit}>
+                    <input className='search-input'
+                           defaultValue={this.state.searchTerm}
+                           ref={input => this.textInput = input}
+                           placeholder="Search"
+                    />
+                    <button className='search-button'>
+                        <SearchIcon/>
+                    </button>
+                </form>
+            </div>
+        )
     }
 }
 

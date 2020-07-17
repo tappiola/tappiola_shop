@@ -19,7 +19,7 @@ class Size extends Component {
             && nextProps.selectedSize === this.props.data.size
             && !this.state.classes.includes('product__size-selected')
         ) {
-            this.setState({classes: [...this.state.classes, 'product_size-selected']});
+            this.setState({classes: [...this.state.classes, 'product__size-selected']});
         } else {
             this.setState({classes: this.state.classes.filter(c => c !== 'product__size-selected')});
         }
