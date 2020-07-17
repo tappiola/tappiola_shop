@@ -50,7 +50,6 @@ class Category extends Component {
     }
 
     componentWillReceiveProps(nextProps, nextValue) {
-        console.log('PROPS');
         if (nextProps.match.params.id !== this.props.match.params.id
             || nextProps.history.location.search !== this.props.location.search) {
             const id = nextProps.match.params.id;

@@ -33,7 +33,6 @@ class ProductPage extends Component {
                     stockLevel: data.stock_level,
                     brand: data.brand.name
                 });
-                console.log(data.stock_level.filter(x => x.size === 'one_size').length);
                 data.stock_level.filter(x => x.size === 'one_size').length !== 0
                 && this.setState({selectedSize: 'one_size'});
             }).catch(err => console.log(err)).finally(() => this.setState({loading: false}));

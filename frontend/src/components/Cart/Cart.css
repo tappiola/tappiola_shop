@@ -1,5 +1,10 @@
+.cart {
+    display: flex;
+}
+
 .cart-items {
     padding-left: 20px;
+    width: 66%;
 }
 
 .cart-header {

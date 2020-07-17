@@ -16,7 +16,6 @@ class Banner extends Component {
     ];
 
     changeBannerText() {
-        console.log(this.state);
         let currentIndex = this.state.bannerIndex;
         currentIndex < this.bannerOptions.length - 1 ? currentIndex += 1 : currentIndex = 0;
         this.setState({bannerIndex: currentIndex});

@@ -16,6 +16,10 @@ class Header extends Component {
         this.props.history.push(`/category/search_results?search=${value}`);
     }
 
+    cartClickHandler = () => {
+        this.props.history.push('/cart');
+    }
+
     componentDidMount() {
         this.setState({searchTerm: queryString.parse(this.props.location.search).search})
     }
@@ -41,9 +45,7 @@ class Header extends Component {
 
                     </form>
                     <div className='main-icons'>
-                        <div>Profile</div>
-                        <div>Favorites</div>
-                        <div>Basket</div>
+                        <div onClick={this.cartClickHandler}>Cart</div>
                     </div>
 
                 </div>
