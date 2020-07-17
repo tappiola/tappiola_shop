@@ -10,7 +10,7 @@ class ProductCard extends Component {
 
     render() {
         return (
-            <div className="designer-card"
+            <div className="designer__card"
                  onClick={this.designerClickHandler.bind(this, this.props.designerData.id)}
                  id={this.props.designerData.id}
             >

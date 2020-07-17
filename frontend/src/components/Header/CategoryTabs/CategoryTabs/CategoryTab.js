@@ -13,11 +13,11 @@ class CategoryTab extends Component {
     render() {
         return (
             <div
-                className={this.props.active ? 'active' : undefined}
+                className={this.props.active ? 'category__active' : undefined}
                 onMouseEnter={this.handleMouseHover}
                 onMouseLeave={this.handleMouseHover}
             >
-                <div id={this.props.id} className={'category-name'} onClick={this.props.clicked}>
+                <div id={this.props.id} className={'category__name'} onClick={this.props.clicked}>
                     {this.props.name}
                 </div>
                 {this.props.popup && this.props.popupData && this.state.isHovered && this.props.popup}

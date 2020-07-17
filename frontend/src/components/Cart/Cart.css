@@ -2,7 +2,7 @@
     display: flex;
 }
 
-.cart-items {
+.cart__items {
     padding-left: 20px;
     width: 66%;
 }

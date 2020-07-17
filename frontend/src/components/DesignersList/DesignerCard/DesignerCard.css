@@ -1,4 +1,4 @@
-.designer-card {
+.designer__card {
     border: 2px solid gray;
     height: 200px;
     display: flex;
@@ -13,14 +13,14 @@
     transition: all .2s ease-in-out;
 }
 
-.designer-card:hover {
+.designer__card:hover {
     -webkit-transform: scale(1.05);
     -ms-transform: scale(1.05);
     transform: scale(1.05);
     box-shadow: 10px 15px 7px #C7C7C7;
 }
 
-.designer-card .image {
+.designer__card .image {
     height: 60%;
     width: 100%;
     background-size: contain;
@@ -28,6 +28,6 @@
     background-repeat: no-repeat;
 }
 
-.designer-card .title {
+.designer__card .title {
     height: 20%;
 }

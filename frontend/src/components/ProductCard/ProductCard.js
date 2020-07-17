@@ -34,8 +34,8 @@ class ProductCard extends Component {
         const discountedPrice = this.props.productData.discounted_price;
 
         return (
-            <div className="product-card">
-                <div className="product-image"
+            <div className="product__card">
+                <div className="product__image"
                      style={{backgroundImage: `url(${this.state.src})`}}
                      onMouseOver={this.hover.bind(this)}
                      onMouseOut={this.unhover.bind(this)}
@@ -46,7 +46,8 @@ class ProductCard extends Component {
                 <div>{this.props.productData.name}</div>
                 <div>
                     <span>{discountedPrice ? discountedPrice + ' ' : ''}</span>
-                    <span className={discountedPrice ? 'discount' : undefined}>{this.props.productData.price}</span>
+                    <span
+                        className={discountedPrice ? 'product__discount' : undefined}>{this.props.productData.price}</span>
                     &nbsp;€
                 </div>
             </div>)

@@ -16,7 +16,7 @@ class ProductPage extends Component {
         purchaseStatus: null
     }
 
-    goBackButton = <div className="goBackButton" onClick={() => this.props.history.goBack()}>
+    goBackButton = <div className="go-back-button" onClick={() => this.props.history.goBack()}>
         <i className="fa fa-arrow-left" aria-hidden="true"/>
         &nbsp;Back
     </div>;
@@ -86,30 +86,30 @@ class ProductPage extends Component {
                 clicked={this.sizeClickHandler.bind(this, x.size)}
                 selectedSize={this.state.selectedSize}
             />)
-        const buttonClasses = this.getTotalStock() === 0 ? 'total-sold-out'
-            : this.state.selectedSize ? 'add-to-cart size-selected' : 'add-to-cart'
+        const buttonClasses = this.getTotalStock() === 0 ? 'product__total-sold-out'
+            : this.state.selectedSize ? 'product__add-to-cart product__size-selected' : 'product__add-to-cart'
 
-        let productData = <div className="product-area">
+        let productData = <div className="product__area">
             {this.props.history.length > 2 && this.goBackButton}
-            <div className="product-block">
-                <div className="carousel-block">
+            <div className="product__block">
+                <div className="product__carousel">
                     <Carousel>
                         {this.state.productImages.map((s, index) => getProductImage(s, index))}
                     </Carousel>
                 </div>
-                <div className="product-data">
-                    <h4 class="product-title">{this.state.brand}</h4>
+                <div className="product__data">
+                    <h4 className="product__title">{this.state.brand}</h4>
                     <h5>{this.state.productData.name}</h5>
-                    <div className="product-description">{this.state.productData.description}</div>
+                    <div className="product__description">{this.state.productData.description}</div>
                     <div>Color: {this.state.productData.color}</div>
                     <div>
                         <span>{discountedPrice ? discountedPrice + ' ' : ''}</span>
                         <span
-                            className={discountedPrice ? 'discount' : undefined}>{this.state.productData.price}</span>
+                            className={discountedPrice ? 'product__discount' : undefined}>{this.state.productData.price}</span>
                         &nbsp;€
                     </div>
-                    <div className="sizes">{sizesData}</div>
-                    <div className="purchase-status">{this.state.purchaseStatus}</div>
+                    <div className="product__sizes">{sizesData}</div>
+                    <div className="product__purchase-status">{this.state.purchaseStatus}</div>
                     <button
                         className={buttonClasses}
                         onClick={this.buttonClickHandler}

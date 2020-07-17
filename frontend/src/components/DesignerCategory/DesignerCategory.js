@@ -58,13 +58,13 @@ class DesignerCategory extends Component {
 
     render() {
         let data = <div>
-            <div className='designer-info'>
-                <div className='designer-header'>
-                    <div className='designer-logo'
+            <div className='designer__info'>
+                <div className='designer__header'>
+                    <div className='designer__logo'
                          style={{backgroundImage: `url(${this.state.designerData.image_link})`}}/>
                 </div>
 
-                <div className="designer-desc">{this.state.designerData.description}</div>
+                <div className="designer__desc">{this.state.designerData.description}</div>
             </div>
 
             <div className="category">

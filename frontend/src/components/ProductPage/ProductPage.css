@@ -1,82 +1,82 @@
-.product-area {
+.product__area {
     margin: 15px 5%;
 }
 
-.product-block {
+.product__block {
     display: flex;
     flex-direction: column;
 }
 
-.product-description {
+.product__description {
     text-align: justify;
 }
 
-.goBackButton {
+.go-back-button {
     margin: 10px;
 }
 
-.product-data {
+.product__data {
     padding-top: 30px;
 }
 
-.product-data div {
+.product__data div {
     padding-bottom: 10px;
     font-size: 14px;
 }
 
 @media (min-width: 650px) {
-    .product-block {
+    .product__block {
         flex-direction: row;
     }
 
-    .carousel-block {
+    .product__carousel {
         width: 45%;
 
     }
 
-    .product-data {
+    .product__data {
         width: 55%;
         padding-left: 30px;
         padding-top: 0;
     }
 }
 
-.sizes {
+.product__sizes {
     display: flex;
 }
 
-.add-to-cart {
+.product__add-to-cart {
     text-transform: uppercase;
     padding: 10px 20px;
     background-color: black;
     color: white;
     width: 230px;
     margin-top: 30px;
-
+    border: none;
 }
 
-.add-to-cart:not(.size-selected):hover span {
+.product__add-to-cart:not(.size-selected):hover span {
     display: none
 }
 
-.add-to-cart:not(.size-selected):hover:before {
+.product__add-to-cart:not(.size-selected):hover:before {
     content: "Please select size"
 }
 
-.total-sold-out:hover span {
+.product__total-sold-out:hover span {
     display: none
 }
 
-.total-sold-out:not(.size-selected):hover:before {
+.product__total-sold-out:not(.size-selected):hover:before {
     content: "Sold out"
 }
 
-.purchase-status {
+.product__purchase-status {
     font-style: italic;
     height: 14px;
     color: darkred;
 }
 
-.product-title {
+.product__title {
     text-transform: uppercase;
 }

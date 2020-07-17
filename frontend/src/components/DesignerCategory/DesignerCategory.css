@@ -1,14 +1,14 @@
-.designer-info {
+.designer__info {
     padding: 30px 10%;
 }
 
-.designer-header {
+.designer__header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.designer-logo {
+.designer__logo {
     width: 25%;
     height: 100px;
     background-repeat: no-repeat;
@@ -16,6 +16,6 @@
     background-size: contain;
 }
 
-.designer-desc {
+.designer__desc {
     text-align: justify;
 }

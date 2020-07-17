@@ -38,31 +38,31 @@ class CartItem extends Component {
     render() {
         const price = this.props.data.discounted_price || this.props.data.price;
 
-        return (<div className="cart-item">
-            <div className="product-card-small" onClick={this.viewProductDetails}>
-                <div className="product-image"
+        return (<div className="cart__item">
+            <div className="cart__card" onClick={this.viewProductDetails}>
+                <div className="cart__image"
                      style={{backgroundImage: `url(${this.getImageSrc()})`}}>
                 </div>
             </div>
-            <div className="cart-data-stable">
+            <div className="cart__data-stable">
                 <div>
-                    <div className="cart-brand">{this.props.data.brand.name}</div>
-                    <div className="cart-name" onClick={this.viewProductDetails}>{this.props.data.name}</div>
+                    <div className="cart__brand">{this.props.data.brand.name}</div>
+                    <div className="cart__name" onClick={this.viewProductDetails}>{this.props.data.name}</div>
                     <div>Size: {this.props.data.size}</div>
                     <div>Color: {this.props.data.color}</div>
                     <div>{price} €</div>
                 </div>
-                <div className="cart-delete" onClick={this.props.deleted}>
+                <div className="cart__delete" onClick={this.props.deleted}>
                     <i className="fa fa-trash-o" aria-hidden="true"/>
                     Delete
                 </div>
             </div>
-            <div className="quantity-selector">
-                <span className="decrement" onClick={this.decrementClickHandler}>-</span>
-                <span className="quantity-input">{this.state.quantity}</span>
-                <span className="increment" onClick={this.incrementClickHandler}>+</span>
+            <div className="cart__quantity">
+                <span className="cart__decrement" onClick={this.decrementClickHandler}>-</span>
+                <span className="cart__quantity-input">{this.state.quantity}</span>
+                <span className="cart__increment" onClick={this.incrementClickHandler}>+</span>
             </div>
-            <div className="totalPrice">{price * +this.state.quantity} €</div>
+            <div className="cart__totalPrice">{price * +this.state.quantity} €</div>
         </div>);
     }
 }

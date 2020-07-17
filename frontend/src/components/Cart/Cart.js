@@ -67,7 +67,7 @@ class Cart extends Component {
             <div>
                 <h4 className="cart-header">Your cart items</h4>
                 <div className="cart">
-                    <div className="cart-items">
+                    <div className="cart__items">
                         {this.state.cartItems.map((itemData, index) => <CartItem
                             key={index}
                             data={itemData}

@@ -1,0 +1,21 @@
+.categories {
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 10;
+}
+
+.categories div.category__name {
+    margin: 20px;
+}
+
+.categories:hover {
+    color: gray;
+}
+
+.categories div:hover {
+    color: black;
+}
+

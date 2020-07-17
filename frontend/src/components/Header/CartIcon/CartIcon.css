@@ -1,0 +1,18 @@
+.header__bag-icon {
+    fill: #000;
+    height: 25px;
+    width: 25px;
+    position: fixed;
+    top: 20px;
+    z-index: 15;
+}
+
+.header__cart-count {
+    width: 25px;
+    position: fixed;
+    top: 27px;
+    color: white;
+    text-align: center;
+    z-index: 16;
+    font-size: 12px;
+}
