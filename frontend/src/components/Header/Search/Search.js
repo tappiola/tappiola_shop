@@ -7,10 +7,6 @@ class Search extends Component {
         searchTerm: ''
     }
 
-    cartClickHandler = () => {
-        this.props.history.push('/cart');
-    }
-
     componentDidMount() {
         this.setState({searchTerm: queryString.parse(this.props.location.search).search})
     }

@@ -55,11 +55,11 @@
     border: none;
 }
 
-.product__add-to-cart:not(.size-selected):hover span {
+.product__add-to-cart:not(.product__size-selected):hover span {
     display: none
 }
 
-.product__add-to-cart:not(.size-selected):hover:before {
+.product__add-to-cart:not(.product__size-selected):hover:before {
     content: "Please select size"
 }
 
@@ -67,7 +67,7 @@
     display: none
 }
 
-.product__total-sold-out:not(.size-selected):hover:before {
+.product__total-sold-out:not(.product__size-selected):hover:before {
     content: "Sold out"
 }
 

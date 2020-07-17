@@ -1,15 +1,20 @@
 import React, {Component} from "react";
 import './CartIcon.css';
 import {getCartItems} from "../../../lib/localStorageHelpers";
+import {withRouter} from 'react-router-dom';
 
 class CartIcon extends Component {
 
+    cartClickHandler = () => {
+        this.props.history.push('/cart');
+    }
 
     render() {
         const cartCount = getCartItems().reduce((prev, next) => prev + next.quantity, 0);
 
         return (<div className='header__main-icons'>
             <div onClick={this.cartClickHandler}>
+                {/*<img className="header__bag-icon" src="icons/suitcase.png" alt="cart"/>*/}
                 <span className="header__cart-count">{cartCount > 0 ? cartCount : ''}</span>
                 <svg className="header__bag-icon" viewBox="0 0 32 32">
                     <path
@@ -20,4 +25,4 @@ class CartIcon extends Component {
     }
 }
 
-export default CartIcon;
+export default withRouter(CartIcon);
