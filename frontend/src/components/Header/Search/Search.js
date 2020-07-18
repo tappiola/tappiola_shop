@@ -10,7 +10,7 @@ class Search extends Component {
     }
 
     componentDidMount() {
-        this.setState({searchTerm: queryString.parse(this.props.location.search).search})
+        this.setState({searchTerm: queryString.parse(this.props.location.search).search});
     }
 
     componentWillReceiveProps(nextProps, nextValue) {

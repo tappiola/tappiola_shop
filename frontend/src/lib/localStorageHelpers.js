@@ -32,7 +32,9 @@ export const getUpdatedCartItems = (cartItems, newItemData, maxQuantity) => {
             return [cartItems, 'Product added to cart'];
         }
     } else {
-        cartItems.push(newItemData);
-        return [cartItems, 'Product added to cart'];
+        const newCartItems = JSON.parse(JSON.stringify(cartItems));
+        newCartItems.push(newItemData);
+        // cartItems.push(newItemData);
+        return [newCartItems, 'Product added to cart'];
     }
 }
