@@ -3,7 +3,7 @@ from rest_framework import generics, views
 from rest_framework import permissions
 from rest_framework.response import Response
 
-from .models import Brand, Category, Product, Image, StockLevel, Order
+from .models import Brand, Category, Product, Image, StockLevel, Order, OrderItem
 from .serilalizers import (
     BrandSerializer, CategorySerializer, ProductSerializer, ImageSerializer, StockLevelSerializer,
     ProductCreateSerializer, CreateOrderSerializer, SubmitOrderSerializer, ViewOrderSerializer
@@ -147,7 +147,7 @@ class CreateOrder(views.APIView):
         request_serializer = CreateOrderSerializer(data=request.data)
         if request_serializer.is_valid():
             new_order = request_serializer.save(paid=False)
-            return Response({'order_id': new_order.pk}, 201)
+            return Response({'order_id': new_order.pk, 'total_price': new_order.total_cost}, 201)
 
         return Response(request_serializer.errors, 400)
 
@@ -159,6 +159,13 @@ class SubmitOrder(views.APIView):
         request_serializer = SubmitOrderSerializer(order, data=request.data)
         if request_serializer.is_valid():
             request_serializer.save(paid=True)
+
+            order_items = OrderItem.objects.filter(order_id=pk)
+            for item in order_items:
+                stock_item_to_update = StockLevel.objects.get(product=item.product_id, size=item.size)
+                new_quantity = max(stock_item_to_update.stock_level - item.quantity, 0)
+                stock_item_to_update.stock_level = new_quantity
+                stock_item_to_update.save()
 
             response_serializer = ViewOrderSerializer(instance=order)
             return Response(response_serializer.data, 200)
