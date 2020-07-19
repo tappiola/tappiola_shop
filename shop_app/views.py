@@ -1,11 +1,12 @@
 from django.db.models import Q, Sum
-from rest_framework import generics
+from rest_framework import generics, views
 from rest_framework import permissions
+from rest_framework.response import Response
 
 from .models import Brand, Category, Product, Image, StockLevel
 from .serilalizers import (
     BrandSerializer, CategorySerializer, ProductSerializer, ImageSerializer, StockLevelSerializer,
-    ProductCreateSerializer
+    ProductCreateSerializer, CreateOrderSerializer, ViewOrderSerializer
 )
 
 
@@ -138,3 +139,15 @@ class StockLevelDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = StockLevel.objects.all()
     serializer_class = StockLevelSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class CreateOrder(views.APIView):
+
+    def post(self, request):
+        request_serializer = CreateOrderSerializer(data=request.data)
+        if request_serializer.is_valid():
+            new_order = request_serializer.save()
+            response_serializer = ViewOrderSerializer(instance=new_order)
+            return Response(response_serializer.data, 201)
+
+        return Response(request_serializer.errors, 400)

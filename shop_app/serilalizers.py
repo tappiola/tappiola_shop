@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Brand, Category, Product, Image, StockLevel
+from .models import Brand, Category, Product, Image, StockLevel, Order, OrderItem
 
 
 class BrandSerializer(serializers.ModelSerializer):
@@ -62,3 +62,43 @@ class ProductCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         exclude = ()
+
+
+class CreateOrderItemSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = OrderItem
+        exclude = ['order']
+
+
+class CreateOrderSerializer(serializers.ModelSerializer):
+    order_items = CreateOrderItemSerializer(many=True)
+
+    class Meta:
+        model = Order
+        fields = '__all__'
+
+    def create(self, validated_data):
+        order_items = validated_data.pop('order_items')
+        order = Order.objects.create(**validated_data)
+
+        for order_item in order_items:
+            OrderItem.objects.create(order=order, **order_item)
+
+        return order
+
+
+class ViewOrderItemSerializer(serializers.ModelSerializer):
+    product = ProductSerializer()
+
+    class Meta:
+        model = OrderItem
+        exclude = ['order']
+
+
+class ViewOrderSerializer(serializers.ModelSerializer):
+    order_items = ViewOrderItemSerializer(many=True)
+
+    class Meta:
+        model = Order
+        fields = '__all__'

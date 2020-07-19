@@ -28,7 +28,6 @@ class Product(models.Model):
     description = models.CharField(max_length=2000)
     category = models.ForeignKey(Category, related_name='product_category', on_delete=models.CASCADE)
     color = models.CharField(max_length=50)
-    # keywords = ArrayField(models.CharField(max_length=200), blank=True)
     keywords = models.CharField(max_length=1000, blank=True)
     price = models.IntegerField()
     discounted_price = models.IntegerField(null=True)
@@ -67,3 +66,25 @@ class StockLevel(models.Model):
 
     class Meta:
         unique_together = ('product', 'size')
+
+
+class Order(models.Model):
+    total_cost = models.IntegerField()
+    paid = models.BooleanField(default=False)
+    email = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    country = models.CharField(max_length=80)
+    address = models.CharField(max_length=200)
+    city = models.CharField(max_length=80)
+    region = models.CharField(max_length=80)
+    zip = models.CharField(max_length=20)
+    shipping_method = models.CharField(max_length=100)
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, related_name='order_items', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    size = models.CharField(max_length=200)
+    quantity = models.IntegerField(default=1)
+    price = models.IntegerField()
