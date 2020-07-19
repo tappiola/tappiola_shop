@@ -88,8 +88,17 @@ class CreateOrderSerializer(serializers.ModelSerializer):
         return order
 
 
+class OrderProductSerializer(serializers.ModelSerializer):
+    product_images = ImageLimitedSerializer(many=True, read_only=True)
+    brand = BrandLimitedSerializer(read_only=False)
+
+    class Meta:
+        model = Product
+        exclude = ('price', 'discounted_price', 'discount')
+
+
 class ViewOrderItemSerializer(serializers.ModelSerializer):
-    product = ProductSerializer()
+    product = OrderProductSerializer()
 
     class Meta:
         model = OrderItem
