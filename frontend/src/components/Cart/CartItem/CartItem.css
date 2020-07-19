@@ -15,7 +15,7 @@
 .cart__item {
     width: 100%;
     display: flex;
-    padding: 20px;
+    padding: 30px;
     text-transform: uppercase;
     font-size: 12px;
     border-bottom: 1px solid gray;
@@ -23,7 +23,7 @@
 
 .cart__data-stable {
     padding-left: 20px;
-    width: 45%;
+    width: 47%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -39,7 +39,7 @@
     padding: 0;
     border-collapse: collapse;
     height: 28px;
-    width: 15%;
+    width: 20%;
 }
 
 .cart__increment, .cart__decrement, .cart__quantity-input {
@@ -76,3 +76,4 @@
 .cart__delete:hover, .cart__name:hover {
     text-decoration: underline;
 }
+

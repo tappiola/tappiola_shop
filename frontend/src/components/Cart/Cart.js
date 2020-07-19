@@ -61,6 +61,9 @@ class Cart extends Component {
     }
 
     render() {
+        const goodsTotal = this.state.cartItems.reduce(
+            (prev, curr) => prev + (curr.discounted_price || curr.price) * curr.quantity, 0);
+
         let data = <React.Fragment>
             <div>
                 <h4 className="cart-header">Your cart items</h4>
@@ -74,9 +77,24 @@ class Cart extends Component {
                         />)}
                     </div>
                     <div className="cart-total">
-                        <div>{this.state.cartItems.reduce(
-                            (prev, curr) => prev + (curr.discounted_price || curr.price) * curr.quantity, 0)
-                        }</div>
+                        <div className="cart-total__box">
+                            <div className="cart-total__title">Order Summary</div>
+                            <div className="cart_total__breakdown">
+                                <div>
+                                    <span>Subtotal</span>
+                                    <span>{goodsTotal} €</span></div>
+                                <div>
+                                    <span>Shipping</span>
+                                    <span>Free</span>
+                                </div>
+                            </div>
+                            <div className="cart_total__total">
+                                <span>Estimated Total</span>
+                                <span>{goodsTotal} €</span>
+                            </div>
+
+                        </div>
+                        <button className="cart-total__checkout">Checkout</button>
                     </div>
                 </div>
             </div>
