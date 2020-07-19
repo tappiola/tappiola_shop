@@ -71,21 +71,33 @@ class CreateOrderItemSerializer(serializers.ModelSerializer):
         exclude = ['order']
 
 
-class CreateOrderSerializer(serializers.ModelSerializer):
+class CreateOrderSerializer(serializers.Serializer):
     order_items = CreateOrderItemSerializer(many=True)
-
-    class Meta:
-        model = Order
-        fields = '__all__'
 
     def create(self, validated_data):
         order_items = validated_data.pop('order_items')
-        order = Order.objects.create(**validated_data)
+        order = Order.objects.create()
 
         for order_item in order_items:
             OrderItem.objects.create(order=order, **order_item)
 
         return order
+
+
+class SubmitOrderSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    country = serializers.CharField()
+    address = serializers.CharField()
+    city = serializers.CharField()
+    region = serializers.CharField()
+    zip = serializers.CharField()
+    shipping_method = serializers.CharField()
+
+    class Meta:
+        model = Order
+        fields = '__all__'
 
 
 class OrderProductSerializer(serializers.ModelSerializer):

@@ -69,17 +69,17 @@ class StockLevel(models.Model):
 
 
 class Order(models.Model):
-    total_cost = models.IntegerField()
+    total_cost = models.IntegerField(null=True)
     paid = models.BooleanField(default=False)
-    email = models.CharField(max_length=100)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    country = models.CharField(max_length=80)
-    address = models.CharField(max_length=200)
-    city = models.CharField(max_length=80)
-    region = models.CharField(max_length=80)
-    zip = models.CharField(max_length=20)
-    shipping_method = models.CharField(max_length=100)
+    email = models.CharField(max_length=100, null=True)
+    first_name = models.CharField(max_length=50, null=True)
+    last_name = models.CharField(max_length=50, null=True)
+    country = models.CharField(max_length=80, null=True)
+    address = models.CharField(max_length=200, null=True)
+    city = models.CharField(max_length=80, null=True)
+    region = models.CharField(max_length=80, null=True)
+    zip = models.CharField(max_length=20, null=True)
+    shipping_method = models.CharField(max_length=100, null=True)
 
 
 class OrderItem(models.Model):

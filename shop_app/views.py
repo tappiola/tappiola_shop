@@ -3,10 +3,10 @@ from rest_framework import generics, views
 from rest_framework import permissions
 from rest_framework.response import Response
 
-from .models import Brand, Category, Product, Image, StockLevel
+from .models import Brand, Category, Product, Image, StockLevel, Order
 from .serilalizers import (
     BrandSerializer, CategorySerializer, ProductSerializer, ImageSerializer, StockLevelSerializer,
-    ProductCreateSerializer, CreateOrderSerializer, ViewOrderSerializer
+    ProductCreateSerializer, CreateOrderSerializer, SubmitOrderSerializer, ViewOrderSerializer
 )
 
 
@@ -146,8 +146,21 @@ class CreateOrder(views.APIView):
     def post(self, request):
         request_serializer = CreateOrderSerializer(data=request.data)
         if request_serializer.is_valid():
-            new_order = request_serializer.save()
-            response_serializer = ViewOrderSerializer(instance=new_order)
-            return Response(response_serializer.data, 201)
+            new_order = request_serializer.save(paid=False)
+            return Response({'order_id': new_order.pk}, 201)
+
+        return Response(request_serializer.errors, 400)
+
+
+class SubmitOrder(views.APIView):
+
+    def put(self, request, pk):
+        order = Order.objects.get(pk=pk)
+        request_serializer = SubmitOrderSerializer(order, data=request.data)
+        if request_serializer.is_valid():
+            request_serializer.save(paid=True)
+
+            response_serializer = ViewOrderSerializer(instance=order)
+            return Response(response_serializer.data, 200)
 
         return Response(request_serializer.errors, 400)
