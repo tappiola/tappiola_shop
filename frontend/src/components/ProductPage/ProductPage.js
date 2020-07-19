@@ -54,7 +54,7 @@ class ProductPage extends Component {
     buttonClickHandler = () => {
         if (this.state.selectedSize) {
             const newItemValue = {
-                id: this.props.match.params.productId,
+                id: +this.props.match.params.productId,
                 size: this.state.selectedSize,
                 quantity: 1
             }

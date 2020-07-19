@@ -52,3 +52,8 @@
     margin-top: 30px;
     border: none;
 }
+
+.cart__no-items{
+    text-align: center;
+    padding: 40px;
+}
