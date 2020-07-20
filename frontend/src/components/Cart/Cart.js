@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {getProducts} from "../../lib/service";
+import {createOrder, getProducts} from "../../lib/service";
 import CartItem from "./CartItem/CartItem";
 import Spinner from "react-bootstrap/Spinner";
 import './Cart.css';
@@ -39,25 +39,45 @@ class Cart extends Component {
         this.props.onButtonClick(cartDataLocal);
     }
 
+    checkoutHandler = () => {
+
+        this.setState({loading: true});
+
+        const orderItems = this.props.cartDataLocal.map(p => ({product: p.id, size: p.size, quantity: p.quantity}));
+        createOrder({order_items: orderItems}).then(({data}) => {
+            this.setState({
+                totalCost: data.totalCost,
+                orderId: data.order_id,
+                loading: false
+            });
+            this.props.history.push('/checkout/' + data.order_id);
+        })
+    }
+
+
     componentDidMount() {
         this.setState({loading: true});
 
         const cartDataLocal = this.props.cartDataLocal;
         const cartIds = Array.from(new Set(cartDataLocal.map(i => i.id)));
-        getProducts({ids: cartIds.join(',')}).then(({data}) => {
-                const idsInStock = data.map(x => x.id);
-                const updatedCartItems = cartDataLocal
-                    .filter(x => idsInStock.includes(+x.id))
-                    .filter(x => this.getStockLevelForCartItem(x, data) > 0);
-                this.props.onButtonClick(updatedCartItems);
+        if(cartIds.length > 0) {
+            getProducts({ids: cartIds.join(',')}).then(({data}) => {
+                    const idsInStock = data.map(x => x.id);
+                    const updatedCartItems = cartDataLocal
+                        .filter(x => idsInStock.includes(+x.id))
+                        .filter(x => this.getStockLevelForCartItem(x, data) > 0);
+                    this.props.onButtonClick(updatedCartItems);
 
-                const cartItems = updatedCartItems.map(item => {
-                    const itemSameId = data.filter(x => +x.id === +item.id)[0];
-                    return {...item, ...itemSameId};
-                })
-                this.setState({cartItems, loading: false});
-            }
-        );
+                    const cartItems = updatedCartItems.map(item => {
+                        const itemSameId = data.filter(x => +x.id === +item.id)[0];
+                        return {...item, ...itemSameId};
+                    })
+                    this.setState({cartItems, loading: false});
+                }
+            );
+        } else {
+            this.setState({cartItems: [], loading: false});
+        }
     }
 
     render() {
@@ -89,12 +109,12 @@ class Cart extends Component {
                                 </div>
                             </div>
                             <div className="cart_total__total">
-                                <span>Estimated Total</span>
+                                <span>Total</span>
                                 <span>{goodsTotal} €</span>
                             </div>
 
                         </div>
-                        <button className="cart-total__checkout">Checkout</button>
+                        <button className="cart-total__checkout" onClick={this.checkoutHandler}>Checkout</button>
                     </div>
                 </div>
             </div>
@@ -102,6 +122,9 @@ class Cart extends Component {
 
         if (this.state.loading) {
             data = <Spinner className="spinner" animation="border" variant="secondary"/>
+        }
+        else if (this.state.cartItems.length === 0){
+            data = <div className="cart__no-items">Really, still no items in cart? Browse our top products to fix this</div>
         }
 
         return (<div>

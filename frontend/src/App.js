@@ -11,6 +11,7 @@ import DesignersList from "./components/DesignersList/DesignersList";
 import DesignerCategory from "./components/DesignerCategory/DesignerCategory";
 import ProductPage from "./components/ProductPage/ProductPage";
 import Cart from "./components/Cart/Cart";
+import Checkout from "./components/Checkout/Checkout";
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                 <Route path='/category/:id/product/:productId' component={ProductPage}/>
                 <Route path='/category/:id' component={Category}/>
                 <Route path='/cart' component={Cart}/>
+                <Route path='/checkout/:id' component={Checkout}/>
                 <Route path='/' component={Home}/>
             </Switch>
         </div>

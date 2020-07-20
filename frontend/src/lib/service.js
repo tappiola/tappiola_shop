@@ -38,3 +38,11 @@ export const getProducts = (paramsDict) => {
 export const getProduct = (id) => {
     return axios.get(API_HOST + '/products/' + id);
 };
+
+export const createOrder = (data) => {
+    return axios.post(API_HOST + '/orders/create', data);
+};
+
+export const submitOrder = (orderId, data) => {
+    return axios.put(API_HOST + '/orders/submit/' + orderId, data);
+};

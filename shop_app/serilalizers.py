@@ -95,6 +95,7 @@ class CardDataSerializer(serializers.Serializer):
     number = serializers.RegexField('[0-9]{16}')
     exp_date = serializers.RegexField('[0-9]{2}/[0-9]{2}')
     cvv = serializers.CharField()
+    name = serializers.CharField()
 
 
 class SubmitOrderSerializer(serializers.ModelSerializer):
