@@ -91,13 +91,6 @@ class CreateOrderSerializer(serializers.Serializer):
         return order
 
 
-class CardDataSerializer(serializers.Serializer):
-    number = serializers.RegexField('[0-9]{16}')
-    exp_date = serializers.RegexField('[0-9]{2}/[0-9]{2}')
-    cvv = serializers.CharField()
-    name = serializers.CharField()
-
-
 class SubmitOrderSerializer(serializers.ModelSerializer):
     total_cost = serializers.CharField(read_only=True)
     email = serializers.EmailField()
@@ -109,7 +102,10 @@ class SubmitOrderSerializer(serializers.ModelSerializer):
     region = serializers.CharField()
     zip = serializers.CharField()
     shipping_method = serializers.CharField()
-    card_data = CardDataSerializer()
+    card_number = serializers.RegexField('[0-9]{16}')
+    exp_date = serializers.RegexField('[0-9]{2}/[0-9]{2}')
+    cvv = serializers.CharField()
+    name_on_card = serializers.CharField()
 
     class Meta:
         model = Order
