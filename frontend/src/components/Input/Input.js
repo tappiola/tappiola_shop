@@ -5,9 +5,11 @@ import './Input.css';
 const input = ( props ) => {
     let inputElement = null;
     const inputClasses = ['order__input'];
+    let validationError = null;
 
     if (props.invalid && props.shouldValidate && props.touched) {
         inputClasses.push('invalid');
+        validationError = <p className="validationError">{props.error || 'Please enter a valid value!'}</p>;
     }
 
     switch ( props.elementType ) {
@@ -51,6 +53,7 @@ const input = ( props ) => {
     return (
         <div className='order__input'>
             {inputElement}
+            {validationError}
         </div>
     );
 

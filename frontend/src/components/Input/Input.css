@@ -1,0 +1,8 @@
+.invalid{
+    border: 1px solid darkred;
+}
+
+.validationError{
+    color: darkred;
+    font-size: 12px;
+}

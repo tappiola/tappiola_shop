@@ -18,7 +18,8 @@ class Checkout extends Component {
                 },
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    isEmail: true
                 },
                 valid: false,
                 touched: false
@@ -161,7 +162,8 @@ class Checkout extends Component {
                 },
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    isExpDate: true
                 },
                 valid: false,
                 touched: false
@@ -222,33 +224,49 @@ class Checkout extends Component {
 
     checkValidity(value, rules) {
         let isValid = true;
+        let errorMessage;
         if (!rules) {
             return true;
         }
 
         if (rules.required) {
             isValid = value.trim() !== '' && isValid;
+            errorMessage = 'Field should not be empty';
+        }
+
+        if (!isValid){
+            return [isValid, errorMessage];
         }
 
         if (rules.minLength) {
-            isValid = value.length >= rules.minLength && isValid
+            isValid = value.length >= rules.minLength && isValid;
+            errorMessage = `Field should have minimum length of ${rules.minLength} symbols`;
         }
 
         if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength && isValid
+            isValid = value.length <= rules.maxLength && isValid;
+            errorMessage = `Field should have maximum length of ${rules.maxLength} symbols`;
         }
 
         if (rules.isEmail) {
             const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-            isValid = pattern.test(value) && isValid
+            isValid = pattern.test(value) && isValid;
+            errorMessage = 'Please enter a valid Email';
+        }
+
+        if (rules.isExpDate) {
+            const pattern = /^[0-9][0-2]\/\d{2}?/;
+            isValid = pattern.test(value) && isValid;
+            errorMessage = 'Please enter date in format MM/YY';
         }
 
         if (rules.isNumeric) {
             const pattern = /^\d+$/;
-            isValid = pattern.test(value) && isValid
+            isValid = pattern.test(value) && isValid;
+            errorMessage = 'Field should contain only numbers';
         }
 
-        return isValid;
+        return [isValid, errorMessage];
     }
 
 
@@ -293,7 +311,7 @@ class Checkout extends Component {
             for (let key in this.state.orderForm) {
                 let orderForm = {...this.state.orderForm};
                 let currentInput = orderForm[key];
-                currentInput.valid = this.checkValidity(currentInput.value, currentInput.validation);
+                [currentInput.valid, currentInput.error] = this.checkValidity(currentInput.value, currentInput.validation);
                 currentInput.touched = true;
                 this.setState({orderForm});
             }
@@ -319,6 +337,7 @@ class Checkout extends Component {
                     invalid={!formElement.config.valid}
                     shouldValidate={formElement.config.validation}
                     touched={formElement.config.touched}
+                    error={formElement.config.error}
                     changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
             ))
     }
