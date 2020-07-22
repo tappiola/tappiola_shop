@@ -14,8 +14,8 @@ class Cart extends Component {
 
     getStockLevelForCartItem = (cartItem, data) => {
         return data
-            .filter(d => d.id === +cartItem.id)[0].stock_level
-            .filter(d => d.size === cartItem.size)[0].stock_level;
+            .find(d => d.id === +cartItem.id).stock_level
+            .find(d => d.size === cartItem.size).stock_level;
     }
 
     deleteItemHandler = (id, size) => {
@@ -70,7 +70,7 @@ class Cart extends Component {
                     this.props.onButtonClick(updatedCartItems);
 
                     const cartItems = updatedCartItems.map(item => {
-                        const itemSameId = data.filter(x => +x.id === +item.id)[0];
+                        const itemSameId = data.find(x => +x.id === +item.id);
                         return {...item, ...itemSameId};
                     })
                     this.setState({cartItems, loading: false});

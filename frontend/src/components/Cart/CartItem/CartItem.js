@@ -12,7 +12,7 @@ class CartItem extends Component {
     }
 
     getMaxQuantity = () => {
-        return this.props.data.stock_level.filter(x => x.size === this.props.data.size)[0].stock_level;
+        return this.props.data.stock_level.find(x => x.size === this.props.data.size).stock_level;
     }
 
     setNewQuantity = (newQuantity) => {

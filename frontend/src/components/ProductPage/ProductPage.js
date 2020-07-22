@@ -58,7 +58,7 @@ class ProductPage extends Component {
                 size: this.state.selectedSize,
                 quantity: 1
             }
-            const maxQuantity = this.state.stockLevel.filter(x => x.size === this.state.selectedSize)[0].stock_level;
+            const maxQuantity = this.state.stockLevel.find(x => x.size === this.state.selectedSize).stock_level;
 
             const [updatedData, purchaseStatus] = getUpdatedCartItems(this.props.cartDataLocal, newItemValue, maxQuantity);
             this.props.onButtonClick(updatedData);
