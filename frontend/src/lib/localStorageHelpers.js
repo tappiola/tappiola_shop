@@ -1,4 +1,7 @@
 const CART_ITEM_KEY = 'tappiola_cart'
+export const ADDED_SUCCESSFULLY_MSG =  "Product added to cart";
+export const NO_MORE_ITEMS_MSG =  "All items in stock are already in your cart";
+
 export const getCartItems = () => {
     if (localStorage.getItem(CART_ITEM_KEY)) {
         return JSON.parse(localStorage[CART_ITEM_KEY]);
@@ -22,18 +25,18 @@ export const getUpdatedCartItems = (cartItems, newItemData, maxQuantity) => {
                     ? {...item, quantity: maxQuantity}
                     : item
             );
-            return [cartItems, 'All items in stock are already in your cart'];
+            return [cartItems, NO_MORE_ITEMS_MSG];
         } else {
             cartItems = cartItems.map(
                 item => item.id === newItemId && item.size === newItemData.size
-                    ? {...item, quantity: sameItemInCart.quantity + 1}
+                    ? {...item, quantity: sameItemInCart.quantity + newItemData.quantity}
                     : item
             );
-            return [cartItems, 'Product added to cart'];
+            return [cartItems, ADDED_SUCCESSFULLY_MSG];
         }
     } else {
         const newCartItems = JSON.parse(JSON.stringify(cartItems));
         newCartItems.push(newItemData);
-        return [newCartItems, 'Product added to cart'];
+        return [newCartItems, ADDED_SUCCESSFULLY_MSG];
     }
 }
