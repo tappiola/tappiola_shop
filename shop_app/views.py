@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from .models import Brand, Category, Product, Image, StockLevel, Order, OrderItem
 from .serilalizers import (
     BrandSerializer, CategorySerializer, ProductSerializer, ImageSerializer, StockLevelSerializer,
-    ProductCreateSerializer, CreateOrderSerializer, SubmitOrderSerializer, ViewOrderSerializer
+    ProductCreateSerializer, CreateOrderSerializer, SubmitOrderSerializer, ViewOrderSerializer, Order
 )
 
 
@@ -139,6 +139,12 @@ class StockLevelDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = StockLevel.objects.all()
     serializer_class = StockLevelSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class OrderDetails(generics.RetrieveAPIView):
+    def get_queryset(self):
+        return Order.objects.filter(id=self.kwargs.get("pk"))
+    serializer_class = ViewOrderSerializer
 
 
 class CreateOrder(views.APIView):

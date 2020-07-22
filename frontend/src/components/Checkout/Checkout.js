@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {submitOrder} from "../../lib/service";
+import {getOrder, submitOrder} from "../../lib/service";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import Input from "../Input/Input";
@@ -353,6 +353,9 @@ class Checkout extends Component {
             orderFormCopy.country.elementConfig.options = data.map(x => ({value: x.name, displayValue: x.name}));
             this.setState({orderForm: orderFormCopy});
         })
+        getOrder(this.props.match.params.id).then(({data}) => {
+            this.setState({totalCost: data.total_cost});
+        })
     }
 
     render() {
@@ -367,7 +370,7 @@ class Checkout extends Component {
                 <button className="checkout__button" onClick={this.orderHandler}>Submit</button>
             </div>
             <div className="checkout__total">
-                <CartTotal/>
+                <CartTotal goodsTotal={this.state.totalCost}/>
             </div>
         </div>)
     }

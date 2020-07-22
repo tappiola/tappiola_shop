@@ -46,3 +46,7 @@ export const createOrder = (data) => {
 export const submitOrder = (orderId, data) => {
     return axios.put(API_HOST + '/orders/submit/' + orderId, data);
 };
+
+export const getOrder = (orderId) => {
+    return axios.get(API_HOST + '/orders/' + orderId);
+};
