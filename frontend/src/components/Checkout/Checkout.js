@@ -8,22 +8,6 @@ import './Checkout.css';
 class Checkout extends Component {
     state = {
         orderForm: {
-            email: {
-                formId: 1,
-                apiKey: 'email',
-                elementType: 'input',
-                elementConfig: {
-                    type: 'email',
-                    placeholder: 'Email'
-                },
-                value: '',
-                validation: {
-                    required: true,
-                    isEmail: true
-                },
-                valid: false,
-                touched: false
-            },
             firstName: {
                 formId: 1,
                 apiKey: 'first_name',
@@ -132,6 +116,22 @@ class Checkout extends Component {
                 valid: false,
                 touched: false
             },
+            email: {
+                formId: 1,
+                apiKey: 'email',
+                elementType: 'input',
+                elementConfig: {
+                    type: 'email',
+                    placeholder: 'Email'
+                },
+                value: '',
+                validation: {
+                    required: true,
+                    isEmail: true
+                },
+                valid: false,
+                touched: false
+            },
             cardNumber: {
                 formId: 2,
                 apiKey: 'card_number',
@@ -152,7 +152,7 @@ class Checkout extends Component {
                 touched: false
             },
             expDate: {
-                formId: 1,
+                formId: 2,
                 apiKey: 'exp_date',
                 elementType: 'input',
                 elementConfig: {
@@ -169,7 +169,7 @@ class Checkout extends Component {
                 touched: false
             },
             cvv: {
-                formId: 1,
+                formId: 2,
                 apiKey: 'cvv',
                 elementType: 'input',
                 elementConfig: {
@@ -331,6 +331,7 @@ class Checkout extends Component {
             .map(formElement => (
                 <Input
                     key={formElement.id}
+                    className={formElement.id}
                     elementType={formElement.config.elementType}
                     elementConfig={formElement.config.elementConfig}
                     value={formElement.config.value}
@@ -344,7 +345,7 @@ class Checkout extends Component {
 
     render() {
         return (<div>
-            <form>
+            <form className="checkout__form">
                 <h4>Shipping Address</h4>
                 {this.inputElementsByFormId(1)}
                 <h4>Payment Method</h4>

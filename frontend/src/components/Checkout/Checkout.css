@@ -1,4 +1,38 @@
+.order__input input,
+.order__input select
+{
+    width: 100%;
 
-.order__input{
+}
 
+.checkout__form {
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    width: 66%;
+    padding: 20px 7%
+}
+
+.firstName,
+.address,
+.region,
+.cardNumber{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.lastName,
+.city,
+.zip {
+    grid-column-start: 3;
+    grid-column-end: -1;
+}
+
+.checkout__form h4,
+.country,
+.email,
+.nameOnCard {
+    grid-column-start: 1;
+    grid-column-end: -1;
 }

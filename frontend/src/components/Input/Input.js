@@ -4,7 +4,9 @@ import './Input.css';
 
 const input = ( props ) => {
     let inputElement = null;
-    const inputClasses = ['order__input'];
+    let inputClasses = [];
+    const divClasses = ['order__input'];
+    divClasses.push(props.className);
     let validationError = null;
 
     if (props.invalid && props.shouldValidate && props.touched) {
@@ -51,7 +53,7 @@ const input = ( props ) => {
     }
 
     return (
-        <div className='order__input'>
+        <div className={divClasses.join(' ')}>
             {inputElement}
             {validationError}
         </div>
