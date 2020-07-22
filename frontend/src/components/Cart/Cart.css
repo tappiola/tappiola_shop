@@ -13,34 +13,9 @@
     padding-left: 40px;
 }
 
-.cart-total{
+.cart-total {
     margin: 0 20px;
     width: 28%;
-}
-
-.cart-total__box {
-    border: 1px solid gray;
-    font-size: 14px;
-    padding: 10px 20px;
-}
-
-.cart-total__title{
-    font-weight: bold;
-    margin: 20px 0;
-}
-
-.cart_total__breakdown div, .cart_total__total{
-    display: flex;
-    justify-content: space-between;
-}
-
-.cart_total__breakdown{
-    padding-bottom: 20px;
-}
-.cart_total__total{
-    font-weight: bold;
-    border-top: 1px solid gray;
-    padding: 20px 0;
 }
 
 .cart-total__checkout {
@@ -53,7 +28,7 @@
     border: none;
 }
 
-.cart__no-items{
+.cart__no-items {
     text-align: center;
     padding: 40px;
 }

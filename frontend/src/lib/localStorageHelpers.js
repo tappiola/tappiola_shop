@@ -1,6 +1,6 @@
 const CART_ITEM_KEY = 'tappiola_cart'
-export const ADDED_SUCCESSFULLY_MSG =  "Product added to cart";
-export const NO_MORE_ITEMS_MSG =  "All items in stock are already in your cart";
+export const ADDED_SUCCESSFULLY_MSG = "Product added to cart";
+export const NO_MORE_ITEMS_MSG = "All items in stock are already in your cart";
 
 export const getCartItems = () => {
     if (localStorage.getItem(CART_ITEM_KEY)) {

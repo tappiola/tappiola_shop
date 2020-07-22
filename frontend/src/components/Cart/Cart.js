@@ -5,6 +5,7 @@ import Spinner from "react-bootstrap/Spinner";
 import './Cart.css';
 import {withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
+import CartTotal from "../CartTotal/CartTotal";
 
 class Cart extends Component {
     state = {
@@ -60,7 +61,7 @@ class Cart extends Component {
 
         const cartDataLocal = this.props.cartDataLocal;
         const cartIds = Array.from(new Set(cartDataLocal.map(i => i.id)));
-        if(cartIds.length > 0) {
+        if (cartIds.length > 0) {
             getProducts({ids: cartIds.join(',')}).then(({data}) => {
                     const idsInStock = data.map(x => x.id);
                     const updatedCartItems = cartDataLocal
@@ -97,23 +98,7 @@ class Cart extends Component {
                         />)}
                     </div>
                     <div className="cart-total">
-                        <div className="cart-total__box">
-                            <div className="cart-total__title">Order Summary</div>
-                            <div className="cart_total__breakdown">
-                                <div>
-                                    <span>Subtotal</span>
-                                    <span>{goodsTotal} €</span></div>
-                                <div>
-                                    <span>Shipping</span>
-                                    <span>Free</span>
-                                </div>
-                            </div>
-                            <div className="cart_total__total">
-                                <span>Total</span>
-                                <span>{goodsTotal} €</span>
-                            </div>
-
-                        </div>
+                        <CartTotal goodsTotal={goodsTotal}/>
                         <button className="cart-total__checkout" onClick={this.checkoutHandler}>Checkout</button>
                     </div>
                 </div>
@@ -122,9 +107,9 @@ class Cart extends Component {
 
         if (this.state.loading) {
             data = <Spinner className="spinner" animation="border" variant="secondary"/>
-        }
-        else if (this.state.cartItems.length === 0){
-            data = <div className="cart__no-items">Really, still no items in cart? Browse our top products to fix this</div>
+        } else if (this.state.cartItems.length === 0) {
+            data = <div className="cart__no-items">Really, still no items in cart? Browse our top products to fix
+                this</div>
         }
 
         return (<div>

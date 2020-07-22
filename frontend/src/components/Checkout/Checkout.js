@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import Input from "../Input/Input";
 import './Checkout.css';
 import axios from 'axios';
+import CartTotal from "../CartTotal/CartTotal";
 
 class Checkout extends Component {
     state = {
@@ -250,7 +251,7 @@ class Checkout extends Component {
 
         if (rules.isEmail) {
             const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-            if (!pattern.test(value)){
+            if (!pattern.test(value)) {
                 isValid = false;
                 errorMessage = 'Please enter a valid Email';
                 return [isValid, errorMessage];
@@ -345,6 +346,7 @@ class Checkout extends Component {
                     changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
             ))
     }
+
     componentDidMount() {
         axios.get('https://restcountries.eu/rest/v2/all').then(({data}) => {
             const orderFormCopy = {...this.state.orderForm};
@@ -354,18 +356,20 @@ class Checkout extends Component {
     }
 
     render() {
-        return (<div>
+        return (<div className="checkout">
             <div className="checkout__area">
-            <form className="checkout__form">
-                <h4>Shipping Address</h4>
-                {this.inputElementsByFormId(1)}
-                <h4>Payment Method</h4>
-                {this.inputElementsByFormId(2)}
-            </form>
-            <button className="checkout__button" onClick={this.orderHandler}>Submit</button>
-        </div>
-        <div></div>
-            </div>)
+                <form className="checkout__form">
+                    <h4>Shipping Address</h4>
+                    {this.inputElementsByFormId(1)}
+                    <h4>Payment Method</h4>
+                    {this.inputElementsByFormId(2)}
+                </form>
+                <button className="checkout__button" onClick={this.orderHandler}>Submit</button>
+            </div>
+            <div className="checkout__total">
+                <CartTotal/>
+            </div>
+        </div>)
     }
 }
 
