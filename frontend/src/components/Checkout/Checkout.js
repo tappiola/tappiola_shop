@@ -4,6 +4,7 @@ import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import Input from "../Input/Input";
 import './Checkout.css';
+import axios from 'axios';
 
 class Checkout extends Component {
     state = {
@@ -224,46 +225,48 @@ class Checkout extends Component {
 
     checkValidity(value, rules) {
         let isValid = true;
-        let errorMessage;
+        let errorMessage = null;
         if (!rules) {
-            return true;
-        }
-
-        if (rules.required) {
-            isValid = value.trim() !== '' && isValid;
-            errorMessage = 'Field should not be empty';
-        }
-
-        if (!isValid){
             return [isValid, errorMessage];
         }
 
-        if (rules.minLength) {
-            isValid = value.length >= rules.minLength && isValid;
-            errorMessage = `Field should have minimum length of ${rules.minLength} symbols`;
+        if (rules.required && value.trim() === '') {
+            isValid = false;
+            errorMessage = 'Field should not be empty';
+            return [isValid, errorMessage];
         }
 
-        if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength && isValid;
+        if (rules.minLength && value.length < rules.minLength) {
+            isValid = false;
+            errorMessage = `Field should have minimum length of ${rules.minLength} symbols`;
+            return [isValid, errorMessage];
+        }
+
+        if (rules.maxLength && value.length > rules.maxLength) {
+            isValid = false;
             errorMessage = `Field should have maximum length of ${rules.maxLength} symbols`;
+            return [isValid, errorMessage];
         }
 
         if (rules.isEmail) {
             const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-            isValid = pattern.test(value) && isValid;
-            errorMessage = 'Please enter a valid Email';
+            if (!pattern.test(value)){
+                isValid = false;
+                errorMessage = 'Please enter a valid Email';
+                return [isValid, errorMessage];
+            }
         }
 
-        if (rules.isExpDate) {
-            const pattern = /^[0-9][0-2]\/\d{2}?/;
-            isValid = pattern.test(value) && isValid;
+        if (rules.isExpDate && !/^[0-9][0-2]\/\d{2}?/.test(value)) {
+            isValid = false;
             errorMessage = 'Please enter date in format MM/YY';
+            return [isValid, errorMessage];
         }
 
-        if (rules.isNumeric) {
-            const pattern = /^\d+$/;
-            isValid = pattern.test(value) && isValid;
+        if (rules.isNumeric && !/^\d+$/.test(value)) {
+            isValid = false;
             errorMessage = 'Field should contain only numbers';
+            return [isValid, errorMessage];
         }
 
         return [isValid, errorMessage];
@@ -342,17 +345,27 @@ class Checkout extends Component {
                     changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
             ))
     }
+    componentDidMount() {
+        axios.get('https://restcountries.eu/rest/v2/all').then(({data}) => {
+            const orderFormCopy = {...this.state.orderForm};
+            orderFormCopy.country.elementConfig.options = data.map(x => ({value: x.name, displayValue: x.name}));
+            this.setState({orderForm: orderFormCopy});
+        })
+    }
 
     render() {
         return (<div>
+            <div className="checkout__area">
             <form className="checkout__form">
                 <h4>Shipping Address</h4>
                 {this.inputElementsByFormId(1)}
                 <h4>Payment Method</h4>
                 {this.inputElementsByFormId(2)}
             </form>
-            <button onClick={this.orderHandler}>Submit</button>
-        </div>)
+            <button className="checkout__button" onClick={this.orderHandler}>Submit</button>
+        </div>
+        <div></div>
+            </div>)
     }
 }
 

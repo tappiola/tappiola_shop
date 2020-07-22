@@ -7,7 +7,7 @@ const input = ( props ) => {
     let inputClasses = [];
     const divClasses = ['order__input'];
     divClasses.push(props.className);
-    let validationError = null;
+    let validationError = <p/>;
 
     if (props.invalid && props.shouldValidate && props.touched) {
         inputClasses.push('invalid');
@@ -35,7 +35,7 @@ const input = ( props ) => {
                     className={inputClasses.join(' ')}
                     value={props.value}
                     onChange={props.changed}>
-                    <option disabled value=''> -- select an option -- </option>
+                    <option disabled hidden value=''> -- select {props.className} -- </option>
                     {props.elementConfig.options.map(option => (
                         <option key={option.value} value={option.value}>
                             {option.displayValue}
