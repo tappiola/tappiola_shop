@@ -35,23 +35,25 @@
 }
 
 .firstName,
-.address,
-.region,
+.city,
+.zip,
 .cardNumber {
     grid-column-start: 1;
     grid-column-end: 3;
 }
 
 .lastName,
-.city,
-.zip {
+.region,
+.country
+ {
     grid-column-start: 3;
     grid-column-end: -1;
 }
 
 .checkout__form h4,
-.country,
+
 .email,
+.address,
 .nameOnCard {
     grid-column-start: 1;
     grid-column-end: -1;

@@ -40,23 +40,6 @@ class Checkout extends Component {
                 valid: false,
                 touched: false
             },
-            country: {
-                formId: 1,
-                apiKey: 'country',
-                elementType: 'select',
-                elementConfig: {
-                    options: [
-                        {value: 'Belarus', displayValue: 'Belarus'},
-                        {value: 'Russia', displayValue: 'Russia'}
-                    ]
-                },
-                value: '',
-                validation: {
-                    required: true
-                },
-                valid: false,
-                touched: false
-            },
             address: {
                 formId: 1,
                 apiKey: 'address',
@@ -110,6 +93,23 @@ class Checkout extends Component {
                     type: 'text',
                     placeholder: 'ZIP/Postal Code',
                     maxLength: 10
+                },
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false,
+                touched: false
+            },
+            country: {
+                formId: 1,
+                apiKey: 'country',
+                elementType: 'select',
+                elementConfig: {
+                    options: [
+                        {value: 'Belarus', displayValue: 'Belarus'},
+                        {value: 'Russia', displayValue: 'Russia'}
+                    ]
                 },
                 value: '',
                 validation: {

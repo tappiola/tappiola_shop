@@ -20,13 +20,7 @@ const input = (props) => {
                 className={inputClasses.join(' ')}
                 {...props.elementConfig}
                 value={props.value}
-                onChange={props.changed}/>;
-            break;
-        case ('textarea'):
-            inputElement = <textarea
-                className={inputClasses.join(' ')}
-                {...props.elementConfig}
-                value={props.value}
+                name={props.className}
                 onChange={props.changed}/>;
             break;
         case ('select'):
@@ -34,6 +28,7 @@ const input = (props) => {
                 <select
                     className={inputClasses.join(' ')}
                     value={props.value}
+                    name={props.className}
                     onChange={props.changed}>
                     <option disabled hidden value=''> -- select {props.className} --</option>
                     {props.elementConfig.options.map(option => (
