@@ -12,6 +12,7 @@ class Header extends Component {
             <div>
                 <div className='header'>
                     <MainLogo/>
+                    <p style={{fontStyle: 'italic', fontSize: '14px'}}>Enjoy free worldwide shipping on all orders</p>
                     <Search/>
                     <CartIcon/>
                 </div>

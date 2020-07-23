@@ -1,0 +1,30 @@
+.home{
+    width: 90%;
+    margin: auto;
+}
+
+.home__banner{
+    display: flex;
+    justify-content: center;
+}
+
+#banner1 img {
+    width: 30%;
+    margin: 20px 10px;
+}
+
+#banner2 img {
+    width: 46%;
+    margin: 20px 10px;
+}
+
+.home__banner-label{
+    text-align: center;
+    font-style: italic;
+}
+.home__brands-label{
+    text-align: center;
+    font-weight: 500;
+    padding-top: 25px;
+    font-style: italic;
+}
