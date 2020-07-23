@@ -6,9 +6,11 @@ import Input from "../Input/Input";
 import './Checkout.css';
 import axios from 'axios';
 import CartTotal from "../CartTotal/CartTotal";
+import Spinner from "react-bootstrap/Spinner";
 
 class Checkout extends Component {
     state = {
+        error: null,
         orderForm: {
             firstName: {
                 formId: 1,
@@ -306,9 +308,9 @@ class Checkout extends Component {
 
             submitOrder(orderId, data).then(({data}) => {
                 this.setState({data, loading: false});
-                alert(JSON.stringify(data));
+                this.props.history.push(`/order-details/${orderId}`);
             }).catch(error => {
-                this.setState({loading: false});
+                this.setState({loading: false, error: "Payment failed."});
             });
             this.props.onButtonClick([]);
         } else {
@@ -348,31 +350,50 @@ class Checkout extends Component {
     }
 
     componentDidMount() {
+        this.setState({loading: true});
         axios.get('https://restcountries.eu/rest/v2/all').then(({data}) => {
             const orderFormCopy = {...this.state.orderForm};
             orderFormCopy.country.elementConfig.options = data.map(x => ({value: x.name, displayValue: x.name}));
             this.setState({orderForm: orderFormCopy});
         })
-        getOrder(this.props.match.params.id).then(({data}) => {
-            this.setState({totalCost: data.total_cost});
-        })
+        getOrder(this.props.match.params.id)
+            .then(null, error => error.response.status === 404 && this.setState({
+                loading: false,
+                error: 'Order not found'
+            }))
+            .then(({data}) => {
+                this.setState({totalCost: data.total_cost, loading: false});
+            })
+            .catch(error => {
+                this.setState({loading: false, error: this.state.error || 'Failed to load checkout page'});
+            });
     }
 
     render() {
-        return (<div className="checkout">
-            <div className="checkout__area">
-                <form className="checkout__form">
-                    <h4>Shipping Address</h4>
-                    {this.inputElementsByFormId(1)}
-                    <h4>Payment Method</h4>
-                    {this.inputElementsByFormId(2)}
-                </form>
-                <button className="checkout__button" onClick={this.orderHandler}>Submit</button>
+        let data;
+        if (!this.state.error) {
+            data = <div className="checkout">
+                <div className="checkout__area">
+                    <form className="checkout__form">
+                        <h4>Shipping Address</h4>
+                        {this.inputElementsByFormId(1)}
+                        <h4>Payment Method</h4>
+                        {this.inputElementsByFormId(2)}
+                    </form>
+                    <button className="checkout__button" onClick={this.orderHandler}>Submit</button>
+                </div>
+                <div className="checkout__total">
+                    <CartTotal goodsTotal={this.state.totalCost}/>
+                </div>
             </div>
-            <div className="checkout__total">
-                <CartTotal goodsTotal={this.state.totalCost}/>
-            </div>
-        </div>)
+        } else {
+            data = <div className="error">{this.state.error}</div>
+        }
+
+        if (this.state.loading) {
+            data = <Spinner className="spinner" animation="border" variant="secondary"/>
+        }
+        return (data);
     }
 }
 

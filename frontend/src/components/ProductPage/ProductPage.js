@@ -128,7 +128,7 @@ class ProductPage extends Component {
         }
 
         if (this.state.notFound) {
-            productData = <h4>This product doesn't exist</h4>
+            productData = <div className="error">This product doesn't exist</div>
         }
 
         return (productData)
