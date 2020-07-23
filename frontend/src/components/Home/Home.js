@@ -32,8 +32,16 @@ class Home extends Component {
                 structured pieces from our & Other Stories are tailored for sun-soaked city days.
             </div>
             <div className="home__banner" id="banner2">
-                <img src="https://tappiola-shop.s3.eu-west-2.amazonaws.com/home/home4.jpg" alt="banner4"/>
-                <img src="https://tappiola-shop.s3.eu-west-2.amazonaws.com/home/home5.jpg" alt="banner5"/>
+                <img
+                    src="https://tappiola-shop.s3.eu-west-2.amazonaws.com/home/home4.jpg"
+                    alt="banner4"
+                    onClick={this.imageClickHandler.bind(this, '/category/3/product/23')}
+                />
+                <img
+                    src="https://tappiola-shop.s3.eu-west-2.amazonaws.com/home/home5.jpg"
+                    alt="banner5"
+                    onClick={this.imageClickHandler.bind(this, '/category/3/product/23')}
+                />
             </div>
             <div className="home__brands-label">Build your capsule wardrobe. Select timeless pieces by the best European
                 designers
