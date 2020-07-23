@@ -8,15 +8,15 @@ class OrderSuccessful extends Component {
 
     state = {error: null, orderItems: []};
 
-    renderItem = (itemData) =>{
+    renderItem = (itemData) => {
         return <tr>
-                        <td>{itemData.product.brand.name}</td>
-                        <td>{itemData.product.name}</td>
-                        <td>{itemData.size}</td>
+            <td>{itemData.product.brand.name}</td>
+            <td>{itemData.product.name}</td>
+            <td>{itemData.size}</td>
             <td>{itemData.price} €</td>
-                        <td>{itemData.quantity}</td>
-                        <td>{itemData.price * itemData.quantity} €</td>
-                    </tr>
+            <td>{itemData.quantity}</td>
+            <td>{itemData.price * itemData.quantity} €</td>
+        </tr>
     }
 
     componentDidMount() {

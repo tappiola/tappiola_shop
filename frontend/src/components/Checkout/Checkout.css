@@ -44,14 +44,12 @@
 
 .lastName,
 .region,
-.country
- {
+.country {
     grid-column-start: 3;
     grid-column-end: -1;
 }
 
 .checkout__form h4,
-
 .email,
 .address,
 .nameOnCard {

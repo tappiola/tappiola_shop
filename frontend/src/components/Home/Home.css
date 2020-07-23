@@ -1,9 +1,9 @@
-.home{
+.home {
     width: 90%;
     margin: auto;
 }
 
-.home__banner{
+.home__banner {
     display: flex;
     justify-content: center;
 }
@@ -18,11 +18,12 @@
     margin: 20px 10px;
 }
 
-.home__banner-label{
+.home__banner-label {
     text-align: center;
     font-style: italic;
 }
-.home__brands-label{
+
+.home__brands-label {
     text-align: center;
     font-weight: 500;
     padding-top: 25px;
