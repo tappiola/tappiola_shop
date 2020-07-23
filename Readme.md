@@ -3,7 +3,7 @@ Website architecture & technologies:
 2. PostgreSQL database for data storage
 3. AWS S3 bucket as storage for static resources
 4. Frontend built via React.js (including router and redux)
-5. 95% of styling is made with pure css, 5% with Bootstrap (carousel for )
+5. 95% of styling is made with pure css, 5% with Bootstrap (Carousel with images for product page)
 6. Chai and Mocha are used for unit testing
 7. Local storage for saving data between sessions
 
@@ -15,7 +15,8 @@ Website features:
 5. You can't add to cart more items than amount in stock.
 6. Amount of items in cart shown on cart icon is updated dynamically wit help of redux store.
 7. Website supports direct links navigation, including bypassing search parameters in URL.
-8. Spinners on each page with data fecthed from the Server.
+8. Spinners on each page with data fetched from the Server.
 9. Error handling for cases when non-existing items are fetched or server returns error.
 10. Configurable inputs and form validation on submit
+11. Stock level is recalculated on successful item purchase 
           
