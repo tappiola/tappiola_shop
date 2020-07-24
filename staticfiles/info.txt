@@ -1,1 +1,0 @@
-Directory for serving django static assets, see https://devcenter.heroku.com/articles/django-assets
