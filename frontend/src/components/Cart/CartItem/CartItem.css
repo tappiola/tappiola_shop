@@ -74,6 +74,7 @@
 }
 
 .cart__delete:hover, .cart__name:hover {
+    cursor: pointer;
     text-decoration: underline;
 }
 

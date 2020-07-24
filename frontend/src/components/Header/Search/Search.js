@@ -57,7 +57,7 @@ class Search extends Component {
                         <div className='search-icon'>
                             <SearchIcon/>
                         </div>
-                        <div className={`close-icon ${this.state.inputValue === '' && 'hidden'}`}
+                        <div className={`close-icon ${!this.state.inputValue && 'hidden'}`}
                              onClick={this.clearValueHandler}>
                             <i className="fa fa-times" aria-hidden="true"/>
                         </div>
