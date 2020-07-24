@@ -1,7 +1,5 @@
-.header__search {
-    width: 250px;
-    position: relative;
-    display: flex;
+.header-search__container {
+    width: 380px;
     overflow: hidden;
 }
 
@@ -9,19 +7,30 @@ form[name=header-search] {
     width: 100%;
 }
 
+.header-search__div{
+    width: 70%;
+    float: right;
+    position: relative;
+}
+
 .search-input {
     width: 100%;
+    float: right;
     height: 36px;
     padding: 4px 0 4px 30px;
     border: 1px solid #bfbfbf;
     font-size: smaller;
 }
 
+.extended {
+    width: 100%;
+}
+
 .search-input:focus {
     outline: none;
 }
 
-.search-button {
+.search-icon {
     height: 36px;
     width: 36px;
     position: absolute;
@@ -36,6 +45,16 @@ form[name=header-search] {
     overflow: hidden;
 }
 
-.search-button svg {
-    vertical-align: baseline;
+.close-icon {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 22px;
+    display: flex;
+    vertical-align: center;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
 }
