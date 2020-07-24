@@ -1,8 +1,12 @@
 .header__search {
-    width: 200px;
+    width: 250px;
     position: relative;
     display: flex;
     overflow: hidden;
+}
+
+form[name=header-search] {
+    width: 100%;
 }
 
 .search-input {
@@ -10,6 +14,7 @@
     height: 36px;
     padding: 4px 0 4px 30px;
     border: 1px solid #bfbfbf;
+    font-size: smaller;
 }
 
 .search-input:focus {
@@ -21,10 +26,10 @@
     width: 36px;
     position: absolute;
     background: none;
-    padding: 9px;
+    padding: 10px;
     left: 0;
     border: 0;
-    bottom: 0;
+    bottom: 4px;
     right: 0;
     top: 0;
     margin: auto 0;

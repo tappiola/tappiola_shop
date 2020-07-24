@@ -9,7 +9,8 @@ class Category extends Component {
     state = {
         categoryId: this.props.match.params.id,
         products: [],
-        searchTerm: ''
+        searchTerm: '',
+        message: null
     }
 
     getProducts(id, searchParam = null) {
@@ -22,6 +23,9 @@ class Category extends Component {
                     products: data,
                     loading: false
                 })
+                if (data.length === 0) {
+                    this.setState({message: "No products found"})
+                }
             });
         } else if (id === 'sale') {
             getSaleItems().then(({data}) => {
@@ -30,6 +34,9 @@ class Category extends Component {
                     products: data,
                     loading: false
                 })
+                if (data.length === 0) {
+                    this.setState({message: "No products in this category"});
+                }
             })
         } else {
             getCategoryProducts(id).then(({data}) => {
@@ -38,6 +45,9 @@ class Category extends Component {
                     products: data,
                     loading: false
                 })
+                if (data.length === 0) {
+                    this.setState({message: "No products in this category"});
+                }
             })
         }
     }
@@ -60,10 +70,15 @@ class Category extends Component {
     }
 
     render() {
+        let productsData;
 
-        let productsData = <div className="category">
-            {this.state.products.map(p => <ProductCard key={p.id} productData={p}/>)}
-        </div>;
+        if (this.state.products.length > 0) {
+            productsData = <div className="category">
+                {this.state.products.map(p => <ProductCard key={p.id} productData={p}/>)}
+            </div>;
+        } else {
+            productsData = <div className="error">{this.state.message}</div>
+        }
 
         if (this.state.loading) {
             productsData = <Spinner className="spinner" animation="border" variant="secondary"/>
