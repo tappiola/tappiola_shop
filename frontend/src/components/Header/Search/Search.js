@@ -6,16 +6,13 @@ import SearchIcon from "../../Icons/SearchIcon";
 
 class Search extends Component {
     state = {
-        searchTerm: '',
         formClasses: ['header-search__div'],
         inputValue: ''
     }
 
     handleSearchTermSubmit = (event) => {
         event.preventDefault();
-        const value = this.state.inputValue;
-        this.setState({searchTerm: value});
-        this.props.history.push(`/category/search_results?search=${value}`);
+        this.props.history.push(`/category/search_results?search=${this.state.inputValue}`);
     }
 
     inputClickHandler = () => {
@@ -26,21 +23,21 @@ class Search extends Component {
         this.setState({formClasses: this.state.formClasses.filter(x => x !== "extended")});
     }
 
-    inputChangeHanlder = (event) =>{
+    inputChangeHanlder = (event) => {
         this.setState({inputValue: event.target.value});
     }
 
     clearValueHandler = (event) => {
-        this.setState({searchTerm: '', inputValue: ''});
+        this.setState({inputValue: ''});
     }
 
     componentDidMount() {
-        this.setState({searchTerm: queryString.parse(this.props.location.search).search});
+        this.setState({inputValue: queryString.parse(this.props.location.search).search});
     }
 
     componentWillReceiveProps(nextProps, nextValue) {
         if (!nextProps.history.location.search) {
-            this.setState({searchTerm: '', inputValue: ''});
+            this.setState({inputValue: ''});
         }
     }
 
@@ -50,16 +47,18 @@ class Search extends Component {
                 <div className={this.state.formClasses.join(' ')}>
                     <form name='header-search__form' onSubmit={this.handleSearchTermSubmit}>
                         <input className="search-input"
-                               defaultValue={this.state.searchTerm}
+                               defaultValue={this.state.inputValue}
                                placeholder="Search"
                                onChange={this.inputChangeHanlder}
                                onFocus={this.inputClickHandler}
                                onBlur={this.inputLeaveHandler}
+                               value={this.state.inputValue}
                         />
                         <div className='search-icon'>
                             <SearchIcon/>
                         </div>
-                        <div className={`close-icon ${this.state.inputValue === '' && 'hidden'}`} onClick={this.clearValueHandler}>
+                        <div className={`close-icon ${this.state.inputValue === '' && 'hidden'}`}
+                             onClick={this.clearValueHandler}>
                             <i className="fa fa-times" aria-hidden="true"/>
                         </div>
                     </form>
