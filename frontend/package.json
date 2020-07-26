@@ -19,8 +19,7 @@
     "redux": "^4.0.5"
   },
   "scripts": {
-    "start:dev": "react-scripts start",
-    "start": "node server/server.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "mocha --require esm **/*.tests.js",
     "eject": "react-scripts eject"
