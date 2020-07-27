@@ -161,6 +161,7 @@ class Checkout extends Component {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
+                    autocomplete: 'cc-exp',
                     placeholder: 'Exp. Date',
                     maxLength: 5
                 },
