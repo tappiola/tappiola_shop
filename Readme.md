@@ -6,6 +6,7 @@ Website architecture & technologies:
 1. 95% of styling is made with pure css, 5% with Bootstrap (Carousel with images for product page)
 1. Chai and Mocha are used for unit testing
 1. Local storage for saving data between sessions
+1. Express server for hosting React app
 
 Website features:
 1. Dynamic content fetched via REST API
