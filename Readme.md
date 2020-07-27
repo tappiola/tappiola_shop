@@ -1,4 +1,4 @@
-Website architecture & technologies:
+## Website architecture & technologies:
 1. Backend REST API developed with Django Rest Framework
 1. PostgreSQL database for data storage
 1. AWS S3 bucket as storage for static resources
@@ -8,7 +8,7 @@ Website architecture & technologies:
 1. Local storage for saving data between sessions
 1. Express server for hosting React app
 
-Website features:
+## Website features:
 1. Dynamic content fetched via REST API
 1. Advanced search (including partial match) by multiple fields (name, brand, color, keywords, etc.)
 1. Out of stock products are filtered out from products list on API level
@@ -21,6 +21,6 @@ Website features:
 1. Configurable inputs and form validation on submit
 1. Stock level is recalculated on successful item purchase 
 
-Deploy to heroku:
+## Deploy to heroku:
 1. Frontend: `git push heroku-web HEAD:master`
 1. Backend: `git push heroku-api HEAD:master`
