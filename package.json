@@ -1,0 +1,10 @@
+{
+  "name": "heroku-build",
+  "version": "1.0.0",
+  "description": "Script used to trigger react build during heroku deployment",
+  "dependencies": {
+  },
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build"
+  }
+}

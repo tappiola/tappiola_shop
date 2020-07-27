@@ -8,9 +8,9 @@ class ProductCard extends Component {
     }
 
     getSrc(position) {
-        return this.state.imagesSorted[0]
+        return this.state.imagesSorted[position]
             ? this.state.imagesSorted[position].image_link
-            : 'https://tuktuk4children.org/wp-content/uploads/2017/09/shop-placeholder-600x600.png'
+            : 'https://tappiola-shop.s3.eu-west-2.amazonaws.com/placeholder.png'
     }
 
 
