@@ -43,6 +43,12 @@ class ProductPage extends Component {
         return this.state.stockLevel.reduce((prev, curr) => prev + curr.stock_level, 0);
     }
 
+    stockLevelSortFunc = (a, b) => {
+
+        const sortingArr = [ 'XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '32', '34', '36', '38', '40', '42'];
+        return sortingArr.indexOf(a.size) - sortingArr.indexOf(b.size);
+    }
+
 
     sizeClickHandler = (newSize) => {
         this.setState({
@@ -81,7 +87,7 @@ class ProductPage extends Component {
             />
         </Carousel.Item>
 
-        const sizesData = this.state.stockLevel
+        const sizesData = this.state.stockLevel.sort(this.stockLevelSortFunc)
             .filter(x => x.size !== 'one_size')
             .map((x, index) => <Size
                 data={x}
