@@ -2,11 +2,12 @@ import React, {Component} from "react";
 import {getOrder, submitOrder} from "../../lib/service";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import Input from "../Input/Input";
-import './Checkout.css';
+import Input from "../../containers/Input/Input";
+import classes from './Checkout.module.css';
 import axios from 'axios';
 import CartTotal from "../CartTotal/CartTotal";
-import Spinner from "react-bootstrap/Spinner";
+import {SpinnerCustom as Spinner} from '../../containers/Spinner/Spinner';
+import {Error} from "../../containers/Error/Error";
 
 class Checkout extends Component {
     state = {
@@ -338,7 +339,8 @@ class Checkout extends Component {
             .map(formElement => (
                 <Input
                     key={formElement.id}
-                    className={formElement.id}
+                    inputType={formElement.id}
+                    className={classes[formElement.id]}
                     elementType={formElement.config.elementType}
                     elementConfig={formElement.config.elementConfig}
                     value={formElement.config.value}
@@ -371,30 +373,31 @@ class Checkout extends Component {
     }
 
     render() {
-        let data;
-        if (!this.state.error) {
-            data = <div className="checkout">
-                <div className="checkout__area">
-                    <form className="checkout__form">
+
+        if (this.state.loading) {
+            return <Spinner/>
+        }
+
+        if (this.state.error) {
+            return <Error>{this.state.error}</Error>
+        }
+
+        return (
+            <div className={classes.checkout}>
+                <div className={classes.area}>
+                    <form className={classes.form}>
                         <h4>Shipping Address</h4>
                         {this.inputElementsByFormId(1)}
                         <h4>Payment Method</h4>
                         {this.inputElementsByFormId(2)}
                     </form>
-                    <button className="checkout__button" onClick={this.orderHandler}>Submit</button>
+                    <button className={classes.button} onClick={this.orderHandler}>Submit</button>
                 </div>
-                <div className="checkout__total">
+                <div className={classes.total}>
                     <CartTotal goodsTotal={this.state.totalCost}/>
                 </div>
             </div>
-        } else {
-            data = <div className="error">{this.state.error}</div>
-        }
-
-        if (this.state.loading) {
-            data = <Spinner className="spinner" animation="border" variant="secondary"/>
-        }
-        return (data);
+        )
     }
 }
 

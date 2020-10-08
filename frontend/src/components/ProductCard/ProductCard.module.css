@@ -1,4 +1,4 @@
-.product__card {
+.productCard {
     width: 100%;
     height: auto;
     text-align: center;
@@ -8,11 +8,11 @@
     flex-wrap: wrap;
 }
 
-.product__discount {
+.productDiscount {
     text-decoration: line-through;
 }
 
-.product__image {
+.productImage {
     height: 100%;
     width: 100%;
     background-repeat: no-repeat;

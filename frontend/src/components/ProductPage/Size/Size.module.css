@@ -1,4 +1,4 @@
-.product__size {
+.productSize {
     color: black;
     border: 1px solid black;
     width: 45px;
@@ -10,13 +10,13 @@
     padding-bottom: 0 !important;
 }
 
-.product__sold-out {
+.productSoldOut {
     color: gray;
     border: 1px solid gray;
     background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M0 99 L99 0 L100 1 L1 100' fill='black' /></svg>") no-repeat center center;
     background-size: 100% 100%, auto;
 }
 
-.product__size-selected {
+.productSizeSelected {
     border-width: 2px;
 }

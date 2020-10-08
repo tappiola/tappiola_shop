@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import './DesignersPopup.css';
+import classes from './DesignersPopup.module.css';
 import {withRouter} from "react-router-dom";
 
 class DesignersPopup extends Component {
@@ -9,8 +9,12 @@ class DesignersPopup extends Component {
     }
 
     render() {
+        if (this.props.isLoading){
+            return null
+        }
+
         return (
-            <div className='category-popup'>
+            <div className={classes.categoryPopup}>
                 <ul>
                     {this.props.data
                         .sort((a, b) => a.name.localeCompare(b.name))

@@ -1,59 +1,36 @@
 import React, {Component} from "react";
-import './Home.css';
 import DesignersList from "../DesignersList/DesignersList";
-import {withRouter} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
+import {STATICS_URL} from "../../constants";
+import classes from './Home.module.css';
 
 class Home extends Component {
 
-    imageClickHandler = (uri) => {
-        this.props.history.push(uri);
-    }
-
     render() {
-        return (<div className="home">
-            <div className="home__banner" id="banner1">
-                <div>
-                    <img
-                        src="https://tappiola-shop.s3.eu-west-2.amazonaws.com/home/home1.jpg"
-                        alt="banner1"
-                        onClick={this.imageClickHandler.bind(this, '/category/1/product/18')}
-                    />
-                </div>
-                <div>
-                    <img
-                        src="https://tappiola-shop.s3.eu-west-2.amazonaws.com/home/home2.jpg"
-                        alt="banner2"
-                        onClick={this.imageClickHandler.bind(this, '/category/1/product/18')}
-                    />
-                </div>
-                <div>
-                    <img
-                        src="https://tappiola-shop.s3.eu-west-2.amazonaws.com/home/home3.jpg"
-                        alt="banner3"
-                        onClick={this.imageClickHandler.bind(this, '/category/1/product/18')}
-                    />
-                </div>
+        return (<div className={classes.home}>
+            <div className={`${classes.banner} ${classes.banner1}`}>
+                <NavLink to='/category/1/product/18'>
+                    <img src={`${STATICS_URL}/home/home1.jpg`} alt="banner1"/>
+                </NavLink>
+                <NavLink to='/category/1/product/18'>
+                    <img src={`${STATICS_URL}/home/home2.jpg`} alt="banner2"/>
+                </NavLink>
+                <NavLink to='/category/1/product/18'>
+                    <img src={`${STATICS_URL}/home/home3.jpg`} alt="banner3"/>
+                </NavLink>
             </div>
-            <div className="home__banner-label">Cut from luxe lightweight fabrics in a neutral palette, these softly
+            <div className={classes.bannerLabel}>Cut from luxe lightweight fabrics in a neutral palette, these softly
                 structured pieces from our & Other Stories are tailored for sun-soaked city days.
             </div>
-            <div className="home__banner" id="banner2">
-                <div>
-                    <img
-                        src="https://tappiola-shop.s3.eu-west-2.amazonaws.com/home/home4.jpg"
-                        alt="banner4"
-                        onClick={this.imageClickHandler.bind(this, '/category/3/product/23')}
-                    />
-                </div>
-                <div>
-                    <img
-                        src="https://tappiola-shop.s3.eu-west-2.amazonaws.com/home/home5.jpg"
-                        alt="banner5"
-                        onClick={this.imageClickHandler.bind(this, '/category/3/product/23')}
-                    />
-                </div>
+            <div className={`${classes.banner} ${classes.banner2}`}>
+                <NavLink to='/category/3/product/23'>
+                    <img src={`${STATICS_URL}/home/home4.jpg`} alt="banner4"/>
+                </NavLink>
+                <NavLink to='/category/3/product/23'>
+                    <img src={`${STATICS_URL}/home/home5.jpg`} alt="banner5"/>
+                </NavLink>
             </div>
-            <div className="home__brands-label">Build your capsule wardrobe. Select timeless pieces by the best European
+            <div className={classes.brandsLabel}>Build your capsule wardrobe. Select timeless pieces by the best European
                 designers
             </div>
             <DesignersList/>
@@ -62,4 +39,4 @@ class Home extends Component {
 
 }
 
-export default withRouter(Home);
+export default Home;

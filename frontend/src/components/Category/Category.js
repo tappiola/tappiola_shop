@@ -1,43 +1,46 @@
 import React, {Component} from "react";
 import {getCategoryProducts, getProducts, getSaleItems} from '../../lib/service';
 import ProductCard from "../ProductCard/ProductCard";
-import './Category.css';
+import classes from './Category.module.css';
 import queryString from 'query-string';
-import Spinner from 'react-bootstrap/Spinner';
+import {SpinnerCustom as Spinner} from '../../containers/Spinner/Spinner';
+import {Error} from "../../containers/Error/Error";
 
 class Category extends Component {
     state = {
         categoryId: this.props.match.params.id,
         products: [],
         searchTerm: '',
-        message: null
+        error: null
     }
 
     getProducts(id, searchParam = null) {
         this.setState({loading: true});
 
         if (id === 'search_results') {
-            getProducts({search: searchParam}).then(({data}) => {
+            getProducts({search: searchParam})
+                .then(({data}) => {
                 this.setState({
                     categoryId: id,
                     products: data,
                     loading: false
                 })
                 if (data.length === 0) {
-                    this.setState({message: "No products found"})
+                    this.setState({error: "No products found"})
                 }
-            });
+            }).catch(error => this.setState({loading: false, error: error.message}));
         } else if (id === 'sale') {
-            getSaleItems().then(({data}) => {
+            getSaleItems()
+                .then(({data}) => {
                 this.setState({
                     categoryId: id,
                     products: data,
                     loading: false
                 })
                 if (data.length === 0) {
-                    this.setState({message: "No products in this category"});
+                    this.setState({error: "No products in this category"});
                 }
-            })
+            }).catch(error => this.setState({loading: false, error: error.message}));
         } else {
             getCategoryProducts(id).then(({data}) => {
                 this.setState({
@@ -46,9 +49,9 @@ class Category extends Component {
                     loading: false
                 })
                 if (data.length === 0) {
-                    this.setState({message: "No products in this category"});
+                    this.setState({error: "No products in this category"});
                 }
-            })
+            }).catch(error => this.setState({loading: false, error: error.message}));
         }
     }
 
@@ -70,20 +73,18 @@ class Category extends Component {
     }
 
     render() {
-        let productsData;
+        if (this.state.loading) {
+            return <Spinner/>
+        }
 
-        if (this.state.products.length > 0) {
-            productsData = <div className="category">
+        if (this.state.error){
+            return <Error>{this.state.error}</Error>
+        }
+
+        return <div className={classes.category}>
                 {this.state.products.map(p => <ProductCard key={p.id} productData={p}/>)}
             </div>;
-        } else {
-            productsData = <div className="error">{this.state.message}</div>
-        }
 
-        if (this.state.loading) {
-            productsData = <Spinner className="spinner" animation="border" variant="secondary"/>
-        }
-        return (productsData);
     }
 
 }

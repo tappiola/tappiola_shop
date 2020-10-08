@@ -1,0 +1,19 @@
+.brand {
+    padding: 50px 5%;
+    display: grid;
+    border-collapse: collapse;
+    grid-template-columns: 100%;
+    grid-gap: 20px;
+}
+
+@media (min-width: 600px) {
+    .brand {
+        grid-template-columns: repeat(2, 50%);
+    }
+}
+
+@media (min-width: 1000px) {
+    .brand {
+        grid-template-columns: repeat(3, 32%);
+    }
+}

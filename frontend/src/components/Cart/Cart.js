@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import {createOrder, getProducts} from "../../lib/service";
-import CartItem from "./CartItem/CartItem";
-import Spinner from "react-bootstrap/Spinner";
-import './Cart.css';
+import CartItem from "./CartItem";
+import {SpinnerCustom as Spinner} from '../../containers/Spinner/Spinner';
+import classes from './Cart.module.css';
 import {withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
 import CartTotal from "../CartTotal/CartTotal";
@@ -85,11 +85,19 @@ class Cart extends Component {
         const goodsTotal = this.state.cartItems.reduce(
             (prev, curr) => prev + (curr.discounted_price || curr.price) * curr.quantity, 0);
 
-        let data = <React.Fragment>
+        if (this.state.loading) {
+            return <Spinner/>
+        }
+
+        if (this.state.cartItems.length === 0) {
+            return <div className={classes.noItems}>Really, still no items in cart? Browse our top products to fix this</div>
+        }
+
+        return <React.Fragment>
             <div>
-                <h4 className="cart-header">Your cart items</h4>
-                <div className="cart">
-                    <div className="cart__items">
+                <h4 className={classes.header}>Your cart items</h4>
+                <div className={classes.cart}>
+                    <div className={classes.items}>
                         {this.state.cartItems.map((itemData, index) => <CartItem
                             key={index}
                             data={itemData}
@@ -97,24 +105,13 @@ class Cart extends Component {
                             quantityChanged={this.quantityChangedHandler.bind(this, itemData.id, itemData.size)}
                         />)}
                     </div>
-                    <div className="cart-total">
+                    <div className={classes.total}>
                         <CartTotal goodsTotal={goodsTotal}/>
-                        <button className="cart-total__checkout" onClick={this.checkoutHandler}>Checkout</button>
+                        <button className={classes.totalCheckout} onClick={this.checkoutHandler}>Checkout</button>
                     </div>
                 </div>
             </div>
         </React.Fragment>
-
-        if (this.state.loading) {
-            data = <Spinner className="spinner" animation="border" variant="secondary"/>
-        } else if (this.state.cartItems.length === 0) {
-            data = <div className="cart__no-items">Really, still no items in cart? Browse our top products to fix
-                this</div>
-        }
-
-        return (<div>
-            {data}
-        </div>);
     }
 }
 

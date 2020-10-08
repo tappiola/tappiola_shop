@@ -3,32 +3,32 @@
     margin: auto;
 }
 
-.home__banner {
+.banner {
     display: flex;
     justify-content: center;
 }
 
-#banner1 div {
+.banner1 a {
     width: 30%;
     margin: 20px 10px;
 }
 
-.home__banner img {
+.banner img {
     width: 100%;
     height: auto;
 }
 
-#banner2 div {
+.banner2 a {
     width: 46%;
     margin: 20px 10px;
 }
 
-.home__banner-label {
+.bannerLabel {
     text-align: center;
     font-style: italic;
 }
 
-.home__brands-label {
+.brandsLabel {
     text-align: center;
     font-weight: 500;
     padding-top: 25px;

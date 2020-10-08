@@ -1,33 +1,34 @@
 import React, {Component} from "react";
-import './Size.css';
+import './Size.module.css';
+import classes from './Size.module.css';
+import clsx from 'clsx';
 
 class Size extends Component {
 
     state = {
-        classes: ['product__size'],
+        isSelected: false
     };
+
     stockLevel = this.props.data.stock_level;
 
-    componentDidMount() {
-        if (this.stockLevel === 0) {
-            this.setState({classes: [...this.state.classes, 'product__sold-out']});
-        }
-    }
-
     componentWillReceiveProps(nextProps, nextValue) {
-        if (this.stockLevel > 0
-            && nextProps.selectedSize === this.props.data.size
-            && !this.state.classes.includes('product__size-selected')
-        ) {
-            this.setState({classes: [...this.state.classes, 'product__size-selected']});
-        } else {
-            this.setState({classes: this.state.classes.filter(c => c !== 'product__size-selected')});
+        if (this.stockLevel > 0) {
+            if (nextProps.selectedSize === this.props.data.size) {
+                this.setState(state => ({isSelected: !state.isSelected}));
+            } else {
+                this.setState({isSelected: false});
+            }
         }
     }
 
     render() {
+        const productClasses = clsx(classes.productSize, {
+            [classes.productSizeSelected]: this.state.isSelected,
+            [classes.productSoldOut]: this.stockLevel === 0
+        })
+
         return (<div
-            className={this.state.classes.join(' ')}
+            className={productClasses}
             onClick={this.props.clicked}
         >
             {this.props.data.size}

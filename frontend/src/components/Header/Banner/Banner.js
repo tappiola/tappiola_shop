@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import './Banner.css';
-import BannerOption from "./BannerOption/BannerOption";
+import classes from './Banner.module.css';
+import BannerOption from "./BannerOption";
 
 class Banner extends Component {
     state = {
@@ -19,7 +19,6 @@ class Banner extends Component {
         let currentIndex = this.state.bannerIndex;
         currentIndex < this.bannerOptions.length - 1 ? currentIndex += 1 : currentIndex = 0;
         this.setState({bannerIndex: currentIndex});
-        // setTimeout(this.changeBannerText.bind(this), 3000);
     }
 
     componentDidMount() {
@@ -35,7 +34,7 @@ class Banner extends Component {
     render() {
 
         return (
-            <div className='banner'>
+            <div className={classes.banner}>
                 {this.bannerOptions[this.state.bannerIndex]}
             </div>
         );

@@ -1,0 +1,72 @@
+.checkout {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 40px;
+}
+
+.total {
+    padding-bottom: 30px;
+    width: 100%;
+}
+
+.area {
+    width: 100%;
+}
+
+.button {
+    text-transform: uppercase;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    width: 230px;
+    margin-top: 20px;
+    border: none;
+    float: right;
+}
+
+@media (min-width: 768px) {
+    .checkout {
+    display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    padding: 0 20px;
+}
+
+    .form {
+    display: grid;
+    grid-gap: 0 15px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+}
+
+    .total {
+    margin: 56px 20px;
+    width: 28%;
+}
+
+.area {
+    width: 66%;
+    padding: 20px 7%
+}
+
+    .firstName,
+    .city,
+    .zip,
+    .cardNumber {
+        grid-column: 1 / span 2;
+    }
+
+    .lastName,
+    .region,
+    .country {
+        grid-column: 3 /span 2;
+    }
+
+    .form h4,
+    .email,
+    .address,
+    .nameOnCard {
+        grid-column: 1 / -1;
+    }
+}

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import './DesignerCard.css';
+import classes from './DesignerCard.module.css';
 import {withRouter} from "react-router-dom";
 
 class ProductCard extends Component {
@@ -10,12 +10,12 @@ class ProductCard extends Component {
 
     render() {
         return (
-            <div className="designer__card"
+            <div className={classes.card}
                  onClick={this.designerClickHandler.bind(this, this.props.designerData.id)}
                  id={this.props.designerData.id}
             >
-                <div className='image' style={{backgroundImage: `url(${this.props.designerData.image_link})`}}/>
-                <div className='title'>
+                <div className={classes.image} style={{backgroundImage: `url(${this.props.designerData.image_link})`}}/>
+                <div className={classes.title}>
                     {this.props.designerData.name}
                 </div>
             </div>)

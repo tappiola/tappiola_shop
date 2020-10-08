@@ -1,10 +1,10 @@
 import React from "react";
-import './CartTotal.css';
+import classes from './CartTotal.module.css';
 
 const CartTotal = (props) => {
-    return (<div className="cart-total__box">
-        <div className="cart-total__title">Order Summary</div>
-        <div className="cart_total__breakdown">
+    return (<div className={classes.box}>
+        <div className={classes.title}>Order Summary</div>
+        <div className={classes.breakdown}>
             <div>
                 <span>Subtotal</span>
                 <span>{props.goodsTotal} €</span></div>
@@ -13,7 +13,7 @@ const CartTotal = (props) => {
                 <span>Free</span>
             </div>
         </div>
-        <div className="cart_total__total">
+        <div className={classes.total}>
             <span>Total</span>
             <span>{props.goodsTotal} €</span>
         </div>

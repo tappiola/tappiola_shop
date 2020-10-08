@@ -1,20 +1,20 @@
-.order-items {
+.orderItems {
     padding: 40px 20%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.order-items__table {
+.orderItemsTable {
     margin-top: 30px;
 }
 
-.order-items__table, th, td {
+.orderItemsTable, th, td {
     border: 1px solid gray;
 }
 
-.order-items__table td,
-.order-items__table th {
+.orderItemsTable td,
+.orderItemsTable th {
     text-align: center;
     padding: 10px;
 }

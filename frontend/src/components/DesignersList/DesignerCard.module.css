@@ -1,4 +1,4 @@
-.designer__card {
+.card {
     border: 2px solid gray;
     height: 200px;
     display: flex;
@@ -9,19 +9,20 @@
     border-collapse: collapse;
     text-transform: uppercase;
     font-size: 14px;
+    cursor: pointer;
 
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
 }
 
-.designer__card:hover {
+.card:hover {
     -webkit-transform: scale(1.05);
     -ms-transform: scale(1.05);
     transform: scale(1.05);
     box-shadow: 10px 15px 7px #C7C7C7;
 }
 
-.designer__card .image {
+.card .image {
     height: 60%;
     width: 100%;
     background-size: contain;
@@ -29,6 +30,6 @@
     background-repeat: no-repeat;
 }
 
-.designer__card .title {
+.card .title {
     height: 20%;
 }

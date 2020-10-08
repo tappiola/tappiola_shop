@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import MainLogo from "./MainLogo/MainLogo";
-import './Header.css';
+import classes from './Header.module.css';
 import CartIcon from "./CartIcon/CartIcon";
 import Search from "./Search/Search";
 
@@ -10,10 +10,9 @@ class Header extends Component {
     render() {
         return (
             <div>
-                <div className='header'>
+                <div className={classes.header}>
                     <MainLogo/>
-                    <p className='header__text' style={{fontStyle: 'italic', fontSize: '14px'}}>Enjoy free worldwide
-                        shipping on all orders</p>
+                    <p className={classes.headerText}>Enjoy free worldwide shipping on all orders</p>
                     <Search/>
                     <CartIcon/>
                 </div>

@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import {getBrands} from '../../lib/service';
-import DesignerCard from "./DesignerCard/DesignerCard";
-import './DesignersList.css';
-import {withRouter} from "react-router-dom";
+import DesignerCard from "./DesignerCard";
+import classes from './DesignersList.module.css';
 
 class DesignersList extends Component {
     state = {
@@ -10,19 +9,16 @@ class DesignersList extends Component {
     }
 
     componentDidMount() {
-        getBrands()
-            .then(({data}) => {
-                this.setState({designersData: data})
-            })
+        getBrands().then(({data}) => this.setState({designersData: data}))
     }
 
 
     render() {
-        return (<div className="brand">
+        return (<div className={classes.brand}>
             {this.state.designersData.map(p => <DesignerCard key={p.id} designerData={p}/>)}
         </div>)
     }
 
 }
 
-export default withRouter(DesignersList);
+export default DesignersList;

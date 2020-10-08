@@ -1,26 +1,23 @@
-.header-search__container {
+.headerSearchContainer {
     width: 380px;
     overflow: hidden;
 }
 
-form[name=header-search] {
-    width: 100%;
-}
-
-.header-search__div {
+.headerSearchDiv {
     width: 70%;
     float: right;
     position: relative;
     transition: width .25s ease-out;
 }
 
-.search-input {
+.searchInput {
     width: 100%;
     float: right;
     height: 36px;
     padding: 4px 0 4px 30px;
     border: 1px solid #bfbfbf;
     font-size: smaller;
+    outline: none;
 }
 
 .extended {
@@ -28,11 +25,7 @@ form[name=header-search] {
     transition: width .25s ease-in;
 }
 
-.search-input:focus {
-    outline: none;
-}
-
-.search-icon {
+.searchIcon {
     height: 36px;
     width: 36px;
     position: absolute;
@@ -47,7 +40,7 @@ form[name=header-search] {
     overflow: hidden;
 }
 
-.close-icon {
+.closeIcon {
     position: absolute;
     right: 0;
     height: 100%;

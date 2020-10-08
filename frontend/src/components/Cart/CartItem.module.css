@@ -1,18 +1,19 @@
-.cart__image {
+.image {
     height: 100%;
     width: 100%;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     padding-top: 145%;
+    cursor: pointer;
 }
 
-.cart__card {
+.card {
     width: 25%;
     text-align: center;
 }
 
-.cart__item {
+.item {
     width: 100%;
     display: flex;
     padding: 30px;
@@ -21,7 +22,7 @@
     border-bottom: 1px solid gray;
 }
 
-.cart__data-stable {
+.dataStable {
     padding-left: 20px;
     width: 47%;
     display: flex;
@@ -29,11 +30,11 @@
     justify-content: space-between;
 }
 
-.cart__brand {
+.brand {
     font-weight: bold;
 }
 
-.cart__quantity {
+.quantity {
     display: flex;
     align-items: center;
     padding: 0;
@@ -42,7 +43,7 @@
     width: 20%;
 }
 
-.cart__increment, .cart__decrement, .cart__quantity-input {
+.increment, .decrement, .quantityInput {
     width: 28px;
     height: 28px;
     float: left;
@@ -57,24 +58,23 @@
     padding-top: 4px;
 }
 
-.cart__increment {
+.increment {
     border-right-width: 1px;
 }
 
-.cart__increment, .cart__decrement {
+.increment, .decrement {
     cursor: pointer;
 }
 
-.cart__totalPrice {
+.totalPrice {
     font-size: 14px;
 }
 
-.cart__delete {
+.delete {
     color: gray;
 }
 
-.cart__delete:hover, .cart__name:hover {
+.delete:hover, .name:hover {
     cursor: pointer;
     text-decoration: underline;
 }
-

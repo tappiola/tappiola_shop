@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import './CartItem.css';
+import classes from './CartItem.module.css';
 import {withRouter} from 'react-router-dom';
 
 class CartItem extends Component {
@@ -8,7 +8,7 @@ class CartItem extends Component {
     }
 
     viewProductDetails = () => {
-        this.props.history.push(`/category/${this.props.data.category}/product/${this.props.data.id}`)
+        this.props.history.push(`/category/${this.props.data.category}/product/${this.props.data.id}`);
     }
 
     getMaxQuantity = () => {
@@ -38,31 +38,31 @@ class CartItem extends Component {
     render() {
         const price = this.props.data.discounted_price || this.props.data.price;
 
-        return (<div className="cart__item">
-            <div className="cart__card" onClick={this.viewProductDetails}>
-                <div className="cart__image"
+        return (<div className={classes.item}>
+            <div className={classes.card} onClick={this.viewProductDetails}>
+                <div className={classes.image}
                      style={{backgroundImage: `url(${this.getImageSrc()})`}}>
                 </div>
             </div>
-            <div className="cart__data-stable">
+            <div className={classes.dataStable}>
                 <div>
-                    <div className="cart__brand">{this.props.data.brand.name}</div>
-                    <div className="cart__name" onClick={this.viewProductDetails}>{this.props.data.name}</div>
+                    <div className={classes.brand}>{this.props.data.brand.name}</div>
+                    <div className={classes.name} onClick={this.viewProductDetails}>{this.props.data.name}</div>
                     <div>Size: {this.props.data.size}</div>
                     <div>Color: {this.props.data.color}</div>
                     <div>{price} €</div>
                 </div>
-                <div className="cart__delete" onClick={this.props.deleted}>
+                <div className={classes.delete} onClick={this.props.deleted}>
                     <i className="fa fa-trash-o" aria-hidden="true"/>
                     Delete
                 </div>
             </div>
-            <div className="cart__quantity">
-                <span className="cart__decrement" onClick={this.decrementClickHandler}>-</span>
-                <span className="cart__quantity-input">{this.state.quantity}</span>
-                <span className="cart__increment" onClick={this.incrementClickHandler}>+</span>
+            <div className={classes.quantity}>
+                <span className={classes.decrement} onClick={this.decrementClickHandler}>-</span>
+                <span className={classes.quantityInput}>{this.state.quantity}</span>
+                <span className={classes.increment} onClick={this.incrementClickHandler}>+</span>
             </div>
-            <div className="cart__totalPrice">{price * +this.state.quantity} €</div>
+            <div className={classes.totalPrice}>{price * +this.state.quantity} €</div>
         </div>);
     }
 }

@@ -1,16 +1,19 @@
 import React, {Component} from "react";
 import {getBrand, getBrandProducts} from '../../lib/service';
 import ProductCard from "../ProductCard/ProductCard";
-import './DesignerCategory.css';
+import classes from './DesignerCategory.module.css';
+import categoryClasses from '../Category/Category.module.css';
 import queryString from 'query-string';
-import Spinner from "react-bootstrap/Spinner";
+import {SpinnerCustom as Spinner} from '../../containers/Spinner/Spinner';
+import {Error} from "../../containers/Error/Error";
 
 class DesignerCategory extends Component {
     state = {
         designerId: this.props.match.params.id,
         designerData: {},
         products: [],
-        searchTerm: ''
+        searchTerm: '',
+        error: null
     }
 
     getProducts(id) {
@@ -20,13 +23,13 @@ class DesignerCategory extends Component {
                 designerId: id,
                 products: data
             })
-        })
+        }).catch(error => this.setState({error: error.message}));
     }
 
     getBrandInfo(id) {
         return getBrand(id).then(({data}) => {
             this.setState({designerData: data})
-        });
+        }).catch(error => this.setState({error: error.message}));
     }
 
     getAllData(id) {
@@ -38,7 +41,6 @@ class DesignerCategory extends Component {
         ]).then(
             () => this.setState({loading: false})
         )
-
     }
 
     componentDidMount() {
@@ -58,25 +60,29 @@ class DesignerCategory extends Component {
 
     render() {
         let data = <div>
-            <div className='designer__info'>
-                <div className='designer__header'>
-                    <div className='designer__logo'
+            <div className={classes.info}>
+                <div className={classes.header}>
+                    <div className={classes.logo}
                          style={{backgroundImage: `url(${this.state.designerData.image_link})`}}/>
                 </div>
 
-                <div className="designer__desc">{this.state.designerData.description}</div>
+                <div className={classes.desc}>{this.state.designerData.description}</div>
             </div>
 
-            <div className="category">
+            <div className={categoryClasses.category}>
                 {this.state.products.map(p => <ProductCard key={p.id} productData={p}/>)}
             </div>
         </div>
 
         if (this.state.loading) {
-            data = <Spinner className="spinner" animation="border" variant="secondary"/>
+            data = <Spinner/>
         }
 
-        return (data)
+        if (this.state.error){
+            return <Error>{this.state.error}</Error>
+        }
+
+        return data
     }
 
 }

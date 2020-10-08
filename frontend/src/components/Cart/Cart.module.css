@@ -3,22 +3,22 @@
     padding: 0 20px;
 }
 
-.cart__items {
+.items {
     width: 66%;
     padding: 0 20px;
 }
 
-.cart-header {
+.header {
     padding-top: 20px;
     padding-left: 40px;
 }
 
-.cart-total {
+.total {
     margin: 0 20px;
     width: 28%;
 }
 
-.cart-total__checkout {
+.totalCheckout {
     text-transform: uppercase;
     padding: 10px 20px;
     background-color: black;
@@ -28,7 +28,7 @@
     border: none;
 }
 
-.cart__no-items {
+.noItems {
     text-align: center;
     padding: 40px;
 }

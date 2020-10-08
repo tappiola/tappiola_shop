@@ -1,4 +1,4 @@
-.category-popup {
+.categoryPopup {
     position: absolute;
     z-index: 10;
     transition: .3s, width 2s;
@@ -7,18 +7,18 @@
     padding: 10px;
 }
 
-.category-popup ul {
+.categoryPopup ul {
     padding: 5px 20px;
 }
 
-.category-popup li {
+.categoryPopup li {
     list-style: none;
     height: 25px;
     color: #222222;
     text-decoration: none;
 }
 
-.category-popup li:hover {
+.categoryPopup li:hover {
     opacity: 0.5;
     text-decoration: underline;
 }

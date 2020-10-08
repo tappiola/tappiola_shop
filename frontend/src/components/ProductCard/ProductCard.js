@@ -1,6 +1,8 @@
 import React, {Component} from "react";
-import './ProductCard.css';
+import classes from './ProductCard.module.css';
 import {withRouter} from 'react-router-dom';
+import clsx from 'clsx';
+import {STATICS_URL} from "../../constants";
 
 class ProductCard extends Component {
     state = {
@@ -10,7 +12,7 @@ class ProductCard extends Component {
     getSrc(position) {
         return this.state.imagesSorted[position]
             ? this.state.imagesSorted[position].image_link
-            : 'https://tappiola-shop.s3.eu-west-2.amazonaws.com/placeholder.png'
+            : `${STATICS_URL}/placeholder.png`
     }
 
 
@@ -34,8 +36,8 @@ class ProductCard extends Component {
         const discountedPrice = this.props.productData.discounted_price;
 
         return (
-            <div className="product__card">
-                <div className="product__image"
+            <div className={classes.productCard}>
+                <div className={classes.productImage}
                      style={{backgroundImage: `url(${this.state.src})`}}
                      onMouseOver={this.hover.bind(this)}
                      onMouseOut={this.unhover.bind(this)}
@@ -47,7 +49,7 @@ class ProductCard extends Component {
                 <div>
                     <span>{discountedPrice ? discountedPrice + ' ' : ''}</span>
                     <span
-                        className={discountedPrice ? 'product__discount' : undefined}>{this.props.productData.price}</span>
+                        className={clsx({[classes.productDiscount]: discountedPrice})}>{this.props.productData.price}</span>
                     &nbsp;€
                 </div>
             </div>)

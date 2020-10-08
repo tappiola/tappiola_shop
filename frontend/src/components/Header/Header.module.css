@@ -7,15 +7,9 @@
     z-index: 10;
 }
 
-.header__text {
+.headerText {
     margin: auto 0;
+    font-style: italic;
+    font-size: 14px;
 }
 
-.header__main-icons {
-    display: flex;
-    flex-direction: row;
-}
-
-.header__main-icons div {
-    margin-right: 1.2rem;
-}

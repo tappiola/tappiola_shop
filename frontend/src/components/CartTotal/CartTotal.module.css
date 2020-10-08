@@ -1,24 +1,24 @@
-.cart-total__box {
+.box {
     border: 1px solid gray;
     font-size: 14px;
     padding: 10px 20px;
 }
 
-.cart-total__title {
+.title {
     font-weight: bold;
     margin: 20px 0;
 }
 
-.cart_total__breakdown div, .cart_total__total {
+.breakdown div, .total {
     display: flex;
     justify-content: space-between;
 }
 
-.cart_total__breakdown {
+.breakdown {
     padding-bottom: 20px;
 }
 
-.cart_total__total {
+.total {
     font-weight: bold;
     border-top: 1px solid gray;
     padding: 20px 0;

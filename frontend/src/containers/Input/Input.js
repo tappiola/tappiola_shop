@@ -1,36 +1,37 @@
 import React from 'react';
 
-import './Input.css';
+import classes from './Input.module.css';
+import clsx from 'clsx';
 
 const input = (props) => {
     let inputElement = null;
-    let inputClasses = [];
-    const divClasses = ['order__input'];
-    divClasses.push(props.className);
-    let validationError = <p/>;
 
-    if (props.invalid && props.shouldValidate && props.touched) {
-        inputClasses.push('invalid');
-        validationError = <p className="validationError">{props.error || 'Please enter a valid value!'}</p>;
-    }
+    const shouldWarn = props.invalid && props.shouldValidate && props.touched;
+    const inputClasses = clsx({[classes.invalid]: shouldWarn});
+    const divClasses = clsx(classes.orderInput, props.className);
 
-    switch (props.elementType) {
-        case ('input'):
-            inputElement = <input
-                className={inputClasses.join(' ')}
+    const validationError = shouldWarn
+        ? <p className={classes.validationError}>{props.error || 'Please enter a valid value!'}</p>
+        : <p/>
+
+
+    const getInputElement = () => {
+            switch (props.elementType) {
+                case ('input'):
+            return <input
+                className={inputClasses}
                 {...props.elementConfig}
                 value={props.value}
                 name={props.className}
                 onChange={props.changed}/>;
-            break;
         case ('select'):
-            inputElement = (
+            return (
                 <select
-                    className={inputClasses.join(' ')}
+                    className={inputClasses}
                     value={props.value}
                     name={props.className}
                     onChange={props.changed}>
-                    <option disabled hidden value=''> -- select {props.className} --</option>
+                    <option disabled hidden value=''> -- select {props.inputType} --</option>
                     {props.elementConfig.options.map(option => (
                         <option key={option.value} value={option.value}>
                             {option.displayValue}
@@ -38,18 +39,19 @@ const input = (props) => {
                     ))}
                 </select>
             );
-            break;
         default:
             inputElement = <input
-                className={inputClasses.join(' ')}
+                className={inputClasses}
                 {...props.elementConfig}
                 value={props.value}
                 onChange={props.changed}/>;
     }
+    }
+
 
     return (
-        <div className={divClasses.join(' ')}>
-            {inputElement}
+        <div className={divClasses}>
+            {getInputElement()}
             {validationError}
         </div>
     );

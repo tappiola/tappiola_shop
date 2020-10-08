@@ -12,7 +12,8 @@ class CategoryTabs extends Component {
     state = {
         categories: [],
         designersData: [],
-        activeCategory: null
+        activeCategory: null,
+        designersLoading: true
     }
 
     scrollToCategories() {
@@ -48,7 +49,7 @@ class CategoryTabs extends Component {
 
         getBrands()
             .then(({data}) => {
-                this.setState({designersData: data})
+                this.setState({designersData: data, designersLoading: false})
             })
     }
 
@@ -60,7 +61,7 @@ class CategoryTabs extends Component {
                 name="Designers"
                 active={this.props.location.pathname.startsWith('/designers')}
                 clicked={this.designersClickHandler.bind(this)}
-                popup={<DesignersPopup data={this.state.designersData}/>}
+                popup={<DesignersPopup data={this.state.designersData} isLoading={this.state.designersLoading}/>}
                 popupData={this.state.designersData}
             />
             {this.state.categories.map(c => <CategoryTab

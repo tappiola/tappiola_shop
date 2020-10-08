@@ -1,8 +1,9 @@
 import React, {Component} from "react";
-import './OrderSuccessful.css';
 import {getOrder} from "../../lib/service";
-import Spinner from "react-bootstrap/Spinner";
+import {SpinnerCustom as Spinner} from '../../containers/Spinner/Spinner';
 import {withRouter} from "react-router-dom";
+import classes from './OrderSuccessful.module.css';
+import {Error} from "../../containers/Error/Error";
 
 class OrderSuccessful extends Component {
 
@@ -43,12 +44,18 @@ class OrderSuccessful extends Component {
     }
 
     render() {
-        let data;
-        if (!this.state.error) {
-            data = <div className="order-items">
+        if (this.state.loading) {
+            return <Spinner/>
+        }
+
+        if (this.state.error){
+            return <Error>{this.state.error}</Error>
+        }
+
+        return <div className={classes.orderItems}>
                 <h4>Your order is successful!</h4>
                 <div>The items you ordered:</div>
-                <table className="order-items__table">
+                <table className={classes.orderItemsTable}>
                     <tr>
                         <th>Designer</th>
                         <th>Product</th>
@@ -60,17 +67,8 @@ class OrderSuccessful extends Component {
                     {this.state.orderItems.map(item => this.renderItem(item))}
                 </table>
             </div>
-        } else {
-            data = <div className="error">{this.state.error}</div>
         }
-
-
-        if (this.state.loading) {
-            data = <Spinner className="spinner" animation="border" variant="secondary"/>
-        }
-
-        return data;
     }
-}
+
 
 export default withRouter(OrderSuccessful);

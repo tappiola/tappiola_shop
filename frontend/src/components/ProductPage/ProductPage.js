@@ -2,11 +2,14 @@ import React, {Component} from "react";
 import {withRouter} from 'react-router-dom';
 import {getProduct} from "../../lib/service";
 import Carousel from "react-bootstrap/Carousel";
-import './ProductPage.css';
+import './ProductPage.module.css';
 import Size from './Size/Size';
-import Spinner from "react-bootstrap/Spinner";
+import {SpinnerCustom as Spinner} from '../../containers/Spinner/Spinner';
 import {connect} from "react-redux";
 import {getUpdatedCartItems} from "../../lib/localStorageHelpers";
+import classes from './ProductPage.module.css';
+import clsx from 'clsx';
+import {Error} from "../../containers/Error/Error";
 
 class ProductPage extends Component {
     state = {
@@ -17,7 +20,7 @@ class ProductPage extends Component {
         purchaseStatus: null
     }
 
-    goBackButton = <div className="go-back-button" onClick={() => this.props.history.goBack()}>
+    goBackButton = <div className={classes.goBackButton} onClick={() => this.props.history.goBack()}>
         <i className="fa fa-arrow-left" aria-hidden="true"/>
         &nbsp;Back
     </div>;
@@ -83,7 +86,7 @@ class ProductPage extends Component {
             <img
                 className="d-block w-100"
                 src={image.image_link}
-                alt="Product image"
+                alt="Product"
             />
         </Carousel.Item>
 
@@ -95,30 +98,42 @@ class ProductPage extends Component {
                 clicked={this.sizeClickHandler.bind(this, x.size)}
                 selectedSize={this.state.selectedSize}
             />)
-        const buttonClasses = this.getTotalStock() === 0 ? 'product__total-sold-out'
-            : this.state.selectedSize ? 'product__add-to-cart product__size-selected' : 'product__add-to-cart'
 
-        let productData = <div className="product__area">
+        const buttonClasses = clsx({
+            [classes.totalSoldOut]: this.getTotalStock() === 0,
+            [classes.addToCart]: this.getTotalStock() > 0,
+            [classes.sizeSelected]: this.state.selectedSize
+        })
+
+        if (this.state.loading) {
+            return <Spinner/>
+        }
+
+        if (this.state.notFound) {
+            return <Error>This product doesn't exist</Error>
+        }
+
+       return <div className={classes.productArea}>
             {this.props.history.length > 2 && this.goBackButton}
-            <div className="product__block">
-                <div className="product__carousel">
+            <div className={classes.productBlock}>
+                <div className={classes.productCarousel}>
                     <Carousel>
                         {this.state.productImages.map((s, index) => getProductImage(s, index))}
                     </Carousel>
                 </div>
-                <div className="product__data">
-                    <h4 className="product__title">{this.state.brand}</h4>
+                <div className={classes.productData}>
+                    <h4 className={classes.title}>{this.state.brand}</h4>
                     <h5>{this.state.productData.name}</h5>
-                    <div className="product__description">{this.state.productData.description}</div>
+                    <div className={classes.description}>{this.state.productData.description}</div>
                     <div>Color: {this.state.productData.color}</div>
                     <div>
                         <span>{discountedPrice ? discountedPrice + ' ' : ''}</span>
                         <span
-                            className={discountedPrice ? 'product__discount' : undefined}>{this.state.productData.price}</span>
+                            className={clsx({[classes.discount]: discountedPrice})}>{this.state.productData.price}</span>
                         &nbsp;€
                     </div>
-                    <div className="product__sizes">{sizesData}</div>
-                    <div className="product__purchase-status">{this.state.purchaseStatus}</div>
+                    <div className={classes.sizes}>{sizesData}</div>
+                    <div className={classes.purchaseStatus}>{this.state.purchaseStatus}</div>
                     <button
                         className={buttonClasses}
                         onClick={this.buttonClickHandler}
@@ -129,15 +144,6 @@ class ProductPage extends Component {
             </div>
         </div>
 
-        if (this.state.loading) {
-            productData = <Spinner className="spinner" animation="border" variant="secondary"/>
-        }
-
-        if (this.state.notFound) {
-            productData = <div className="error">This product doesn't exist</div>
-        }
-
-        return (productData)
     }
 }
 

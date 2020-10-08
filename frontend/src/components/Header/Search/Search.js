@@ -1,13 +1,14 @@
 import React, {Component} from "react";
 import queryString from 'query-string';
 import {withRouter} from "react-router-dom";
-import './Search.css';
+import classes from './Search.module.css';
 import SearchIcon from "../../Icons/SearchIcon";
+import clsx from 'clsx';
 
 class Search extends Component {
     state = {
-        formClasses: ['header-search__div'],
-        inputValue: ''
+        inputValue: '',
+        isInputFocused: false
     }
 
     handleSearchTermSubmit = (event) => {
@@ -16,23 +17,23 @@ class Search extends Component {
     }
 
     inputClickHandler = () => {
-        this.setState({formClasses: [...this.state.formClasses, "extended"]});
+        this.setState({isInputFocused: true});
     }
 
     inputLeaveHandler = () => {
-        this.setState({formClasses: this.state.formClasses.filter(x => x !== "extended")});
+        this.setState({isInputFocused: false});
     }
 
-    inputChangeHanlder = (event) => {
+    inputChangeHandler = (event) => {
         this.setState({inputValue: event.target.value});
     }
 
-    clearValueHandler = (event) => {
+    clearValueHandler = () => {
         this.setState({inputValue: ''});
     }
 
     componentDidMount() {
-        this.setState({inputValue: queryString.parse(this.props.location.search).search});
+        this.setState({inputValue: queryString.parse(this.props.location.search).search || ''});
     }
 
     componentWillReceiveProps(nextProps, nextValue) {
@@ -43,21 +44,20 @@ class Search extends Component {
 
     render() {
         return (
-            <div className='header-search__container'>
-                <div className={this.state.formClasses.join(' ')}>
-                    <form name='header-search__form' onSubmit={this.handleSearchTermSubmit}>
-                        <input className="search-input"
-                               defaultValue={this.state.inputValue}
+            <div className={classes.headerSearchContainer}>
+                <div className={clsx(classes.headerSearchDiv, {[classes.extended]: this.state.isInputFocused})}>
+                    <form onSubmit={this.handleSearchTermSubmit}>
+                        <input className={classes.searchInput}
                                placeholder="Search"
-                               onChange={this.inputChangeHanlder}
+                               onChange={this.inputChangeHandler}
                                onFocus={this.inputClickHandler}
                                onBlur={this.inputLeaveHandler}
                                value={this.state.inputValue}
                         />
-                        <div className='search-icon'>
+                        <div className={classes.searchIcon}>
                             <SearchIcon/>
                         </div>
-                        <div className={`close-icon ${!this.state.inputValue && 'hidden'}`}
+                        <div className={clsx(classes.closeIcon, {[classes.hidden]: !this.state.inputValue})}
                              onClick={this.clearValueHandler}>
                             <i className="fa fa-times" aria-hidden="true"/>
                         </div>

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Script used to trigger react build during heroku deployment",
   "dependencies": {
+    "clsx": "^1.1.1"
   },
   "scripts": {
     "build": "cd frontend && npm install && npm run build"

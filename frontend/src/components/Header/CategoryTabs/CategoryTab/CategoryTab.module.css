@@ -1,0 +1,7 @@
+.active .name{
+    font-weight: bold;
+}
+
+.name {
+    margin: 20px;
+}
