@@ -13,6 +13,12 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import django_heroku
 import os
 
+# Import secrets
+try:
+    import shop_project.secrets
+except ImportError:
+    pass
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -82,14 +88,6 @@ WSGI_APPLICATION = 'shop_project.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dan6a0gvmdt0gt',
-        'USER': 'yocqaiiwbtrrfk',
-        'PASSWORD': '33a57fbf7bf74b441e5bfa5d6127e6b269e7d05f99cad072db0bf10ef6477c9b',
-        'HOST': 'ec2-107-22-7-9.compute-1.amazonaws.com',
-        'PORT': 5432
-    }
 }
 
 # Password validation

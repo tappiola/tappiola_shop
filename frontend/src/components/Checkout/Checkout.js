@@ -12,6 +12,7 @@ import {Error} from "../../containers/Error/Error";
 class Checkout extends Component {
     state = {
         error: null,
+        formIsValid: false,
         orderForm: {
             firstName: {
                 formId: 1,
@@ -286,7 +287,7 @@ class Checkout extends Component {
             ...updatedOrderForm[inputIdentifier]
         };
         updatedFormElement.value = event.target.value;
-        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        [updatedFormElement.valid, updatedFormElement.error] = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
         updatedFormElement.touched = true;
         updatedOrderForm[inputIdentifier] = updatedFormElement;
 
