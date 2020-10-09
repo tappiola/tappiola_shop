@@ -6,10 +6,13 @@ import classes from './Cart.module.css';
 import {withRouter} from 'react-router-dom';
 import {connect} from "react-redux";
 import CartTotal from "../CartTotal/CartTotal";
+import {Error} from "../../containers/Error/Error";
 
 class Cart extends Component {
     state = {
-        cartItems: []
+        cartItems: [],
+        loading: true,
+        error: null
     }
 
     getStockLevelForCartItem = (cartItem, data) => {
@@ -45,20 +48,19 @@ class Cart extends Component {
         this.setState({loading: true});
 
         const orderItems = this.props.cartDataLocal.map(p => ({product: p.id, size: p.size, quantity: p.quantity}));
-        createOrder({order_items: orderItems}).then(({data}) => {
+        createOrder({order_items: orderItems})
+            .then(({data}) => {
             this.setState({
                 totalCost: data.totalCost,
                 orderId: data.order_id,
                 loading: false
-            });
+            }).catch(error => this.setState({error: error.message, loading: false}));
             this.props.history.push('/checkout/' + data.order_id);
         })
     }
 
 
     componentDidMount() {
-        this.setState({loading: true});
-
         const cartDataLocal = this.props.cartDataLocal;
         const cartIds = Array.from(new Set(cartDataLocal.map(i => i.id)));
         if (cartIds.length > 0) {
@@ -75,7 +77,7 @@ class Cart extends Component {
                     })
                     this.setState({cartItems, loading: false});
                 }
-            );
+            ).catch(error => this.setState({error: error.message, loading: false}));
         } else {
             this.setState({cartItems: [], loading: false});
         }
@@ -87,6 +89,10 @@ class Cart extends Component {
 
         if (this.state.loading) {
             return <Spinner/>
+        }
+
+        if (this.state.error){
+            return <Error>{this.state.error}</Error>
         }
 
         if (this.state.cartItems.length === 0) {

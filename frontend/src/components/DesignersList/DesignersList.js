@@ -5,11 +5,15 @@ import classes from './DesignersList.module.css';
 
 class DesignersList extends Component {
     state = {
-        designersData: []
+        designersData: [],
+        error: null
     }
 
     componentDidMount() {
-        getBrands().then(({data}) => this.setState({designersData: data}))
+        this.setState({error: null});
+        getBrands()
+            .then(({data}) => this.setState({designersData: data}))
+            .catch(error => this.setState({error: error.message}));
     }
 
 
