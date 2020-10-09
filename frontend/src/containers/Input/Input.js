@@ -16,36 +16,36 @@ const input = (props) => {
 
 
     const getInputElement = () => {
-            switch (props.elementType) {
-                case ('input'):
-            return <input
-                className={inputClasses}
-                {...props.elementConfig}
-                value={props.value}
-                name={props.className}
-                onChange={props.changed}/>;
-        case ('select'):
-            return (
-                <select
+        switch (props.elementType) {
+            case ('input'):
+                return <input
                     className={inputClasses}
+                    {...props.elementConfig}
                     value={props.value}
                     name={props.className}
-                    onChange={props.changed}>
-                    <option disabled hidden value=''> -- select {props.inputType} --</option>
-                    {props.elementConfig.options.map(option => (
-                        <option key={option.value} value={option.value}>
-                            {option.displayValue}
-                        </option>
-                    ))}
-                </select>
-            );
-        default:
-            inputElement = <input
-                className={inputClasses}
-                {...props.elementConfig}
-                value={props.value}
-                onChange={props.changed}/>;
-    }
+                    onChange={props.changed}/>;
+            case ('select'):
+                return (
+                    <select
+                        className={inputClasses}
+                        value={props.value}
+                        name={props.className}
+                        onChange={props.changed}>
+                        <option disabled hidden value=''> -- select {props.inputType} --</option>
+                        {props.elementConfig.options.map(option => (
+                            <option key={option.value} value={option.value}>
+                                {option.displayValue}
+                            </option>
+                        ))}
+                    </select>
+                );
+            default:
+                inputElement = <input
+                    className={inputClasses}
+                    {...props.elementConfig}
+                    value={props.value}
+                    onChange={props.changed}/>;
+        }
     }
 
 

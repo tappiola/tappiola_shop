@@ -27,28 +27,28 @@
 
 @media (min-width: 768px) {
     .checkout {
-    display: flex;
+        display: flex;
         flex-direction: row;
         align-items: flex-start;
-    padding: 0 20px;
-}
+        padding: 0 20px;
+    }
 
     .form {
-    display: grid;
-    grid-gap: 0 15px;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto;
-}
+        display: grid;
+        grid-gap: 0 15px;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto;
+    }
 
     .total {
-    margin: 56px 20px;
-    width: 28%;
-}
+        margin: 56px 20px;
+        width: 28%;
+    }
 
-.area {
-    width: 66%;
-    padding: 20px 7%
-}
+    .area {
+        width: 66%;
+        padding: 20px 7%
+    }
 
     .firstName,
     .city,

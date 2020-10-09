@@ -1,8 +1,5 @@
 .banner {
-    background-color: #dddddd;
-    padding: 12px;
-    text-align: center;
-    font-size: 15px;
+    display: none;
 }
 
 .separate::after {
@@ -11,4 +8,14 @@
 
 .underline {
     text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+    .banner {
+        display: block;
+        background-color: #dddddd;
+        padding: 12px;
+        text-align: center;
+        font-size: 15px;
+    }
 }

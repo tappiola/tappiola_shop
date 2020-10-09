@@ -1,10 +1,5 @@
 .categories {
-    display: flex;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 10;
+    display: none;
 }
 
 .categories:hover {
@@ -14,5 +9,16 @@
 .categories div:hover {
     color: black;
     cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .categories {
+        display: flex;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        background-color: white;
+        z-index: 10;
+    }
 }
 

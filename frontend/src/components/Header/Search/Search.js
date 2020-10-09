@@ -7,7 +7,11 @@ import clsx from 'clsx';
 
 class Search extends Component {
     state = {
-        inputValue: '',
+        inputValue: (
+            this.props.history.location.pathname === '/category/search_results'
+                ? queryString.parse(this.props.location.search).search
+                : ''
+        ),
         isInputFocused: false
     }
 
@@ -16,29 +20,23 @@ class Search extends Component {
         this.props.history.push(`/category/search_results?search=${this.state.inputValue}`);
     }
 
-    inputClickHandler = () => {
-        this.setState({isInputFocused: true});
-    }
+    inputClickHandler = () => this.setState({isInputFocused: true});
 
-    inputLeaveHandler = () => {
-        this.setState({isInputFocused: false});
-    }
+    inputLeaveHandler = () => this.setState({isInputFocused: false});
 
-    inputChangeHandler = (event) => {
-        this.setState({inputValue: event.target.value});
-    }
+    inputChangeHandler = event => this.setState({inputValue: event.target.value});
 
-    clearValueHandler = () => {
-        this.setState({inputValue: ''});
-    }
+    clearValueHandler = () => this.setState({inputValue: ''});
 
-    componentDidMount() {
-        this.setState({inputValue: queryString.parse(this.props.location.search).search || ''});
-    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
 
-    componentWillReceiveProps(nextProps, nextValue) {
-        if (!nextProps.history.location.search) {
-            this.setState({inputValue: ''});
+        if (prevProps.location.pathname !== this.props.location.pathname
+            && this.props.location.pathname !== '/category/search_results'
+        ) {
+            this.setState({inputValue: ''})
+        }
+        if (this.props.location.search !== prevProps.location.search) {
+            this.setState({inputValue: queryString.parse(this.props.location.search)?.search || ''})
         }
     }
 

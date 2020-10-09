@@ -30,7 +30,8 @@ class Home extends Component {
                     <img src={`${STATICS_URL}/home/home5.jpg`} alt="banner5"/>
                 </NavLink>
             </div>
-            <div className={classes.brandsLabel}>Build your capsule wardrobe. Select timeless pieces by the best European
+            <div className={classes.brandsLabel}>Build your capsule wardrobe. Select timeless pieces by the best
+                European
                 designers
             </div>
             <DesignersList/>

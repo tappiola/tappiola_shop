@@ -90,7 +90,8 @@ class Cart extends Component {
         }
 
         if (this.state.cartItems.length === 0) {
-            return <div className={classes.noItems}>Really, still no items in cart? Browse our top products to fix this</div>
+            return <div className={classes.noItems}>Really, still no items in cart? Browse our top products to fix
+                this</div>
         }
 
         return <React.Fragment>

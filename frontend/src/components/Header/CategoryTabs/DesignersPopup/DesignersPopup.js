@@ -9,7 +9,7 @@ class DesignersPopup extends Component {
     }
 
     render() {
-        if (this.props.isLoading){
+        if (this.props.isLoading) {
             return null
         }
 

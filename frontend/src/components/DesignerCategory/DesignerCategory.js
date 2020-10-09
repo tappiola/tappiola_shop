@@ -33,7 +33,7 @@ class DesignerCategory extends Component {
     }
 
     getAllData(id) {
-        this.setState({loading: true});
+        this.setState({loading: true, error: null});
 
         Promise.all([
             this.getProducts(id),
@@ -51,9 +51,9 @@ class DesignerCategory extends Component {
         this.setState({searchTerm: param});
     }
 
-    componentWillReceiveProps(nextProps, nextValue) {
-        if (nextProps.match.params.id !== this.props.match.params.id) {
-            const id = nextProps.match.params.id;
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.match.params.id !== this.props.match.params.id) {
+            const id = this.props.match.params.id;
             this.getAllData(id);
         }
     }
@@ -78,7 +78,7 @@ class DesignerCategory extends Component {
             data = <Spinner/>
         }
 
-        if (this.state.error){
+        if (this.state.error) {
             return <Error>{this.state.error}</Error>
         }
 

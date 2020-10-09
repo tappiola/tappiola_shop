@@ -1,15 +1,34 @@
 .header {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 48px;
+    width: 100%;
     z-index: 10;
+    /*position: fixed;*/
+    padding: 20px 0;
 }
 
 .headerText {
-    margin: auto 0;
-    font-style: italic;
-    font-size: 14px;
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .header {
+        /*position: static;*/
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 48px;
+        width: 100%;
+    }
+
+    .headerText {
+        display: inline-block;
+        margin: auto 0;
+        font-style: italic;
+        font-size: 14px;
+    }
+
 }
 

@@ -48,27 +48,27 @@ class OrderSuccessful extends Component {
             return <Spinner/>
         }
 
-        if (this.state.error){
+        if (this.state.error) {
             return <Error>{this.state.error}</Error>
         }
 
         return <div className={classes.orderItems}>
-                <h4>Your order is successful!</h4>
-                <div>The items you ordered:</div>
-                <table className={classes.orderItemsTable}>
-                    <tr>
-                        <th>Designer</th>
-                        <th>Product</th>
-                        <th>Size</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total Cost</th>
-                    </tr>
-                    {this.state.orderItems.map(item => this.renderItem(item))}
-                </table>
-            </div>
-        }
+            <h4>Your order is successful!</h4>
+            <div>The items you ordered:</div>
+            <table className={classes.orderItemsTable}>
+                <tr>
+                    <th>Designer</th>
+                    <th>Product</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total Cost</th>
+                </tr>
+                {this.state.orderItems.map(item => this.renderItem(item))}
+            </table>
+        </div>
     }
+}
 
 
 export default withRouter(OrderSuccessful);

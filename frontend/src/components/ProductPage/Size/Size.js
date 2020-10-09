@@ -5,26 +5,11 @@ import clsx from 'clsx';
 
 class Size extends Component {
 
-    state = {
-        isSelected: false
-    };
-
-    stockLevel = this.props.data.stock_level;
-
-    componentWillReceiveProps(nextProps, nextValue) {
-        if (this.stockLevel > 0) {
-            if (nextProps.selectedSize === this.props.data.size) {
-                this.setState(state => ({isSelected: !state.isSelected}));
-            } else {
-                this.setState({isSelected: false});
-            }
-        }
-    }
-
     render() {
+
         const productClasses = clsx(classes.productSize, {
-            [classes.productSizeSelected]: this.state.isSelected,
-            [classes.productSoldOut]: this.stockLevel === 0
+            [classes.productSizeSelected]: this.props.selectedSize === this.props.data.size,
+            [classes.productSoldOut]: this.props.data.stock_level === 0
         })
 
         return (<div

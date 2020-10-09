@@ -6,13 +6,13 @@
     grid-gap: 20px;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 768px) {
     .brand {
         grid-template-columns: repeat(2, 50%);
     }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1024px) {
     .brand {
         grid-template-columns: repeat(3, 32%);
     }

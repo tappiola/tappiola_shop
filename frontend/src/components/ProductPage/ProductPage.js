@@ -48,16 +48,18 @@ class ProductPage extends Component {
 
     stockLevelSortFunc = (a, b) => {
 
-        const sortingArr = [ 'XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '32', '34', '36', '38', '40', '42'];
+        const sortingArr = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '32', '34', '36', '38', '40', '42'];
         return sortingArr.indexOf(a.size) - sortingArr.indexOf(b.size);
     }
 
 
-    sizeClickHandler = (newSize) => {
-        this.setState({
-            selectedSize: this.state.selectedSize !== newSize ? newSize : null,
-            purchaseStatus: null
-        });
+    sizeClickHandler = ({size, stock_level}) => {
+        if (stock_level > 0) {
+            this.setState({
+                selectedSize: this.state.selectedSize !== size ? size : null,
+                purchaseStatus: null
+            });
+        }
     }
 
     buttonClickHandler = () => {
@@ -95,7 +97,7 @@ class ProductPage extends Component {
             .map((x, index) => <Size
                 data={x}
                 key={index}
-                clicked={this.sizeClickHandler.bind(this, x.size)}
+                clicked={this.sizeClickHandler.bind(this, x)}
                 selectedSize={this.state.selectedSize}
             />)
 
@@ -113,7 +115,7 @@ class ProductPage extends Component {
             return <Error>This product doesn't exist</Error>
         }
 
-       return <div className={classes.productArea}>
+        return <div className={classes.productArea}>
             {this.props.history.length > 2 && this.goBackButton}
             <div className={classes.productBlock}>
                 <div className={classes.productCarousel}>
