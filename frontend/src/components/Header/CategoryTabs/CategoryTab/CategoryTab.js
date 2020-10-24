@@ -3,7 +3,7 @@ import classes from './CategoryTab.module.css';
 
 class CategoryTab extends Component {
     state = {
-        isHovered: false
+        isHovered: false,
     };
 
     handleMouseHover = () => {
@@ -16,11 +16,12 @@ class CategoryTab extends Component {
                 className={this.props.active ? classes.active : ''}
                 onMouseEnter={this.handleMouseHover}
                 onMouseLeave={this.handleMouseHover}
+                onClick={() => this.setState(state => ({isClicked: !state.isClicked}))}
             >
                 <div id={this.props.id} className={classes.name} onClick={this.props.clicked}>
                     {this.props.name}
                 </div>
-                {this.props.popup && this.props.popupData && this.state.isHovered && this.props.popup}
+                {this.state.isHovered && this.props.children}
             </div>
         )
     }

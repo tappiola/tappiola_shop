@@ -1,10 +1,11 @@
 .cart {
     display: flex;
+    flex-direction: column;
     padding: 0 20px;
 }
 
 .items {
-    width: 66%;
+    width: 100%;
     padding: 0 20px;
 }
 
@@ -14,11 +15,11 @@
 }
 
 .total {
-    margin: 0 20px;
-    width: 28%;
+    width: 100%;
+    padding: 30px;
 }
 
-.totalCheckout {
+.button {
     text-transform: uppercase;
     padding: 10px 20px;
     background-color: black;
@@ -31,4 +32,21 @@
 .noItems {
     text-align: center;
     padding: 40px;
+}
+
+@media (min-width: 900px) {
+    .cart {
+        flex-direction: row;
+    }
+
+    .items {
+        width: 66%;
+    }
+
+    .total {
+        width: 28%;
+        padding: 0;
+        margin: 0 20px;
+
+    }
 }

@@ -1,9 +1,10 @@
 .toggle {
-    border-radius: 4px;
-    padding: 4px 4px 0 4px;
-    background-color: transparent;
-    border: transparent;
-    outline: none;
+    height: 30px;
+    position: absolute;
+    top: 15px;
+    left: 22px;
+    z-index: 20;
+
 }
 
 .button {
@@ -22,7 +23,7 @@
     margin-left: 0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 960px) {
     .toggle {
         display: none;
     }

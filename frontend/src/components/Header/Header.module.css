@@ -13,9 +13,9 @@
     display: none;
 }
 
-@media (min-width: 768px) {
+
+@media (min-width: 960px) {
     .header {
-        /*position: static;*/
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
@@ -23,9 +23,13 @@
         width: 100%;
     }
 
+}
+
+@media (min-width: 960px) {
+
     .headerText {
         display: inline-block;
-        margin: auto 0;
+        margin: auto 0 auto 30px;
         font-style: italic;
         font-size: 14px;
     }

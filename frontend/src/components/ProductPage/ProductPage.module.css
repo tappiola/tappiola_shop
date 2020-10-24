@@ -14,6 +14,7 @@
 .goBackButton {
     margin: 10px;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .productData {
@@ -73,6 +74,10 @@
 }
 
 .sizeSelected {
+}
+
+.price {
+    white-space: nowrap;
 }
 
 .totalSoldOut:not(.sizeSelected):hover:before {

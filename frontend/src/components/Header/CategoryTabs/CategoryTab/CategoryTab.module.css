@@ -3,5 +3,11 @@
 }
 
 .name {
-    margin: 20px;
+    margin: 10px 20px;
+}
+
+@media (min-width: 960px) {
+    .name {
+        margin: 20px;
+    }
 }

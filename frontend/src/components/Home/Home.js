@@ -34,7 +34,7 @@ class Home extends Component {
                 European
                 designers
             </div>
-            <DesignersList/>
+            <DesignersList isFooter={true}/>
         </div>)
     }
 

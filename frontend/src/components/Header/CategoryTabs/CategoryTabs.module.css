@@ -1,0 +1,59 @@
+.categories {
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    z-index: 10;
+    background-color: white;
+    padding-top: 60px;
+    width: 320px;
+}
+
+.categories.hidden {
+    display: none;
+}
+
+.categories:hover {
+    color: gray;
+}
+
+.categories div:hover {
+    color: black;
+    cursor: pointer;
+}
+
+.backdrop {
+    background-color: rgb(68, 68, 68);
+    opacity: 0.3;
+    width: 100vw;
+    height: 100vh;
+    z-index: 8;
+    top: 0;
+    position: fixed;
+}
+
+@media (min-width: 960px) {
+    .categories {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        background-color: white;
+        z-index: 10;
+        width: 100%;
+        padding: 0;
+    }
+
+    .categories.hidden {
+        display: flex;
+    }
+
+    .backdrop {
+        display: none;
+    }
+
+}
+

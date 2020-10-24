@@ -21,15 +21,13 @@ class ProductPage extends Component {
     }
 
     goBackButton = <div className={classes.goBackButton} onClick={() => this.props.history.goBack()}>
-        <i className="fa fa-arrow-left" aria-hidden="true"/>
-        &nbsp;Back
+        <i className="fa fa-arrow-left" aria-hidden="true"/> Back
     </div>;
 
     getProductInfo(id) {
         this.setState({loading: true});
 
         return getProduct(id)
-            .then(null, error => error.response.status === 404 && this.setState({notFound: true}))
             .then(({data}) => {
                 this.setState({
                     productData: data,
@@ -39,7 +37,15 @@ class ProductPage extends Component {
                 });
                 data.stock_level.filter(x => x.size === 'one_size').length !== 0
                 && this.setState({selectedSize: 'one_size'});
-            }).catch(err => console.log(err)).finally(() => this.setState({loading: false}));
+            })
+            .catch(error => {
+                if(error.response.status === 404){
+                    this.setState({notFound: true});
+                }
+
+                console.log(error);
+            })
+            .finally(() => this.setState({loading: false}));
     }
 
     getTotalStock = () => {
@@ -128,7 +134,7 @@ class ProductPage extends Component {
                     <h5>{this.state.productData.name}</h5>
                     <div className={classes.description}>{this.state.productData.description}</div>
                     <div>Color: {this.state.productData.color}</div>
-                    <div>
+                    <div className={classes.price}>
                         <span>{discountedPrice ? discountedPrice + ' ' : ''}</span>
                         <span
                             className={clsx({[classes.discount]: discountedPrice})}>{this.state.productData.price}</span>

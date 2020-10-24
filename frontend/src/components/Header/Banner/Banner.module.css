@@ -10,7 +10,7 @@
     text-decoration: underline;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 960px) {
     .banner {
         display: block;
         background-color: #dddddd;

@@ -5,7 +5,6 @@ import {Route, Switch} from 'react-router-dom';
 import Header from './components/Header/Header';
 import Home from "./components/Home/Home";
 import Category from "./components/Category/Category";
-import CategoryTabs from "./components/Header/CategoryTabs/CategoryTabs";
 import Banner from "./components/Header/Banner/Banner";
 import DesignersList from "./components/DesignersList/DesignersList";
 import DesignerCategory from "./components/DesignerCategory/DesignerCategory";
@@ -18,7 +17,6 @@ function App() {
     return (
         <div>
             <Header/>
-            <Route path={['/category/:id', '/']} component={CategoryTabs}/>
             <Banner/>
             <Switch>
                 <Route path='/designers/:id' component={DesignerCategory}/>

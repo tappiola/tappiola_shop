@@ -1,19 +1,18 @@
 .categoryPopup {
-    position: absolute;
-    z-index: 10;
+    /*position: absolute;*/
+    z-index: 11;
     transition: .3s, width 2s;
-    background-color: white;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, .2);
+    background-color: transparent;
     padding: 10px;
+    width: 320px;
 }
 
 .categoryPopup ul {
-    padding: 5px 20px;
+    padding: 5px 30px;
 }
 
 .categoryPopup li {
     list-style: none;
-    height: 25px;
     color: #222222;
     text-decoration: none;
 }
@@ -21,4 +20,20 @@
 .categoryPopup li:hover {
     opacity: 0.5;
     text-decoration: underline;
+}
+
+@media (min-width: 960px) {
+    .categoryPopup li {
+        height: 25px;
+    }
+
+    .categoryPopup ul {
+        padding: 5px 20px;
+    }
+
+    .categoryPopup {
+        position: absolute;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, .2);
+        background-color: white;
+    }
 }

@@ -9,7 +9,7 @@ class OrderSuccessful extends Component {
 
     state = {error: null, orderItems: []};
 
-    renderItem = (itemData) => {
+    renderItem = itemData => {
         return <tr>
             <td>{itemData.product.brand.name}</td>
             <td>{itemData.product.name}</td>
@@ -54,7 +54,7 @@ class OrderSuccessful extends Component {
 
         return <div className={classes.orderItems}>
             <h4>Your order is successful!</h4>
-            <div>The items you ordered:</div>
+            <div className={classes.items}>The items you ordered:</div>
             <table className={classes.orderItemsTable}>
                 <tr>
                     <th>Designer</th>

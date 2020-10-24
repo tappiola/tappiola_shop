@@ -361,10 +361,12 @@ class Checkout extends Component {
             this.setState({orderForm: orderFormCopy});
         })
         getOrder(this.props.match.params.id)
-            .then(null, error => error.response.status === 404 && this.setState({
-                loading: false,
-                error: 'Order not found'
-            }))
+            .then(null, error => {
+                error.response.status === 404 && this.setState({
+                    loading: false,
+                    error: 'Order not found'
+                })
+            })
             .then(({data}) => {
                 this.setState({totalCost: data.total_cost, loading: false});
             })

@@ -49,7 +49,7 @@
     display: none;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 960px) {
     .headerSearchContainer {
         margin: 0 20px;
         width: 380px;

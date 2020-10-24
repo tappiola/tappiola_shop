@@ -49,8 +49,7 @@ class ProductCard extends Component {
                 <div>
                     <span>{discountedPrice ? discountedPrice + ' ' : ''}</span>
                     <span
-                        className={clsx({[classes.productDiscount]: discountedPrice})}>{this.props.productData.price}</span>
-                    &nbsp;€
+                        className={clsx({[classes.productDiscount]: discountedPrice})}>{this.props.productData.price}</span> €
                 </div>
             </div>)
     }

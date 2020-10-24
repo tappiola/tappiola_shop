@@ -50,13 +50,13 @@ class Cart extends Component {
         const orderItems = this.props.cartDataLocal.map(p => ({product: p.id, size: p.size, quantity: p.quantity}));
         createOrder({order_items: orderItems})
             .then(({data}) => {
-            this.setState({
-                totalCost: data.totalCost,
-                orderId: data.order_id,
-                loading: false
+                this.setState({
+                    totalCost: data.totalCost,
+                    orderId: data.order_id,
+                    loading: false
+                });
+                this.props.history.push('/checkout/' + data.order_id);
             }).catch(error => this.setState({error: error.message, loading: false}));
-            this.props.history.push('/checkout/' + data.order_id);
-        })
     }
 
 
@@ -91,7 +91,7 @@ class Cart extends Component {
             return <Spinner/>
         }
 
-        if (this.state.error){
+        if (this.state.error) {
             return <Error>{this.state.error}</Error>
         }
 
@@ -114,7 +114,7 @@ class Cart extends Component {
                     </div>
                     <div className={classes.total}>
                         <CartTotal goodsTotal={goodsTotal}/>
-                        <button className={classes.totalCheckout} onClick={this.checkoutHandler}>Checkout</button>
+                        <button className={classes.button} onClick={this.checkoutHandler}>Checkout</button>
                     </div>
                 </div>
             </div>

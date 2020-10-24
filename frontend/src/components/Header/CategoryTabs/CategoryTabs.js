@@ -1,6 +1,6 @@
 import {getBrands, getCategories} from '../../../lib/service';
 import React, {Component} from "react";
-import './CategoryTabs.css';
+import classes from './CategoryTabs.module.css';
 import CategoryTab from "./CategoryTab/CategoryTab";
 import {withRouter} from "react-router-dom";
 import DesignersPopup from "./DesignersPopup/DesignersPopup";
@@ -8,7 +8,7 @@ import DesignersPopup from "./DesignersPopup/DesignersPopup";
 
 class CategoryTabs extends Component {
 
-    categoriesPanel = React.createRef()
+    categoriesPanel = React.createRef();
     state = {
         categories: [],
         designersData: [],
@@ -23,6 +23,7 @@ class CategoryTabs extends Component {
     }
 
     categoryClickHandler(event) {
+        this.props.onMenuClose();
         const id = event.target.id
         this.setState({activeCategory: event.target.id});
         this.props.history.push(`/category/${id}`);
@@ -30,12 +31,14 @@ class CategoryTabs extends Component {
     }
 
     saleClickHandler() {
+        this.props.onMenuClose();
         this.setState({activeCategory: 'sale'});
         this.props.history.push(`/category/sale`);
         this.scrollToCategories()
     }
 
     designersClickHandler() {
+        this.props.onMenuClose();
         this.setState({activeCategory: 'designers'});
         this.props.history.push(`/designers`);
         this.scrollToCategories();
@@ -61,9 +64,13 @@ class CategoryTabs extends Component {
                 name="Designers"
                 active={this.props.location.pathname.startsWith('/designers')}
                 clicked={this.designersClickHandler.bind(this)}
-                popup={<DesignersPopup data={this.state.designersData} isLoading={this.state.designersLoading}/>}
-                popupData={this.state.designersData}
-            />
+            >
+                <DesignersPopup
+                    data={this.state.designersData}
+                    isLoading={this.state.designersLoading}
+                    onMenuClose={this.props.onMenuClose}
+                />
+            </CategoryTab>
             {this.state.categories.map(c => <CategoryTab
                 key={c.id}
                 id={c.id}
@@ -80,10 +87,17 @@ class CategoryTabs extends Component {
             />
         </React.Fragment>
 
-        return (<React.Fragment>
-                <div className="categories" ref={this.categoriesPanel}>{categoriesData}</div>
-                {/*<div className="categories-mobile" ref={this.categoriesPanel}>{categoriesData}</div>*/}
-            </React.Fragment>
+        return (
+            <>
+                {this.props.isMenuOpen && <div
+                    className={classes.backdrop}
+                    onClick={this.props.onMenuClose}
+                />}
+                <div
+                    className={`${classes.categories} ${this.props.isMenuOpen ? '' : classes.hidden}`}
+                    ref={this.categoriesPanel}>{categoriesData}
+                </div>
+            </>
         )
     }
 

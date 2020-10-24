@@ -8,9 +8,9 @@
     width: 100%
 }
 
-@media (min-width: 768px) {
+@media (min-width: 960px) {
     .mainLogo {
         width: 12rem;
-        margin-right: 20px;
+        margin: auto 0 auto 15px;
     }
 }

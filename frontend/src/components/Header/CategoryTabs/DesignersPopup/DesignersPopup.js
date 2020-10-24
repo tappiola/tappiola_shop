@@ -5,6 +5,7 @@ import {withRouter} from "react-router-dom";
 class DesignersPopup extends Component {
 
     designerLinkClickHandler(id) {
+        this.props.onMenuClose();
         this.props.history.push(`/designers/${id}`);
     }
 

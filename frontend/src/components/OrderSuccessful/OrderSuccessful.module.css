@@ -1,20 +1,47 @@
 .orderItems {
-    padding: 40px 20%;
+    margin: 40px auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
 }
 
 .orderItemsTable {
-    margin-top: 30px;
+    display: none;
 }
 
-.orderItemsTable, th, td {
-    border: 1px solid gray;
+.items {
+    display: none;
 }
 
-.orderItemsTable td,
-.orderItemsTable th {
-    text-align: center;
-    padding: 10px;
+@media (min-width: 768px) {
+
+    .orderItems {
+        padding: 0;
+    }
+
+    .items {
+        display: block;
+    }
+
+    .orderItemsTable {
+        display: block;
+        margin-top: 30px;
+        width: fit-content;
+    }
+
+    .orderItemsTable, th, td {
+        border: 1px solid gray;
+    }
+
+    .orderItemsTable td,
+    .orderItemsTable th {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .orderItems {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 }
