@@ -1,6 +1,7 @@
 .productSize {
     color: black;
     border: 1px solid black;
+    cursor: pointer;
     width: 45px;
     height: 45px;
     display: flex;
