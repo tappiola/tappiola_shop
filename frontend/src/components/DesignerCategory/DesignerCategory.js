@@ -17,19 +17,22 @@ class DesignerCategory extends Component {
     }
 
     getProducts(id) {
-
-        return getBrandProducts(id).then(({data}) => {
-            this.setState({
-                designerId: id,
-                products: data
+        return getBrandProducts(id)
+            .then(({data}) => {
+                this.setState({
+                    designerId: id,
+                    products: data
+                })
             })
-        }).catch(error => this.setState({error: error.message}));
+            .catch(error => this.setState({error: error.message}));
     }
 
     getBrandInfo(id) {
-        return getBrand(id).then(({data}) => {
-            this.setState({designerData: data})
-        }).catch(error => this.setState({error: error.message}));
+        return getBrand(id)
+            .then(({data}) => {
+                this.setState({designerData: data})
+            })
+            .catch(error => this.setState({error: error.message}));
     }
 
     getAllData(id) {
@@ -59,32 +62,31 @@ class DesignerCategory extends Component {
     }
 
     render() {
-        let data = <div>
-            <div className={classes.info}>
-                <div className={classes.header}>
-                    <div className={classes.logo}
-                         style={{backgroundImage: `url(${this.state.designerData.image_link})`}}/>
-                </div>
-
-                <div className={classes.desc}>{this.state.designerData.description}</div>
-            </div>
-
-            <div className={categoryClasses.category}>
-                {this.state.products.map(p => <ProductCard key={p.id} productData={p}/>)}
-            </div>
-        </div>
-
         if (this.state.loading) {
-            data = <Spinner/>
+            return <Spinner/>
         }
 
         if (this.state.error) {
             return <Error>{this.state.error}</Error>
         }
 
-        return data
-    }
+        return (
+            <div>
+                <div className={classes.info}>
+                    <div className={classes.header}>
+                        <div className={classes.logo}
+                             style={{backgroundImage: `url(${this.state.designerData.image_link})`}}/>
+                    </div>
 
+                    <div className={classes.desc}>{this.state.designerData.description}</div>
+                </div>
+
+                <div className={categoryClasses.category}>
+                    {this.state.products.map(p => <ProductCard key={p.id} productData={p}/>)}
+                </div>
+            </div>
+        )
+    }
 }
 
 export default DesignerCategory;

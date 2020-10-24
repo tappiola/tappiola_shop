@@ -20,7 +20,6 @@ class ProductCard extends Component {
                 </div>
             </div>)
     }
-
 }
 
 export default withRouter(ProductCard);

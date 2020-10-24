@@ -23,7 +23,8 @@ class Header extends Component {
                     <div className={classes.header}>
                         <HamburgerButton
                             menuOpen={this.state.isMenuOpen}
-                            onButtonClick={() => this.setState({isMenuOpen: !this.state.isMenuOpen})}/>
+                            onButtonClick={() => this.setState({isMenuOpen: !this.state.isMenuOpen})}
+                        />
                         <MainLogo/>
                         <p className={classes.headerText}>Enjoy free worldwide shipping</p>
                         <Search/>

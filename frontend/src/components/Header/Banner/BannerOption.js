@@ -5,7 +5,7 @@ const BannerOption = (props) => {
     return (<div>
         <span className={classes.separate}><b>{props.boldText}</b></span>
         {props.normalText && <span className={classes.separate}>{props.normalText}</span>}
-        <span className={classes.underline}>{props.linkText}</span>
+        <span className={classes.separate}>{props.linkText}</span>
     </div>)
 }
 

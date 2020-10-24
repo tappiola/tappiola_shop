@@ -44,10 +44,11 @@ class Cart extends Component {
     }
 
     checkoutHandler = () => {
-
         this.setState({loading: true});
 
-        const orderItems = this.props.cartDataLocal.map(p => ({product: p.id, size: p.size, quantity: p.quantity}));
+        const orderItems = this.props.cartDataLocal.map(p =>
+            ({product: p.id, size: p.size, quantity: p.quantity})
+        );
         createOrder({order_items: orderItems})
             .then(({data}) => {
                 this.setState({
@@ -56,7 +57,8 @@ class Cart extends Component {
                     loading: false
                 });
                 this.props.history.push('/checkout/' + data.order_id);
-            }).catch(error => this.setState({error: error.message, loading: false}));
+            })
+            .catch(error => this.setState({error: error.message, loading: false}));
     }
 
 
@@ -64,7 +66,8 @@ class Cart extends Component {
         const cartDataLocal = this.props.cartDataLocal;
         const cartIds = Array.from(new Set(cartDataLocal.map(i => i.id)));
         if (cartIds.length > 0) {
-            getProducts({ids: cartIds.join(',')}).then(({data}) => {
+            getProducts({ids: cartIds.join(',')})
+                .then(({data}) => {
                     const idsInStock = data.map(x => x.id);
                     const updatedCartItems = cartDataLocal
                         .filter(x => idsInStock.includes(+x.id))
@@ -76,8 +79,8 @@ class Cart extends Component {
                         return {...item, ...itemSameId};
                     })
                     this.setState({cartItems, loading: false});
-                }
-            ).catch(error => this.setState({error: error.message, loading: false}));
+                })
+                .catch(error => this.setState({error: error.message, loading: false}));
         } else {
             this.setState({cartItems: [], loading: false});
         }
@@ -96,8 +99,9 @@ class Cart extends Component {
         }
 
         if (this.state.cartItems.length === 0) {
-            return <div className={classes.noItems}>Really, still no items in cart? Browse our top products to fix
-                this</div>
+            return <div className={classes.noItems}>
+                Really, still no items in cart? Browse our top products to fix this
+            </div>
         }
 
         return <React.Fragment>

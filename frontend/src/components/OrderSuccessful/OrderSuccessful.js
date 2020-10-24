@@ -34,10 +34,10 @@ class OrderSuccessful extends Component {
                         error: 'This order has not been paid yet. Go back to cart and proceed with checkout',
                         loading: false
                     });
-                } else (
-                    this.setState({orderItems: data.order_items, loading: false}))
+                } else {
+                    this.setState({orderItems: data.order_items, loading: false})
+                }
             })
-
             .catch(error => {
                 this.setState({loading: false, error: this.state.error || 'Failed to load order details'});
             });

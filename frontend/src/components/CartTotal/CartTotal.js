@@ -17,9 +17,7 @@ const CartTotal = (props) => {
             <span>Total</span>
             <span>{props.goodsTotal} €</span>
         </div>
-
     </div>);
-
 }
 
 export default CartTotal;

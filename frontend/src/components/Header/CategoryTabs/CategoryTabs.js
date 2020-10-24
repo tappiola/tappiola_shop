@@ -46,9 +46,10 @@ class CategoryTabs extends Component {
 
     componentDidMount() {
 
-        getCategories().then(
-            ({data}) => this.setState({categories: data})
-        )
+        getCategories()
+            .then(({data}) => {
+                this.setState({categories: data})
+            })
 
         getBrands()
             .then(({data}) => {
@@ -100,7 +101,6 @@ class CategoryTabs extends Component {
             </>
         )
     }
-
 }
 
 export default withRouter(CategoryTabs);

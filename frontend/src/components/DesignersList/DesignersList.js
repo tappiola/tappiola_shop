@@ -22,7 +22,6 @@ class DesignersList extends Component {
 
 
     render() {
-
         if (this.state.loading && !this.props.isFooter) {
             return <Spinner/>
         }
@@ -35,7 +34,6 @@ class DesignersList extends Component {
             {this.state.designersData.map(p => <DesignerCard key={p.id} designerData={p}/>)}
         </div>)
     }
-
 }
 
 export default DesignersList;

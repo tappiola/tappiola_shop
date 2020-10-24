@@ -80,7 +80,8 @@ class Category extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.match.params.id !== this.props.match.params.id
-            || prevProps.location.search !== this.props.location.search) {
+            || prevProps.location.search !== this.props.location.search
+        ) {
             const id = this.props.match.params.id;
             const searchParam = queryString.parse(this.props.history.location.search).search;
             this.setState({searchTerm: searchParam});
@@ -100,9 +101,7 @@ class Category extends Component {
         return <div className={classes.category}>
             {this.state.products.map(p => <ProductCard key={p.id} productData={p}/>)}
         </div>;
-
     }
-
 }
 
 export default Category;

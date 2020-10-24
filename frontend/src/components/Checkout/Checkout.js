@@ -355,11 +355,14 @@ class Checkout extends Component {
 
     componentDidMount() {
         this.setState({loading: true});
-        axios.get('https://restcountries.eu/rest/v2/all').then(({data}) => {
-            const orderFormCopy = {...this.state.orderForm};
-            orderFormCopy.country.elementConfig.options = data.map(x => ({value: x.name, displayValue: x.name}));
-            this.setState({orderForm: orderFormCopy});
-        })
+
+        axios.get('https://restcountries.eu/rest/v2/all')
+            .then(({data}) => {
+                const orderFormCopy = {...this.state.orderForm};
+                orderFormCopy.country.elementConfig.options = data.map(x => ({value: x.name, displayValue: x.name}));
+                this.setState({orderForm: orderFormCopy});
+            });
+
         getOrder(this.props.match.params.id)
             .then(null, error => {
                 error.response.status === 404 && this.setState({
@@ -376,7 +379,6 @@ class Checkout extends Component {
     }
 
     render() {
-
         if (this.state.loading) {
             return <Spinner/>
         }

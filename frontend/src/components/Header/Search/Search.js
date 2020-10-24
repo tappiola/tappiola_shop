@@ -35,8 +35,11 @@ class Search extends Component {
         ) {
             this.setState({inputValue: ''})
         }
+
         if (this.props.location.search !== prevProps.location.search) {
-            this.setState({inputValue: queryString.parse(this.props.location.search)?.search || ''})
+            this.setState({
+                inputValue: queryString.parse(this.props.location.search)?.search || ''
+            })
         }
     }
 

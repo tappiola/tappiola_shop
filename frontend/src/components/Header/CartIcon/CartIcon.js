@@ -10,7 +10,6 @@ class CartIcon extends Component {
     getCartLabel = quantity => quantity > 0 ? quantity : ''
 
     render() {
-
         return (<div className={classes.headerMainIcons}>
             <NavLink to="/cart">
                 <span className={classes.headerCartCount}>

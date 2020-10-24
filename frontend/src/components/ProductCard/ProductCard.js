@@ -15,7 +15,6 @@ class ProductCard extends Component {
             : `${STATICS_URL}/placeholder.png`
     }
 
-
     hover = () => {
         this.setState({src: this.getSrc(1)});
     }
@@ -48,8 +47,9 @@ class ProductCard extends Component {
                 <div>{this.props.productData.name}</div>
                 <div>
                     <span>{discountedPrice ? discountedPrice + ' ' : ''}</span>
-                    <span
-                        className={clsx({[classes.productDiscount]: discountedPrice})}>{this.props.productData.price}</span> €
+                    <span className={clsx({[classes.productDiscount]: discountedPrice})}>
+                        {this.props.productData.price}
+                    </span> €
                 </div>
             </div>)
     }

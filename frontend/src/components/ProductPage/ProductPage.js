@@ -24,36 +24,11 @@ class ProductPage extends Component {
         <i className="fa fa-arrow-left" aria-hidden="true"/> Back
     </div>;
 
-    getProductInfo(id) {
-        this.setState({loading: true});
-
-        return getProduct(id)
-            .then(({data}) => {
-                this.setState({
-                    productData: data,
-                    productImages: data.product_images,
-                    stockLevel: data.stock_level,
-                    brand: data.brand.name
-                });
-                data.stock_level.filter(x => x.size === 'one_size').length !== 0
-                && this.setState({selectedSize: 'one_size'});
-            })
-            .catch(error => {
-                if(error.response.status === 404){
-                    this.setState({notFound: true});
-                }
-
-                console.log(error);
-            })
-            .finally(() => this.setState({loading: false}));
-    }
-
     getTotalStock = () => {
         return this.state.stockLevel.reduce((prev, curr) => prev + curr.stock_level, 0);
     }
 
     stockLevelSortFunc = (a, b) => {
-
         const sortingArr = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '32', '34', '36', '38', '40', '42'];
         return sortingArr.indexOf(a.size) - sortingArr.indexOf(b.size);
     }
@@ -84,7 +59,27 @@ class ProductPage extends Component {
     }
 
     componentDidMount() {
-        this.getProductInfo(this.props.match.params.productId);
+        this.setState({loading: true});
+
+        getProduct(this.props.match.params.productId)
+            .then(({data}) => {
+                this.setState({
+                    productData: data,
+                    productImages: data.product_images,
+                    stockLevel: data.stock_level,
+                    brand: data.brand.name
+                });
+                data.stock_level.filter(x => x.size === 'one_size').length !== 0
+                && this.setState({selectedSize: 'one_size'});
+            })
+            .catch(error => {
+                if(error.response.status === 404){
+                    this.setState({notFound: true});
+                }
+
+                console.log(error);
+            })
+            .finally(() => this.setState({loading: false}));
     }
 
     render() {

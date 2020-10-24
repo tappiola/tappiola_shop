@@ -12,7 +12,7 @@ class Banner extends Component {
                       normalText="We remain dedicated to this."
                       linkText="Here are the things we've committed to so far."/>,
         <BannerOption boldText="Want to shop more sustainably?"
-                      linkText="Try our fashion footprint tool."/>
+                      linkText="Shop with us."/>
     ];
 
     changeBannerText() {
@@ -32,7 +32,6 @@ class Banner extends Component {
     }
 
     render() {
-
         return (
             <div className={classes.banner}>
                 {this.bannerOptions[this.state.bannerIndex]}

@@ -24,9 +24,11 @@ class DesignersPopup extends Component {
                                 onClick={this.designerLinkClickHandler.bind(this, d.id)}
                                 key={d.id} id={d.id}>
                                 {d.name}
-                            </li>)}
+                            </li>)
+                    }
                 </ul>
-            </div>)
+            </div>
+        )
     }
 }
 

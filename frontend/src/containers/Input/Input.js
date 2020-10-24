@@ -4,7 +4,6 @@ import classes from './Input.module.css';
 import clsx from 'clsx';
 
 const input = (props) => {
-    let inputElement = null;
 
     const shouldWarn = props.invalid && props.shouldValidate && props.touched;
     const inputClasses = clsx({[classes.invalid]: shouldWarn});
@@ -40,7 +39,7 @@ const input = (props) => {
                     </select>
                 );
             default:
-                inputElement = <input
+                return <input
                     className={inputClasses}
                     {...props.elementConfig}
                     value={props.value}
